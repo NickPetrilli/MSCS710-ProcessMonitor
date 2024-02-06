@@ -18,13 +18,14 @@ public class Controller {
         String processorName = Cpu.getName();
 
         // Processor Speed (current)
-        long[] processorSpeed = Cpu.getCurrentFreq();
+        long processorSpeed = Cpu.getCurrentFreq();
 
         // Processor Max Speed
         long processorMaxSpeed = Cpu.getMaxFreq();
 
         //Physical Processor Count
-        int physicalProcessorCount = Cpu.getProcessorCount();
+        int physicalProcessorCount = Cpu.getCoreCount();
+        int logicalProcessorCount = Cpu.getLogicalProcessorCount();
 
         //Context Switches Count
         long contextSwitches = Cpu.getContextSwitches();
@@ -33,7 +34,8 @@ public class Controller {
 
         return "Processor Name: " + processorName + "\n" + " Processor Current Speed: " + processorSpeed 
         + " Hz" + "\n" + " Processor Max Speed: " + processorMaxSpeed + " Hz" + "\n" +
-        " Physical Processor Count: " + physicalProcessorCount + "\n" + " Context Switches: " + 
+        " Physical Processor Count: " + physicalProcessorCount + "\n" + " Logical Processor Count: " + 
+        logicalProcessorCount + "\n" + " Context Switches: " + 
         contextSwitches + "\n" + " Interrupts: " + interrupts;
     }
     
@@ -63,7 +65,7 @@ public class Controller {
         //Network Speed
         long networkSpeed = Network.getSpeed();
 
-        return "Network Info: " + networkInfo + " Network Name: " + networkName + " Network Speed: " + networkSpeed;
+        return "Network Info: " + networkInfo + "Network Name: " + networkName + "Network Speed: " + networkSpeed + " bits/s";
     }
     
     
