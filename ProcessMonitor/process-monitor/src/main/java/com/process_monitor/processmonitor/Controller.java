@@ -1,6 +1,9 @@
 package com.process_monitor.processmonitor;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import oshi.hardware.GraphicsCard;
+
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -25,18 +28,45 @@ public class Controller {
 
         //Physical Processor Count
         int physicalProcessorCount = Cpu.getCoreCount();
-        int logicalProcessorCount = Cpu.getLogicalProcessorCount();
+        int logicalProcessorCount = Cpu.getThreadCount();
 
         //Context Switches Count
         long contextSwitches = Cpu.getContextSwitches();
         //Interrupt Count
         long interrupts = Cpu.getInterrupts();
 
-        return "Processor Name: " + processorName + "\n" + " Processor Current Speed: " + processorSpeed 
-        + " Hz" + "\n" + " Processor Max Speed: " + processorMaxSpeed + " Hz" + "\n" +
-        " Physical Processor Count: " + physicalProcessorCount + "\n" + " Logical Processor Count: " + 
+        return "Processor Name: " + processorName + "\n" + " Processor Current Speed (Hz): " + processorSpeed 
+        + "\n" + " Processor Max Speed (Hz): " + processorMaxSpeed + "\n" +
+        " Physical Processor Count (Cores): " + physicalProcessorCount + "\n" + " Logical Processor Count (Threads): " + 
         logicalProcessorCount + "\n" + " Context Switches: " + 
         contextSwitches + "\n" + " Interrupts: " + interrupts;
+    }
+
+    @GetMapping("api/gpu")
+    public String getGPUInfo() {
+
+        String output = "";
+
+        for (GraphicsCard card : Gpu.graphicsCards) {
+
+            // GPU Manufacturer
+            String gpuManufacturer = Gpu.getGPUManufacturer(card);
+            
+            // GPU Name
+            String gpuName = Gpu.getGPUName(card);
+
+            // Processor Max Speed
+            // String VRAM;
+            long gpuVRAM = Gpu.getGPUVRAM(card);
+            /* if (gpuVRAM >= 1000000000) {VRAM = (gpuVRAM / 1000000000L) + " GB";}
+            else {VRAM = (gpuVRAM / 1000000L) + " MB";} */
+
+            output += "GPU Name: " + gpuName + " \n" 
+            + " GPU Manufacturer: " + gpuManufacturer + "\n" 
+            + " GPU VRAM (Bytes): " + gpuVRAM + "\n";
+        }
+
+        return output;
     }
     
     @GetMapping("/api/memory")

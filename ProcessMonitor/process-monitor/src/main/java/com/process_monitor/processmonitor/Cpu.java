@@ -12,6 +12,8 @@ public class Cpu {
         return processor.getProcessorIdentifier().getName();
     }
 
+    // TODO: May need to be scrapped, all cores are reported @ max frequency, even though this does not match the performance graphs
+    // given by Windows (Task Manager, Resource Monitor)
     public static long getCurrentFreq() {
         long[] currFreqs = processor.getCurrentFreq();
 
@@ -25,14 +27,14 @@ public class Cpu {
     }
 
     public static long getMaxFreq() {;
-        return processor.getMaxFreq();
+        return processor.getProcessorIdentifier().getVendorFreq();
     }
 
     public static int getCoreCount() {
         return processor.getPhysicalProcessorCount();
     }
 
-    public static int getLogicalProcessorCount() {
+    public static int getThreadCount() {
         // What about hyperthreading/multi-threading??? Any way to check?
         return processor.getLogicalProcessorCount();
     }
