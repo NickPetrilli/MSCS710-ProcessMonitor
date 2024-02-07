@@ -10,7 +10,7 @@ public class Memory {
 
     static SystemInfo systemInfo = new SystemInfo();
     static GlobalMemory memory = systemInfo.getHardware().getMemory();
-    static List<PhysicalMemory> physicalMemoryList = memory.getPhysicalMemory();
+    public static List<PhysicalMemory> physicalMemoryList = memory.getPhysicalMemory();
 
     public static long getTotalMemory() {
         return memory.getTotal();
@@ -21,13 +21,15 @@ public class Memory {
         return memory.getAvailable();
     }
 
-    public static String getMemoryType() {
-        String output = "";
-        for (int i = 0; i < physicalMemoryList.size(); i++) {
-            output += physicalMemoryList.get(i);
-        }
-        return output;
-    }
-    
-    
+    public static int getMemStickID(PhysicalMemory mem) {return physicalMemoryList.indexOf(mem);}
+
+    public static String getMemStickBankLabel(PhysicalMemory mem) {return mem.getBankLabel();}
+
+    public static String getMemStickManufacturer(PhysicalMemory mem) {return mem.getManufacturer();}
+
+    public static long getMemStickCapacity(PhysicalMemory mem) {return mem.getCapacity();}
+
+    public static String getMemStickType(PhysicalMemory mem) {return mem.getMemoryType();}
+
+    public static long getMemStickSpeed(PhysicalMemory mem) {return mem.getClockSpeed();}
 }

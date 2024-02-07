@@ -2,6 +2,8 @@ package com.process_monitor.processmonitor;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import oshi.hardware.PhysicalMemory;
+import oshi.hardware.NetworkIF;
 import oshi.hardware.GraphicsCard;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,11 +37,13 @@ public class Controller {
         //Interrupt Count
         long interrupts = Cpu.getInterrupts();
 
-        return "Processor Name: " + processorName + "\n" + " Processor Current Speed (Hz): " + processorSpeed 
-        + "\n" + " Processor Max Speed (Hz): " + processorMaxSpeed + "\n" +
-        " Physical Processor Count (Cores): " + physicalProcessorCount + "\n" + " Logical Processor Count (Threads): " + 
-        logicalProcessorCount + "\n" + " Context Switches: " + 
-        contextSwitches + "\n" + " Interrupts: " + interrupts;
+        return "Processor Name: " + processorName + "\n" 
+        + " Processor Current Speed (Hz): " + processorSpeed + "\n" 
+        + " Processor Max Speed (Hz): " + processorMaxSpeed + "\n" 
+        + " Physical Processor Count (Cores): " + physicalProcessorCount + "\n" 
+        + " Logical Processor Count (Threads): " + logicalProcessorCount + "\n" 
+        + " Context Switches: " + contextSwitches + "\n" 
+        + " Interrupts: " + interrupts;
     }
 
     @GetMapping("api/gpu")
@@ -71,32 +75,76 @@ public class Controller {
     
     @GetMapping("/api/memory")
     public String getMemoryInfo() {
+
+        String output = "";
+
         //Total Memory
         long totalMemory = Memory.getTotalMemory();
 
         //Available Memory
         long availableMemory = Memory.getAvailableMemory();
 
-        //Memory Types
-        String memoryTypes = Memory.getMemoryType();
+        float memoryUsed = ((float)availableMemory / totalMemory);
+        memoryUsed *= 100;
 
-        return "Total Memory: " + totalMemory + " Bytes " + " Available Memory: " + availableMemory + " Bytes" + " Memory Types: " + memoryTypes;
+        output += "Total Memory (B): " + totalMemory + "\n"
+        + " Available Memory (B): " + availableMemory 
+            + " (" + memoryUsed + "% Used)" + "\n";
 
+        for (PhysicalMemory memStick : Memory.physicalMemoryList) {
+
+            int id = Memory.getMemStickID(memStick);
+
+            String bankLabel = Memory.getMemStickBankLabel(memStick);
+
+            String manufacturer = Memory.getMemStickManufacturer(memStick);
+
+            long size = Memory.getMemStickCapacity(memStick);
+
+            String type = Memory.getMemStickType(memStick);
+
+            long speed = Memory.getMemStickSpeed(memStick);
+
+            output += "Card ID: " + id + "\n"
+            + " Bank Label: " + bankLabel + "\n"
+            + " Manufacturer: " + manufacturer + "\n" 
+            + " Size (B): " + size + "\n"
+            + " Type: " + type + "\n"
+            + " Speed (Hz): " + speed + "\n";
+        }
+
+        return output;
     }
 
     @GetMapping("/api/network")
     public String getNetworkInfo() {
-        //Network info
-        String networkInfo = Network.getNetworkInfo();
-        
-        //Network adapter names
-        String networkName = Network.getName();
 
-        //Network Speed
-        long networkSpeed = Network.getSpeed();
+        String output = "";
 
-        return "Network Info: " + networkInfo + "Network Name: " + networkName + "Network Speed: " + networkSpeed + " bits/s";
+        for (NetworkIF network : Network.networkAdapters) {
+            // Updates to the most recent network stats for the given network card
+            network.updateAttributes();
+
+            //Network adapter name
+            String networkName = Network.getName(network);
+
+            // Network Card name
+            String networkCardName = Network.getNetworkInfo(network);
+
+            // Network Speed *ADVERTISED*
+            long networkSpeed = Network.getSpeed(network);
+
+            // Network Upload/Download Speed
+            long networkUpload = Network.getUpload(network);
+            long networkDownload = Network.getDownload(network);
+
+            output += "Network Name: " + networkName + "\n" 
+            + " Network Card Name: " + networkCardName + "\n" 
+            + " Network Speed (bits/s): " + networkSpeed + "\n"
+            + " Bytes Sent (bits): " + networkUpload + "\n"
+            + " Bytes Recieved (bits): " + networkDownload + "\n";
+        }
+
+        return output;
     }
-    
-    
 }
