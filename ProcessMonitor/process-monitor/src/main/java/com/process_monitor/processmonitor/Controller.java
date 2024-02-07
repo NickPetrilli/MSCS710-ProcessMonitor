@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.RestController;
 import oshi.hardware.PhysicalMemory;
 import oshi.hardware.NetworkIF;
 import oshi.hardware.GraphicsCard;
+import oshi.software.os.OSProcess;
+
+import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -146,5 +149,27 @@ public class Controller {
         }
 
         return output;
+    }
+
+    @GetMapping("/api/processes")
+    public List<OSProcess> getProcesses() {
+        return Process.getProcesses();
+    }
+    @GetMapping("/api/processnames")
+    public String getProcessNames() {
+        //Process Names
+        String processNames = Process.getProcessNames();
+        
+        return processNames;
+    }
+
+    @GetMapping("/api/processCpu")
+    public String getProcessCpuUsage() {
+        //double cpuUsage = Process.getCpuUsage();
+        double cpuUsage = Process.getCpuCumulative();
+
+        long memUsage = Process.getResidentSetSize();
+
+        return "Cumulative CPU Usage" + cpuUsage + " Memory Usage: " + memUsage;
     }
 }
