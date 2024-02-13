@@ -2,12 +2,12 @@ package com.process_monitor.processmonitor;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import oshi.hardware.PhysicalMemory;
-import oshi.hardware.NetworkIF;
-import oshi.hardware.GraphicsCard;
-import oshi.software.os.OSProcess;
+// import oshi.hardware.PhysicalMemory;
+// import oshi.hardware.NetworkIF;
+// import oshi.hardware.GraphicsCard;
+// import oshi.software.os.OSProcess;
 
-import java.util.List;
+// import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -54,17 +54,17 @@ public class Controller {
 
         String output = "";
 
-        for (GraphicsCard card : Gpu.graphicsCards) {
+        for (int cardNum = 0; cardNum < Gpu.getGPULength(); cardNum++) {
 
             // GPU Manufacturer
-            String gpuManufacturer = Gpu.getGPUManufacturer(card);
+            String gpuManufacturer = Gpu.getGPUManufacturer(cardNum);
             
             // GPU Name
-            String gpuName = Gpu.getGPUName(card);
+            String gpuName = Gpu.getGPUName(cardNum);
 
             // Processor Max Speed
             // String VRAM;
-            long gpuVRAM = Gpu.getGPUVRAM(card);
+            long gpuVRAM = Gpu.getGPUVRAM(cardNum);
             /* if (gpuVRAM >= 1000000000) {VRAM = (gpuVRAM / 1000000000L) + " GB";}
             else {VRAM = (gpuVRAM / 1000000L) + " MB";} */
 
@@ -87,16 +87,16 @@ public class Controller {
         //Available Memory
         long availableMemory = Memory.getAvailableMemory();
 
-        float memoryUsed = ((float)availableMemory / totalMemory);
+        float memoryUsed = (float)availableMemory / totalMemory;
         memoryUsed *= 100;
 
         output += "Total Memory (B): " + totalMemory + "\n"
         + " Available Memory (B): " + availableMemory 
             + " (" + memoryUsed + "% Used)" + "\n";
 
-        for (PhysicalMemory memStick : Memory.physicalMemoryList) {
+        for (int memStick = 0; memStick < Memory.getMemoryCardsLength(); memStick++) {
 
-            int id = Memory.getMemStickID(memStick);
+            int id = memStick;
 
             String bankLabel = Memory.getMemStickBankLabel(memStick);
 
@@ -122,12 +122,13 @@ public class Controller {
     @GetMapping("/api/network")
     public String getNetworkInfo() {
 
+        // Update all network adapter to their latest data attributes
+        Network.updateNetworkAdapters();
+
         String output = "";
 
-        for (NetworkIF network : Network.networkAdapters) {
-            // Updates to the most recent network stats for the given network card
-            network.updateAttributes();
-
+        for (int network = 0; network < Network.getNetworkAdaptersLength(); network++) {
+            
             //Network adapter name
             String networkName = Network.getName(network);
 
@@ -151,16 +152,18 @@ public class Controller {
         return output;
     }
 
-    @GetMapping("/api/processes")
-    public List<OSProcess> getProcesses() {
-        return Process.getProcesses();
-    }
-    @GetMapping("/api/processnames")
+    /* @GetMapping("/api/processes")
+    public List<Object> getProcesses() {return Process.getProcesses();} */
+    
+    /*@GetMapping("/api/processnames")
     public String getProcessNames() {
-        //Process Names
-        String processNames = Process.getProcessNames();
+        String output = "";
+
+        for (OSProcess process : Process.getProcesses()) {
+            output += Process.getProcessName(process) + "\n";
+        }
         
-        return processNames;
+        return output;
     }
 
     @GetMapping("/api/processCpu")
@@ -170,6 +173,28 @@ public class Controller {
 
         long memUsage = Process.getResidentSetSize();
 
-        return "Cumulative CPU Usage" + cpuUsage + " Memory Usage: " + memUsage;
+        return "Cumulative CPU Usage: " + cpuUsage + "\n" + "Memory Usage (Bytes): " + memUsage;
+    } */
+
+    @GetMapping("/api/processStats")
+    public String getProcessStats() {
+        String output = "";
+
+        for (int procNum = 0; procNum < Process.getOSProcessesLength(); procNum++) {
+            String procName = Process.getProcessName(procNum);
+
+            double cpUsage = Process.getCpuUsage(procNum);
+            cpUsage *= 100;
+
+            long memUsage = Process.getResidentSetSize(procNum);
+            float memUsed = (float)memUsage / Memory.getTotalMemory();
+            memUsed *= 100;
+
+            output += "Process Name: " + procName + "\n" 
+            + " CPU Usage: " + cpUsage + "%" + "\n"
+            + " Memory Usage (Bytes): " + memUsage + " (" + memUsed + "%)" + "\n";
+        }
+
+        return output;
     }
 }

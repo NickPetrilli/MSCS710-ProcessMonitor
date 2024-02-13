@@ -10,26 +10,24 @@ public class Memory {
 
     static SystemInfo systemInfo = new SystemInfo();
     static GlobalMemory memory = systemInfo.getHardware().getMemory();
-    public static List<PhysicalMemory> physicalMemoryList = memory.getPhysicalMemory();
+    private static List<PhysicalMemory> physicalMemoryList = memory.getPhysicalMemory();
 
-    public static long getTotalMemory() {
-        return memory.getTotal();
-        
-    }
+    public static int getMemoryCardsLength() {return physicalMemoryList.size();}
+    
+    public static long getTotalMemory() {return memory.getTotal();}
 
-    public static long getAvailableMemory() {
-        return memory.getAvailable();
-    }
+    public static long getAvailableMemory() {return memory.getAvailable();}
 
-    public static int getMemStickID(PhysicalMemory mem) {return physicalMemoryList.indexOf(mem);}
+    // May not need this anymore
+    // public static int getMemStickID(int mem) {return physicalMemoryList.indexOf(mem);}
 
-    public static String getMemStickBankLabel(PhysicalMemory mem) {return mem.getBankLabel();}
+    public static String getMemStickBankLabel(int mem) {return physicalMemoryList.get(mem).getBankLabel();}
 
-    public static String getMemStickManufacturer(PhysicalMemory mem) {return mem.getManufacturer();}
+    public static String getMemStickManufacturer(int mem) {return physicalMemoryList.get(mem).getManufacturer();}
 
-    public static long getMemStickCapacity(PhysicalMemory mem) {return mem.getCapacity();}
+    public static long getMemStickCapacity(int mem) {return physicalMemoryList.get(mem).getCapacity();}
 
-    public static String getMemStickType(PhysicalMemory mem) {return mem.getMemoryType();}
+    public static String getMemStickType(int mem) {return physicalMemoryList.get(mem).getMemoryType();}
 
-    public static long getMemStickSpeed(PhysicalMemory mem) {return mem.getClockSpeed();}
+    public static long getMemStickSpeed(int mem) {return physicalMemoryList.get(mem).getClockSpeed();}
 }

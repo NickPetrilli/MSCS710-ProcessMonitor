@@ -5,8 +5,8 @@ import oshi.hardware.CentralProcessor;
 
 public class Cpu {
     
-    static SystemInfo systemInfo = new SystemInfo();
-    static CentralProcessor processor = systemInfo.getHardware().getProcessor();
+    private static SystemInfo systemInfo = new SystemInfo();
+    private static CentralProcessor processor = systemInfo.getHardware().getProcessor();
 
     public static String getName() {
         return processor.getProcessorIdentifier().getName();

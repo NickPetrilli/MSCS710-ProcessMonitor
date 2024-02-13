@@ -11,29 +11,15 @@ public class Process {
    static SystemInfo systemInfo = new SystemInfo();
    static OperatingSystem os = systemInfo.getOperatingSystem();
    
-   public static List<OSProcess> getProcesses() {
-    return os.getProcesses();
-   }
+   private static List<OSProcess> allOSProcesses = os.getProcesses();
 
-   public static String getProcessNames() {
-    List<OSProcess> osProcesses = os.getProcesses();
-    String output = "";
-    for (int i = 0; i < osProcesses.size(); i++) {
-        output += osProcesses.get(i).getName() + " ";
-    }
-    return output;
-   } 
+   public static int getOSProcessesLength() {return allOSProcesses.size();}
 
-    public static double getCpuUsage() {
-        return os.getProcesses().get(3).getProcessCpuLoadBetweenTicks(null);
-    }
+   public static String getProcessName(int proc) {return allOSProcesses.get(proc).getName();} 
 
-    public static double getCpuCumulative() {
-        return os.getProcesses().get(1).getProcessCpuLoadCumulative();
-    }
-
-    public static long getResidentSetSize() {
-        return os.getProcesses().get(0).getResidentSetSize();
-    }
-
+   public static double getCpuUsage(int proc) {return allOSProcesses.get(proc).getProcessCpuLoadBetweenTicks(null);}
+   
+   public static double getCpuCumulative() {return os.getProcesses().get(1).getProcessCpuLoadCumulative();}
+   
+   public static long getResidentSetSize(int proc) {return allOSProcesses.get(proc).getResidentSetSize();}
 }
