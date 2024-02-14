@@ -2,30 +2,22 @@ package com.process_monitor.processmonitor.api.cpu.model;
 
 public class Cpu {
 
-    int processId;
     String timestamp;
     long speed;
     long maxSpeed;
     int numCores;
     int numProcesses;
     int numThreads;
+    double utilization;
 
-    public Cpu(int processId, String timestamp, long speed, long maxSpeed, int numCores, int numProcesses, int numThreads) {
-        this.processId = processId;
+    public Cpu(String timestamp, long speed, long maxSpeed, int numCores, int numProcesses, 
+               int numThreads, double utilization) {
         this.timestamp = timestamp;
         this.speed = speed;
         this.maxSpeed = maxSpeed;
         this.numCores = numCores;
         this.numProcesses = numProcesses;
         this.numThreads = numThreads;
-    }
-
-    public int getProcessId() {
-        return processId;
-    }
-
-    public void setProcessId(int processId) {
-        this.processId = processId;
     }
 
     public String getTimestamp() {
@@ -75,13 +67,24 @@ public class Cpu {
     public void setNumThreads(int numThreads) {
         this.numThreads = numThreads;
     }
+
+    public double getUtilization() {
+        return utilization;
+    }
+
+    public void setUtilization(double utilization) {
+        this.utilization = utilization;
+    }
+
     @Override
     public String toString() {
         return "Cpu{" +
-                "processId=" + processId +
                 ", timestamp='" + timestamp + '\'' +
                 ", speed=" + speed +
                 ", maxSpeed=" + maxSpeed +
+                ", cores=" + numCores +
+                ", processes=" + numProcesses +
+                ", threads=" + numThreads +
                 '}';
     }
 }

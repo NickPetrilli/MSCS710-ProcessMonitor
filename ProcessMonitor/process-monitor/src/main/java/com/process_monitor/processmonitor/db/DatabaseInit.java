@@ -1,4 +1,4 @@
-package com.process_monitor.processmonitor;
+package com.process_monitor.processmonitor.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

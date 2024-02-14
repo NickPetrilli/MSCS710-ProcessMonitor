@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.process_monitor.processmonitor.db.DatabaseFunctions;
+
 import java.time.LocalDateTime;
 
 /**
@@ -30,12 +32,14 @@ public class MetricCollector {
 
         CpuCollector cpuCollector = new CpuCollector();
 
+        String timestamp = LocalDateTime.now().toString();
         String name = cpuCollector.getName();
         long speed = cpuCollector.getCurrentFreq();
         long maxSpeed = cpuCollector.getMaxFreq();
         int numCores = cpuCollector.getCoreCount();
         int numProcesses = cpuCollector.getProcessCount();
         int numThreads = cpuCollector.getThreadCount();
+        double utilization = 0; //TODO: Calculate utilization
 
         System.out.println("CPU Name: " + name);
         System.out.println("CPU Speed: " + speed);
@@ -43,6 +47,8 @@ public class MetricCollector {
         System.out.println("Cores: " + numCores);
         System.out.println("Processes: " + numProcesses);
         System.out.println("Threads: " + numThreads);
+
+        DatabaseFunctions.insertCpuData(timestamp, name, speed, maxSpeed, numCores, numProcesses, numThreads, utilization);
 
     }
 
