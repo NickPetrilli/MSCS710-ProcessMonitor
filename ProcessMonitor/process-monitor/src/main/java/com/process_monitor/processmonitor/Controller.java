@@ -2,6 +2,8 @@ package com.process_monitor.processmonitor;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 // import oshi.hardware.PhysicalMemory;
 // import oshi.hardware.NetworkIF;
 // import oshi.hardware.GraphicsCard;
@@ -20,33 +22,59 @@ public class Controller {
         return System.getProperty("os.name");
     }
 
-    @GetMapping("api/processor")
-    public String getProcessorInfo() {
-        // Processor Name
-        String processorName = Cpu.getName();
+    // @GetMapping("api/processor")
+    // public String getProcessorInfo() {
+    //     // Processor Name
+    //     String processorName = Cpu.getName();
 
-        // Processor Speed (current)
-        long processorSpeed = Cpu.getCurrentFreq();
+    //     // Processor Speed (current)
+    //     long processorSpeed = Cpu.getCurrentFreq();
 
-        // Processor Max Speed
-        long processorMaxSpeed = Cpu.getMaxFreq();
+    //     // Processor Max Speed
+    //     long processorMaxSpeed = Cpu.getMaxFreq();
 
-        //Physical Processor Count
-        int physicalProcessorCount = Cpu.getCoreCount();
-        int logicalProcessorCount = Cpu.getThreadCount();
+    //     //Physical Processor Count
+    //     int physicalProcessorCount = Cpu.getCoreCount();
+    //     int logicalProcessorCount = Cpu.getThreadCount();
 
-        //Context Switches Count
-        long contextSwitches = Cpu.getContextSwitches();
-        //Interrupt Count
-        long interrupts = Cpu.getInterrupts();
+    //     //Context Switches Count
+    //     long contextSwitches = Cpu.getContextSwitches();
+    //     //Interrupt Count
+    //     long interrupts = Cpu.getInterrupts();
 
-        return "Processor Name: " + processorName + "\n" 
-        + " Processor Current Speed (Hz): " + processorSpeed + "\n" 
-        + " Processor Max Speed (Hz): " + processorMaxSpeed + "\n" 
-        + " Physical Processor Count (Cores): " + physicalProcessorCount + "\n" 
-        + " Logical Processor Count (Threads): " + logicalProcessorCount + "\n" 
-        + " Context Switches: " + contextSwitches + "\n" 
-        + " Interrupts: " + interrupts;
+    //     return "Processor Name: " + processorName + "\n" 
+    //     + " Processor Current Speed (Hz): " + processorSpeed + "\n" 
+    //     + " Processor Max Speed (Hz): " + processorMaxSpeed + "\n" 
+    //     + " Physical Processor Count (Cores): " + physicalProcessorCount + "\n" 
+    //     + " Logical Processor Count (Threads): " + logicalProcessorCount + "\n" 
+    //     + " Context Switches: " + contextSwitches + "\n" 
+    //     + " Interrupts: " + interrupts;
+    // }
+
+    @GetMapping("api/disk")
+    public String getGPUInfo() {
+
+        Disk.updateDiskData();
+
+        String output = "";
+
+        for (int diskNum = 0; diskNum < Disk.getDiskLength(); diskNum++) {
+
+            // Disk Name
+            String diskName = Disk.getDiskName(diskNum);
+
+            // Disk Read Speed
+            long diskReadSpeed = Disk.getDiskReadSpeed(diskNum);
+
+            // Disk Write Speed
+            long diskWriteSpeed = Disk.getDiskWriteSpeed(diskNum);
+
+            output += "Disk Name: " + diskName + " \n" 
+            + " Disk Read Speed (B/s): " + diskReadSpeed + "\n" 
+            + " Disk Write Speed (B/s): " + diskWriteSpeed + "\n";
+        }
+
+        return output;
     }
     
     @GetMapping("/api/memory")
@@ -120,20 +148,71 @@ public class Controller {
     public String getProcessStats() {
         String output = "";
 
+        ArrayList<String> procNames = new ArrayList<>();
+
+        ArrayList<Double> cpuUsages = new ArrayList<>();
+
+        ArrayList<Float> memUsagesBytes = new ArrayList<>();
+        ArrayList<Float> memUsagesPer = new ArrayList<>();
+
+        ArrayList<Long> initReads = new ArrayList<>();
+        ArrayList<Long> initWrites = new ArrayList<>();
+
+        ArrayList<Long> diskUsagesBytes = new ArrayList<>();
+
         for (int procNum = 0; procNum < Process.getOSProcessesLength(); procNum++) {
-            String procName = Process.getProcessName(procNum);
+            procNames.add(Process.getProcessName(procNum));
 
-            double cpUsage = Process.getCpuUsage(procNum);
-            cpUsage *= 100;
-
-            long memUsage = Process.getResidentSetSize(procNum);
-            float memUsed = (float)memUsage / Memory.getTotalMemory();
-            memUsed *= 100;
-
-            output += "Process Name: " + procName + "\n" 
-            + " CPU Usage: " + cpUsage + "%" + "\n"
-            + " Memory Usage (Bytes): " + memUsage + " (" + memUsed + "%)" + "\n";
+            initReads.add(Process.getDiskReadBytes(procNum));
+            initWrites.add(Process.getDiskWriteBytes(procNum));
         }
+
+        try {
+            // Delay for 1 seconds
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Process.updateProcesses();
+
+        for (int procNum = 0; procNum < Process.getOSProcessesLength(); procNum++) {
+            cpuUsages.add(Process.getCpuUsage(procNum) * 100);
+
+            float memUsage = (float)Process.getResidentSetSize(procNum);
+            memUsagesBytes.add(memUsage);
+            memUsagesPer.add((memUsage / Memory.getTotalMemory()) * 100);
+
+            long secRead = Process.getDiskReadBytes(procNum);
+            long secWrite = Process.getDiskWriteBytes(procNum);
+
+            long procReadSpeed = secRead - initReads.get(procNum);
+            long procWriteSpeed = secWrite - initWrites.get(procNum);
+
+            diskUsagesBytes.add(procReadSpeed + procWriteSpeed);
+        }
+
+        long diskTotSpeed = 0;
+
+        Disk.updateDiskData();
+        for (int diskNum = 0; diskNum < Disk.getDiskLength(); diskNum++) {diskTotSpeed += Disk.getdiskReadBytes(diskNum) + Disk.getdiskWriteBytes(diskNum);}
+
+        float totalDiskUsagePer = 0.0f;
+
+        for (int procNum = 0; procNum < Process.getOSProcessesLength(); procNum++) {
+
+            float diskUsagePer = ((float)diskUsagesBytes.get(procNum) / diskTotSpeed) * 100;
+
+            totalDiskUsagePer += diskUsagePer;
+
+            output += "Process Name: " + procNames.get(procNum) + "\n" 
+            + " CPU Usage: " + cpuUsages.get(procNum) + "%" + "\n"
+            + " Memory Usage (Bytes): " + memUsagesBytes.get(procNum) + " (" + memUsagesPer.get(procNum) + "%)" + "\n"
+            + " Disk Usage (B/s): " + diskUsagesBytes.get(procNum) + " (" + diskUsagePer + "%)" + "\n";
+        }
+
+        output += "TOTAL DISK USAGE BY ALL PROCESSES: " + (int)totalDiskUsagePer + "% \n";
+        
 
         return output;
     }

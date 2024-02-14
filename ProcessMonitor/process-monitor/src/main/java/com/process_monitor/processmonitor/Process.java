@@ -15,6 +15,10 @@ public class Process {
 
    public static int getOSProcessesLength() {return allOSProcesses.size();}
 
+   public static void updateProcesses() {
+      for (OSProcess proc : allOSProcesses) {proc.updateAttributes();}
+   }
+
    public static String getProcessName(int proc) {return allOSProcesses.get(proc).getName();} 
 
    public static double getCpuUsage(int proc) {return allOSProcesses.get(proc).getProcessCpuLoadBetweenTicks(null);}
@@ -22,4 +26,8 @@ public class Process {
    public static double getCpuCumulative() {return os.getProcesses().get(1).getProcessCpuLoadCumulative();}
    
    public static long getResidentSetSize(int proc) {return allOSProcesses.get(proc).getResidentSetSize();}
+
+   public static long getDiskReadBytes(int proc) {return allOSProcesses.get(proc).getBytesRead();}
+
+   public static long getDiskWriteBytes(int proc) {return allOSProcesses.get(proc).getBytesWritten();}
 }
