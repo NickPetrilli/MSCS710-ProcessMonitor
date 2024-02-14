@@ -26,7 +26,24 @@ public class MetricCollector {
 
         System.out.println("METRICS COLLECTION");
 
-        // TODO: implement metric collection
+        // TODO: implement metric collection and inserting to database
+
+        CpuCollector cpuCollector = new CpuCollector();
+
+        String name = cpuCollector.getName();
+        long speed = cpuCollector.getCurrentFreq();
+        long maxSpeed = cpuCollector.getMaxFreq();
+        int numCores = cpuCollector.getCoreCount();
+        int numProcesses = cpuCollector.getProcessCount();
+        int numThreads = cpuCollector.getThreadCount();
+
+        System.out.println("CPU Name: " + name);
+        System.out.println("CPU Speed: " + speed);
+        System.out.println("CPU Max Speed: " + maxSpeed);
+        System.out.println("Cores: " + numCores);
+        System.out.println("Processes: " + numProcesses);
+        System.out.println("Threads: " + numThreads);
+
     }
 
 }

@@ -1,20 +1,26 @@
-package com.process_monitor.processmonitor;
+package com.process_monitor.processmonitor.collector;
+
+import java.util.List;
 
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
+import oshi.software.os.OSProcess;
+import oshi.software.os.OperatingSystem;
 
-public class Cpu {
+public class CpuCollector {
     
     private static SystemInfo systemInfo = new SystemInfo();
     private static CentralProcessor processor = systemInfo.getHardware().getProcessor();
-
-    public static String getName() {
+    private static OperatingSystem os = systemInfo.getOperatingSystem();
+    private static List<OSProcess> allOSProcesses = os.getProcesses();
+    
+    public String getName() {
         return processor.getProcessorIdentifier().getName();
     }
 
     // TODO: May need to be scrapped, all cores are reported @ max frequency, even though this does not match the performance graphs
     // given by Windows (Task Manager, Resource Monitor)
-    public static long getCurrentFreq() {
+    public long getCurrentFreq() {
         long[] currFreqs = processor.getCurrentFreq();
 
         long sumFreqs = 0L;
@@ -26,24 +32,20 @@ public class Cpu {
         return avgFreq;
     }
 
-    public static long getMaxFreq() {;
+    public long getMaxFreq() {;
         return processor.getProcessorIdentifier().getVendorFreq();
     }
 
-    public static int getCoreCount() {
+    public int getCoreCount() {
         return processor.getPhysicalProcessorCount();
     }
 
-    public static int getThreadCount() {
-        // What about hyperthreading/multi-threading??? Any way to check?
-        return processor.getLogicalProcessorCount();
+    public int getProcessCount() {
+        return allOSProcesses.size();
     }
 
-    public static long getContextSwitches() {
-        return processor.getContextSwitches();
+    public int getThreadCount() {
+        return os.getThreadCount();
     }
 
-    public static long getInterrupts() {
-        return processor.getInterrupts();
-    }
 }

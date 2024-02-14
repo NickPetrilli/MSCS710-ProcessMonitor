@@ -48,33 +48,6 @@ public class Controller {
         + " Context Switches: " + contextSwitches + "\n" 
         + " Interrupts: " + interrupts;
     }
-
-    @GetMapping("api/gpu")
-    public String getGPUInfo() {
-
-        String output = "";
-
-        for (int cardNum = 0; cardNum < Gpu.getGPULength(); cardNum++) {
-
-            // GPU Manufacturer
-            String gpuManufacturer = Gpu.getGPUManufacturer(cardNum);
-            
-            // GPU Name
-            String gpuName = Gpu.getGPUName(cardNum);
-
-            // Processor Max Speed
-            // String VRAM;
-            long gpuVRAM = Gpu.getGPUVRAM(cardNum);
-            /* if (gpuVRAM >= 1000000000) {VRAM = (gpuVRAM / 1000000000L) + " GB";}
-            else {VRAM = (gpuVRAM / 1000000L) + " MB";} */
-
-            output += "GPU Name: " + gpuName + " \n" 
-            + " GPU Manufacturer: " + gpuManufacturer + "\n" 
-            + " GPU VRAM (Bytes): " + gpuVRAM + "\n";
-        }
-
-        return output;
-    }
     
     @GetMapping("/api/memory")
     public String getMemoryInfo() {
@@ -114,39 +87,6 @@ public class Controller {
             + " Size (B): " + size + "\n"
             + " Type: " + type + "\n"
             + " Speed (Hz): " + speed + "\n";
-        }
-
-        return output;
-    }
-
-    @GetMapping("/api/network")
-    public String getNetworkInfo() {
-
-        // Update all network adapter to their latest data attributes
-        Network.updateNetworkAdapters();
-
-        String output = "";
-
-        for (int network = 0; network < Network.getNetworkAdaptersLength(); network++) {
-            
-            //Network adapter name
-            String networkName = Network.getName(network);
-
-            // Network Card name
-            String networkCardName = Network.getNetworkInfo(network);
-
-            // Network Speed *ADVERTISED*
-            long networkSpeed = Network.getSpeed(network);
-
-            // Network Upload/Download Speed
-            long networkUpload = Network.getUpload(network);
-            long networkDownload = Network.getDownload(network);
-
-            output += "Network Name: " + networkName + "\n" 
-            + " Network Card Name: " + networkCardName + "\n" 
-            + " Network Speed (bits/s): " + networkSpeed + "\n"
-            + " Bytes Sent (bits): " + networkUpload + "\n"
-            + " Bytes Recieved (bits): " + networkDownload + "\n";
         }
 
         return output;
