@@ -1,14 +1,22 @@
 package com.process_monitor.processmonitor.db;
 
+import com.process_monitor.processmonitor.api.memory.model.Memory;
+import com.process_monitor.processmonitor.api.cpu.model.Cpu;
 import com.process_monitor.processmonitor.api.process.model.Process;
+import com.process_monitor.processmonitor.collector.MetricCollector;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class DatabaseFunctions {
-        
+    
+    private static final Logger logger = LoggerFactory.getLogger(MetricCollector.class);
+
     // Database URL
     private final String URL = "jdbc:sqlite:ProcessMonitor.db";
 
@@ -35,13 +43,7 @@ public class DatabaseFunctions {
      * @param threads Number of threads used on computer
      * @param utilization CPU utilization
      */
-    public void insertCpuData(String name,
-                              long speed,
-                              long maxSpeed,
-                              int cores,
-                              int processes,
-                              int threads,
-                              double utilization) {
+    public void insertCpu(Cpu cpu) {
 
         try {
             // Connect to the database
@@ -50,28 +52,27 @@ public class DatabaseFunctions {
             // Create statement and insert into cpu
             String cpuQuery = """
                     INSERT INTO
-                        cpu (timestamp, name, speed, maxSpeed, cores, processes, threads)
+                        cpu (timestamp, name, speed, maxSpeed, cores, processes, threads, utilization)
                     VALUES
-                        (?, ?, ?, ?, ?, ?, ?);
+                        (?, ?, ?, ?, ?, ?, ?, ?);
                     """;
 
             preparedStatement = connection.prepareStatement(cpuQuery);
             // Set values for the parameters
             preparedStatement.setString(1, timestamp);
-            preparedStatement.setString(2, name);
-            preparedStatement.setLong(3, speed);
-            preparedStatement.setLong(4, maxSpeed);
-            preparedStatement.setInt(5, cores);
-            preparedStatement.setInt(6, processes);
-            preparedStatement.setInt(7, threads);
+            preparedStatement.setString(2, cpu.getName());
+            preparedStatement.setLong(3, cpu.getSpeed());
+            preparedStatement.setLong(4, cpu.getMaxSpeed());
+            preparedStatement.setInt(5, cpu.getNumCores());
+            preparedStatement.setInt(6, cpu.getNumProcesses());
+            preparedStatement.setInt(7, cpu.getNumThreads());
+            preparedStatement.setDouble(8, cpu.getUtilization());
 
-            // NOT INCLUDED IN SQL INSERT STATEMENT
-            // preparedStatement.setDouble(8, utilization);
             //Execute query
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Error inserting CPU data.");
+            logger.error("Error inserting CPU data.");
             e.printStackTrace();
         } finally {
             // Close resources
@@ -99,25 +100,65 @@ public class DatabaseFunctions {
             // Create statement and insert into cpu
             String sql = """
                     INSERT INTO
-                        process (timestamp, name, status, cpuUsage, memUsage, bytesRead, bytesWritten)
+                        process (process_id, timestamp, name, status, cpuUsage, memUsage, bytesRead, bytesWritten)
                     VALUES
-                        (?, ?, ?, ?, ?, ?, ?);
+                        (?, ?, ?, ?, ?, ?, ?, ?);
+                    """;
+
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setInt(1, process.getId());
+            preparedStatement.setString(2, timestamp);
+            preparedStatement.setString(3, process.getName());
+            preparedStatement.setString(4, process.getStatus());
+            preparedStatement.setDouble(5, process.getCpuUsage());
+            preparedStatement.setLong(6, process.getMemoryUsage());
+            preparedStatement.setLong(7, process.getBytesRead());
+            preparedStatement.setLong(8, process.getBytesWritten());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            logger.error("Error inserting process data.");
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    public void insertMemory(Memory memory) {
+        try {
+            // Connect to the database
+            connection = DriverManager.getConnection(URL);
+
+            // Create statement and insert into cpu
+            String sql = """
+                    INSERT INTO
+                        memory (timestamp, totalMemory, availableMemory, usedMemory, utilization)
+                    VALUES
+                        (?, ?, ?, ?, ?);
                     """;
 
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, timestamp);
-            preparedStatement.setString(2, process.getName());
-            preparedStatement.setString(3, process.getStatus());
-            preparedStatement.setDouble(4, process.getCpuUsage());
-            preparedStatement.setLong(5, process.getMemoryUsage());
-            preparedStatement.setLong(6, process.getBytesRead());
-            preparedStatement.setLong(7, process.getBytesWritten());
+            preparedStatement.setLong(2, memory.getTotalMemory());
+            preparedStatement.setLong(3, memory.getAvailableMemory());
+            preparedStatement.setLong(4, memory.getUsedMemory());
+            preparedStatement.setDouble(5, memory.getUtilization());
 
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Error inserting process data.");
+            logger.error("Error inserting memory data.");
             e.printStackTrace();
         } finally {
             // Close resources

@@ -19,10 +19,11 @@ public class DatabaseInit {
             + "timestamp TEXT,"
             + "name TEXT,"
             + "status TEXT,"
-            + "cpuUsage REAL,"
-            + "memUsage REAL,"
-            + "bytesRead REAL,"
-            + "bytesWritten REAL,"
+            + "cpuPercentage REAL,"
+            + "memUsageBytes INTEGER,"
+            + "memPercentage REAL,"
+            + "diskSpeed REAL,"
+            + "diskPercentage REAL,"
             + "PRIMARY KEY (process_id, timestamp)" 
             + ")";
 
