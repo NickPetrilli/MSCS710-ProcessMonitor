@@ -3,6 +3,7 @@ package com.process_monitor.processmonitor.api.cpu.model;
 public class Cpu {
 
     String timestamp;
+    String name;
     long speed;
     long maxSpeed;
     int numCores;
@@ -10,9 +11,10 @@ public class Cpu {
     int numThreads;
     double utilization;
 
-    public Cpu(String timestamp, long speed, long maxSpeed, int numCores, int numProcesses, 
+    public Cpu(String timestamp, String name, long speed, long maxSpeed, int numCores, int numProcesses, 
                int numThreads, double utilization) {
         this.timestamp = timestamp;
+        this.name = name;
         this.speed = speed;
         this.maxSpeed = maxSpeed;
         this.numCores = numCores;
@@ -26,6 +28,10 @@ public class Cpu {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public long getSpeed() {

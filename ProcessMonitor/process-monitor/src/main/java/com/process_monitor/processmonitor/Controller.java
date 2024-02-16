@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
-
-@RestController
+/*
+ * @RestController
 public class Controller {
 
     @GetMapping("/api/os")
@@ -142,8 +142,9 @@ public class Controller {
         long memUsage = Process.getResidentSetSize();
 
         return "Cumulative CPU Usage: " + cpuUsage + "\n" + "Memory Usage (Bytes): " + memUsage;
-    } */
+    } 
 
+    
     @GetMapping("/api/processStats")
     public String getProcessStats() {
         String output = "";
@@ -217,3 +218,5 @@ public class Controller {
         return output;
     }
 }
+
+ */

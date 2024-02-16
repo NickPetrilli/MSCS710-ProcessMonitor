@@ -1,6 +1,7 @@
 package com.process_monitor.processmonitor.collector;
 
 import com.process_monitor.processmonitor.api.cpu.model.Cpu;
+import com.process_monitor.processmonitor.api.memory.model.Memory;
 import com.process_monitor.processmonitor.api.process.model.Process;
 import org.hibernate.dialect.Database;
 import org.slf4j.Logger;
@@ -45,22 +46,38 @@ public class MetricCollector {
         }
         logger.info("Finished insert of process list at {}", LocalDateTime.now());
 
-
         // Object to handle collecting CPU metrics
         CpuCollector cpuCollector = new CpuCollector();
-
         String name = cpuCollector.getName();
         long speed = cpuCollector.getCurrentFreq();
         long maxSpeed = cpuCollector.getMaxFreq();
         int numCores = cpuCollector.getCoreCount();
         int numProcesses = cpuCollector.getProcessCount();
         int numThreads = cpuCollector.getThreadCount();
-        double utilization = 0; //TODO: Calculate utilization
+        double cpuUtilization = 0; //TODO: Calculate utilization
+
+        //Timestamp is null because DatabaseFunctions handles it
+        Cpu cpu = new Cpu(null, name, speed, maxSpeed, numCores, numProcesses, numThreads, cpuUtilization);
 
         logger.info("Begin insert of cpu metrics at {}", LocalDateTime.now());
-        databaseFunctions.insertCpuData(name, speed, maxSpeed, numCores, numProcesses, numThreads, utilization);
+        databaseFunctions.insertCpu(cpu);
         logger.info("Finished insert of cpu metrics at {}", LocalDateTime.now());
 
+
+        //Object to handle collecting memory metrics
+        MemoryCollector memoryCollector = new MemoryCollector();
+
+        long totalMemory = memoryCollector.getTotalMemory();
+        long availableMemory = memoryCollector.getAvailableMemory();
+        long usedMemory = memoryCollector.getUsedMemory();
+        double memoryUtilization = memoryCollector.getUtilization();
+
+        //Timestamp is null because DatabaseFunctions handles it
+        Memory memory = new Memory(null, totalMemory, availableMemory, usedMemory, memoryUtilization);
+
+        logger.info("Begin insert of memory metrics at {}", LocalDateTime.now());
+        databaseFunctions.insertMemory(memory);
+        logger.info("Finished insert of memory metrics at {}", LocalDateTime.now());
     }
 
 }

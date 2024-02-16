@@ -1,28 +1,19 @@
 package com.process_monitor.processmonitor.api.memory.model;
 
 public class Memory {
-    int processId;
-    String timestamp;
-    double totalMemory;
-    double usedMemory;
-    double freeMemory;
-    double usage;
 
-    public Memory(int processId, String timestamp, double totalMemory, double usedMemory, double freeMemory, double usage) {
-        this.processId = processId;
+    String timestamp;
+    long totalMemory;
+    long availableMemory;
+    long usedMemory;
+    double utilization;
+
+    public Memory(String timestamp, long totalMemory, long availableMemory, long usedMemory, double utilization) {
         this.timestamp = timestamp;
         this.totalMemory = totalMemory;
+        this.availableMemory = availableMemory;
         this.usedMemory = usedMemory;
-        this.freeMemory = freeMemory;
-        this.usage = usage;
-    }
-
-    public int getProcessId() {
-        return processId;
-    }
-
-    public void setProcessId(int processId) {
-        this.processId = processId;
+        this.utilization = utilization;
     }
 
     public String getTimestamp() {
@@ -33,47 +24,46 @@ public class Memory {
         this.timestamp = timestamp;
     }
 
-    public double getTotalMemory() {
+    public long getTotalMemory() {
         return totalMemory;
     }
 
-    public void setTotalMemory(double totalMemory) {
+    public void setTotalMemory(long totalMemory) {
         this.totalMemory = totalMemory;
     }
 
-    public double getUsedMemory() {
+    public long getUsedMemory() {
         return usedMemory;
     }
 
-    public void setUsedMemory(double usedMemory) {
+    public void setUsedMemory(long usedMemory) {
         this.usedMemory = usedMemory;
     }
 
-    public double getFreeMemory() {
-        return freeMemory;
+    public long getAvailableMemory() {
+        return availableMemory;
     }
 
-    public void setFreeMemory(double freeMemory) {
-        this.freeMemory = freeMemory;
+    public void setAvailableMemory(long availableMemory) {
+        this.availableMemory = availableMemory;
     }
 
-    public double getUsage() {
-        return usage;
+    public double getUtilization() {
+        return utilization;
     }
 
-    public void setUsage(double usage) {
-        this.usage = usage;
+    public void setUsage(double utilization) {
+        this.utilization = utilization;
     }
 
     @Override
     public String toString() {
         return "Memory{" +
-                "processId=" + processId +
                 ", timestamp='" + timestamp + '\'' +
                 ", totalMemory=" + totalMemory +
+                ", freeMemory=" + availableMemory +
                 ", usedMemory=" + usedMemory +
-                ", freeMemory=" + freeMemory +
-                ", usage=" + usage +
+                ", utilization=" + utilization +
                 '}';
     }
 }
