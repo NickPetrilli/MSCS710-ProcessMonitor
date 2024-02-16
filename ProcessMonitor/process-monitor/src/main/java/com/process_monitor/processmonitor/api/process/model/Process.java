@@ -2,14 +2,14 @@ package com.process_monitor.processmonitor.api.process.model;
 
 
 public class Process {
-    int id;
-    String timestamp;
-    String name;
-    String status;
-    double cpuUsage;
-    long memoryUsage;
-    long bytesRead;
-    long bytesWritten;
+    private int id;
+    private String timestamp;
+    private String name;
+    private String status;
+    private double cpuUsage;
+    private long memoryUsage;
+    private long bytesRead;
+    private long bytesWritten;
 
     public Process(int id,
                    String timestamp,
@@ -20,22 +20,6 @@ public class Process {
                    long bytesRead,
                    long bytesWritten) {
         this.id = id;
-        this.timestamp = timestamp;
-        this.name = name;
-        this.status = status;
-        this.cpuUsage = cpuUsage;
-        this.memoryUsage = memoryUsage;
-        this.bytesRead = bytesRead;
-        this.bytesWritten = bytesWritten;
-    }
-
-    public Process(String timestamp,
-                   String name,
-                   String status,
-                   double cpuUsage,
-                   long memoryUsage,
-                   long bytesRead,
-                   long bytesWritten) {
         this.timestamp = timestamp;
         this.name = name;
         this.status = status;

@@ -22,9 +22,9 @@ import java.util.List;
  */
 public class ProcessCollector {
 
-    SystemInfo systemInfo = new SystemInfo();
-    OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
-    List<OSProcess> allOSProcesses = operatingSystem.getProcesses();
+    private SystemInfo systemInfo = new SystemInfo();
+    private OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
+    private List<OSProcess> allOSProcesses = operatingSystem.getProcesses();
 
     /**
      * Gets running process metrics using the Oshi library to interact with Operating System.
@@ -35,6 +35,7 @@ public class ProcessCollector {
         List<Process> processList = new ArrayList<>();
 
         for (OSProcess process : allOSProcesses) {
+            int id = process.getProcessID();
             String name = process.getName();
             String status = process.getState().toString();
             double cpuUsage = process.getProcessCpuLoadBetweenTicks(null);
@@ -43,6 +44,7 @@ public class ProcessCollector {
             long diskBytesWritten = process.getBytesWritten();
 
             processList.add(new Process(
+                    id,
                     null,  // Null because the timestamp is handled by the DatabaseFunctions object.
                     name,
                     status,
