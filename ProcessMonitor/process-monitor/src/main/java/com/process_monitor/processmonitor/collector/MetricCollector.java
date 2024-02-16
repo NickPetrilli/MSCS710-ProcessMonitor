@@ -1,5 +1,8 @@
 package com.process_monitor.processmonitor.collector;
 
+import com.process_monitor.processmonitor.api.cpu.model.Cpu;
+import com.process_monitor.processmonitor.api.process.model.Process;
+import org.hibernate.dialect.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.process_monitor.processmonitor.db.DatabaseFunctions;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Class to collect computer metrics.
@@ -24,15 +28,27 @@ public class MetricCollector {
     // Collects metrics every 30 seconds.
     @Scheduled(fixedRate = 30000)
     public void collectMetrics() {
-        logger.info("Metric Collection performed at {}", LocalDateTime.now());
+        LocalDateTime currentTimestamp = LocalDateTime.now();
+        logger.info("Metric Collection performed at {}", currentTimestamp);
 
-        System.out.println("METRICS COLLECTION");
+        // Object to handle database functions
+        DatabaseFunctions databaseFunctions = new DatabaseFunctions(currentTimestamp.toString());
 
-        // TODO: implement metric collection and inserting to database
+        // Object to handle collecting running process metrics
+        ProcessCollector processCollector = new ProcessCollector();
 
+        List<Process> processList = processCollector.getProcessMetrics();
+
+        logger.info("Begin insert of process list at {}", LocalDateTime.now());
+        for (Process process : processList) {
+            databaseFunctions.insertProcess(process);
+        }
+        logger.info("Finished insert of process list at {}", LocalDateTime.now());
+
+
+        // Object to handle collecting CPU metrics
         CpuCollector cpuCollector = new CpuCollector();
 
-        String timestamp = LocalDateTime.now().toString();
         String name = cpuCollector.getName();
         long speed = cpuCollector.getCurrentFreq();
         long maxSpeed = cpuCollector.getMaxFreq();
@@ -41,14 +57,9 @@ public class MetricCollector {
         int numThreads = cpuCollector.getThreadCount();
         double utilization = 0; //TODO: Calculate utilization
 
-        System.out.println("CPU Name: " + name);
-        System.out.println("CPU Speed: " + speed);
-        System.out.println("CPU Max Speed: " + maxSpeed);
-        System.out.println("Cores: " + numCores);
-        System.out.println("Processes: " + numProcesses);
-        System.out.println("Threads: " + numThreads);
-
-        DatabaseFunctions.insertCpuData(timestamp, name, speed, maxSpeed, numCores, numProcesses, numThreads, utilization);
+        logger.info("Begin insert of cpu metrics at {}", LocalDateTime.now());
+        databaseFunctions.insertCpuData(name, speed, maxSpeed, numCores, numProcesses, numThreads, utilization);
+        logger.info("Finished insert of cpu metrics at {}", LocalDateTime.now());
 
     }
 

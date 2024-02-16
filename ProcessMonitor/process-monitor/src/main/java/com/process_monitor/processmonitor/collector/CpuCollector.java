@@ -2,6 +2,7 @@ package com.process_monitor.processmonitor.collector;
 
 import java.util.List;
 
+import com.process_monitor.processmonitor.api.cpu.model.Cpu;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.software.os.OSProcess;

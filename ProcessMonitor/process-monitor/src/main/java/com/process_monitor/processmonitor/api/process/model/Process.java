@@ -1,31 +1,48 @@
 package com.process_monitor.processmonitor.api.process.model;
 
+
 public class Process {
     int id;
+    String timestamp;
     String name;
     String status;
     double cpuUsage;
-    double gpuUsage;
-    double memoryUsage;
-    double networkUsage;
+    long memoryUsage;
+    long bytesRead;
+    long bytesWritten;
 
-    public Process(int id, String name, String status, double cpuUsage, double gpuUsage, double memoryUsage, double networkUsage) {
+    public Process(int id,
+                   String timestamp,
+                   String name,
+                   String status,
+                   double cpuUsage,
+                   long memoryUsage,
+                   long bytesRead,
+                   long bytesWritten) {
         this.id = id;
+        this.timestamp = timestamp;
         this.name = name;
         this.status = status;
         this.cpuUsage = cpuUsage;
-        this.gpuUsage = gpuUsage;
         this.memoryUsage = memoryUsage;
-        this.networkUsage = networkUsage;
+        this.bytesRead = bytesRead;
+        this.bytesWritten = bytesWritten;
     }
 
-    public Process(String name, String status, double cpuUsage, double gpuUsage, double memoryUsage, double networkUsage) {
+    public Process(String timestamp,
+                   String name,
+                   String status,
+                   double cpuUsage,
+                   long memoryUsage,
+                   long bytesRead,
+                   long bytesWritten) {
+        this.timestamp = timestamp;
         this.name = name;
         this.status = status;
         this.cpuUsage = cpuUsage;
-        this.gpuUsage = gpuUsage;
         this.memoryUsage = memoryUsage;
-        this.networkUsage = networkUsage;
+        this.bytesRead = bytesRead;
+        this.bytesWritten = bytesWritten;
     }
 
     public int getId() {
@@ -34,6 +51,14 @@ public class Process {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getName() {
@@ -60,40 +85,41 @@ public class Process {
         this.cpuUsage = cpuUsage;
     }
 
-    public double getGpuUsage() {
-        return gpuUsage;
-    }
-
-    public void setGpuUsage(double gpuUsage) {
-        this.gpuUsage = gpuUsage;
-    }
-
-    public double getMemoryUsage() {
+    public long getMemoryUsage() {
         return memoryUsage;
     }
 
-    public void setMemoryUsage(double memoryUsage) {
+    public void setMemoryUsage(long memoryUsage) {
         this.memoryUsage = memoryUsage;
     }
 
-    public double getNetworkUsage() {
-        return networkUsage;
+    public long getBytesRead() {
+        return bytesRead;
     }
 
-    public void setNetworkUsage(double networkUsage) {
-        this.networkUsage = networkUsage;
+    public void setBytesRead(long bytesRead) {
+        this.bytesRead = bytesRead;
+    }
+
+    public long getBytesWritten() {
+        return bytesWritten;
+    }
+
+    public void setBytesWritten(long bytesWritten) {
+        this.bytesWritten = bytesWritten;
     }
 
     @Override
     public String toString() {
         return "Process{" +
                 "id=" + id +
+                ", timestamp='" + timestamp + '\'' +
                 ", name='" + name + '\'' +
                 ", status='" + status + '\'' +
                 ", cpuUsage=" + cpuUsage +
-                ", gpuUsage=" + gpuUsage +
                 ", memoryUsage=" + memoryUsage +
-                ", networkUsage=" + networkUsage +
+                ", bytesRead=" + bytesRead +
+                ", bytesWritten=" + bytesWritten +
                 '}';
     }
 }
