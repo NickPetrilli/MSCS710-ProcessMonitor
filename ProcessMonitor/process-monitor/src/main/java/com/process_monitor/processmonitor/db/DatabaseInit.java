@@ -55,7 +55,7 @@ public class DatabaseInit {
             + "swapUtilization REAL,"
             + "totalReadBytes REAL,"
             + "totalWriteBytes REAL,"
-            + "transferTime REAL"
+            + "utilization REAL"
             + ")";
 
     Connection connection = null;

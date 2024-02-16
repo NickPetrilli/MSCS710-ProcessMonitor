@@ -27,7 +27,7 @@ public class MetricCollector {
     private static final Logger logger = LoggerFactory.getLogger(MetricCollector.class);
 
     // Collects metrics every 30 seconds.
-    @Scheduled(fixedRate = 30000)
+    @Scheduled(fixedRate = 10000)
     public void collectMetrics() {
         LocalDateTime currentTimestamp = LocalDateTime.now();
         logger.info("Metric Collection performed at {}", currentTimestamp);

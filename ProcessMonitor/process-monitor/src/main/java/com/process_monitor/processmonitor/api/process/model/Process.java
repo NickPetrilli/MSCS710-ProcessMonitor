@@ -6,27 +6,30 @@ public class Process {
     private String timestamp;
     private String name;
     private String status;
-    private double cpuUsage;
-    private long memoryUsage;
-    private long bytesRead;
-    private long bytesWritten;
+    private double cpuPercentage;
+    private long memoryUsageBytes;
+    private double memoryUsagePercentage;
+    private double diskSpeed;
+    private double diskPercentage;
 
     public Process(int id,
                    String timestamp,
                    String name,
                    String status,
-                   double cpuUsage,
-                   long memoryUsage,
-                   long bytesRead,
-                   long bytesWritten) {
+                   double cpuPercentage,
+                   long memoryUsageBytes,
+                   double memoryUsagePercentage,
+                   double diskSpeed,
+                   double diskPercentage) {
         this.id = id;
         this.timestamp = timestamp;
         this.name = name;
         this.status = status;
-        this.cpuUsage = cpuUsage;
-        this.memoryUsage = memoryUsage;
-        this.bytesRead = bytesRead;
-        this.bytesWritten = bytesWritten;
+        this.cpuPercentage = cpuPercentage;
+        this.memoryUsageBytes = memoryUsageBytes;
+        this.memoryUsagePercentage = memoryUsagePercentage;
+        this.diskSpeed = diskSpeed;
+        this.diskPercentage = diskPercentage;
     }
 
     public int getId() {
@@ -61,36 +64,44 @@ public class Process {
         this.status = status;
     }
 
-    public double getCpuUsage() {
-        return cpuUsage;
+    public double getCpuPercentage() {
+        return cpuPercentage;
     }
 
-    public void setCpuUsage(double cpuUsage) {
-        this.cpuUsage = cpuUsage;
+    public void setCpuPercentage(double cpuPercentage) {
+        this.cpuPercentage = cpuPercentage;
     }
 
-    public long getMemoryUsage() {
-        return memoryUsage;
+    public long getMemoryUsageBytes() {
+        return memoryUsageBytes;
     }
 
-    public void setMemoryUsage(long memoryUsage) {
-        this.memoryUsage = memoryUsage;
+    public void setMemoryUsageBytes(long memoryUsageBytes) {
+        this.memoryUsageBytes = memoryUsageBytes;
     }
 
-    public long getBytesRead() {
-        return bytesRead;
+    public double getMemoryUsagePercentage() {
+        return memoryUsagePercentage;
     }
 
-    public void setBytesRead(long bytesRead) {
-        this.bytesRead = bytesRead;
+    public void setMemoryUsagePercentage(double memoryUsagePercentage) {
+        this.memoryUsagePercentage = memoryUsagePercentage;
     }
 
-    public long getBytesWritten() {
-        return bytesWritten;
+    public double getDiskSpeed() {
+        return diskSpeed;
     }
 
-    public void setBytesWritten(long bytesWritten) {
-        this.bytesWritten = bytesWritten;
+    public void setDiskSpeed(double diskSpeed) {
+        this.diskSpeed = diskSpeed;
+    }
+
+    public double getDiskPercentage() {
+        return diskPercentage;
+    }
+
+    public void setDiskPercentage(double diskPercentage) {
+        this.diskPercentage = diskPercentage;
     }
 
     @Override
@@ -100,10 +111,11 @@ public class Process {
                 ", timestamp='" + timestamp + '\'' +
                 ", name='" + name + '\'' +
                 ", status='" + status + '\'' +
-                ", cpuUsage=" + cpuUsage +
-                ", memoryUsage=" + memoryUsage +
-                ", bytesRead=" + bytesRead +
-                ", bytesWritten=" + bytesWritten +
+                ", cpuPercentage=" + cpuPercentage +
+                ", memoryUsageBytes=" + memoryUsageBytes +
+                ", memoryUsagePercentage=" + memoryUsagePercentage +
+                ", diskSpeed=" + diskSpeed +
+                ", diskPercentage=" + diskPercentage +
                 '}';
     }
 }

@@ -100,9 +100,9 @@ public class DatabaseFunctions {
             // Create statement and insert into cpu
             String sql = """
                     INSERT INTO
-                        process (process_id, timestamp, name, status, cpuUsage, memUsage, bytesRead, bytesWritten)
+                        process (process_id, timestamp, name, status, cpuPercentage, memUsageBytes, memPercentage, diskSpeed, diskPercentage)
                     VALUES
-                        (?, ?, ?, ?, ?, ?, ?, ?);
+                        (?, ?, ?, ?, ?, ?, ?, ?, ?);
                     """;
 
             preparedStatement = connection.prepareStatement(sql);
@@ -111,10 +111,11 @@ public class DatabaseFunctions {
             preparedStatement.setString(2, timestamp);
             preparedStatement.setString(3, process.getName());
             preparedStatement.setString(4, process.getStatus());
-            preparedStatement.setDouble(5, process.getCpuUsage());
-            preparedStatement.setLong(6, process.getMemoryUsage());
-            preparedStatement.setLong(7, process.getBytesRead());
-            preparedStatement.setLong(8, process.getBytesWritten());
+            preparedStatement.setDouble(5, process.getCpuPercentage());
+            preparedStatement.setLong(6, process.getMemoryUsageBytes());
+            preparedStatement.setDouble(7, process.getMemoryUsagePercentage());
+            preparedStatement.setDouble(8, process.getDiskSpeed());
+            preparedStatement.setDouble(9, process.getDiskPercentage());
 
             preparedStatement.executeUpdate();
 
