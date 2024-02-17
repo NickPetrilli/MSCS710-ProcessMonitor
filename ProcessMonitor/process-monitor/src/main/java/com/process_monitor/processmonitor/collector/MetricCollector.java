@@ -46,6 +46,10 @@ public class MetricCollector {
         }
         //CPU and Disk utilization are summed in the ProcessCollector
         double cpuUtilization = processCollector.getTotalCpuPercentage();
+        //CPU usage can exceed 100% due to multithreading
+        //To handle this, divide by the number of logical processors to match Task Manager
+        int logicalProcessors = CpuCollector.getLogicalProcessorCount();
+        cpuUtilization = cpuUtilization / logicalProcessors;
         double diskUtilization = processCollector.getTotalDiskPercentage();
 
         logger.info("Finished insert of process list at {}", LocalDateTime.now());

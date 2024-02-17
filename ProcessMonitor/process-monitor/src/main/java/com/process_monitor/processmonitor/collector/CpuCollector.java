@@ -82,4 +82,13 @@ public class CpuCollector {
         return os.getThreadCount();
     }
 
+    /**
+     * Gets the number of logical processors used to calculate actual cpu usage
+     * Static method allows to call without creating another object in MetricCollector
+     * @return the number of logical processors
+     */
+    public static int getLogicalProcessorCount() {
+        return processor.getLogicalProcessorCount();
+    }
+
 }
