@@ -177,7 +177,7 @@ public class DatabaseFunctions {
      * Inserts Disk metrics into the database.
      * @param disk Disk object containing disk metrics of the user's computer.
      */
-    public void insertDisk(Disk disk) {
+    public void insertDisk(Disk disk, double diskUtilization) {
         try {
             // Connect to the database
             connection = DriverManager.getConnection(URL);
@@ -202,7 +202,7 @@ public class DatabaseFunctions {
             preparedStatement.setLong(8, disk.getTotalWriteBytes());
             preparedStatement.setLong(9, disk.getReadSpeed());
             preparedStatement.setLong(10, disk.getWriteSpeed());
-            preparedStatement.setDouble(11, disk.getUtilization());
+            preparedStatement.setDouble(11, diskUtilization);
 
             preparedStatement.executeUpdate();
 

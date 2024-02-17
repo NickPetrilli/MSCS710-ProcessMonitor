@@ -44,6 +44,10 @@ public class MetricCollector {
         for (Process process : processList) {
             databaseFunctions.insertProcess(process);
         }
+        //CPU and Disk utilization are summed in the ProcessCollector
+        double cpuUtilization = processCollector.getTotalCpuPercentage();
+        double diskUtilization = processCollector.getTotalDiskPercentage();
+
         logger.info("Finished insert of process list at {}", LocalDateTime.now());
 
         // Object to handle collecting CPU metrics
@@ -54,7 +58,6 @@ public class MetricCollector {
         int numCores = cpuCollector.getCoreCount();
         int numProcesses = cpuCollector.getProcessCount();
         int numThreads = cpuCollector.getThreadCount();
-        double cpuUtilization = cpuCollector.getUtilization();
 
         //Timestamp is null because DatabaseFunctions handles it
         Cpu cpu = new Cpu(null, name, speed, maxSpeed, numCores, numProcesses, numThreads, cpuUtilization);
@@ -86,7 +89,7 @@ public class MetricCollector {
 
         logger.info("Begin insert of disk metrics at {}", LocalDateTime.now());
         for (Disk disk : diskStores) {
-            databaseFunctions.insertDisk(disk);
+            databaseFunctions.insertDisk(disk, diskUtilization);
         }
         logger.info("Finished insert of disk metrics at {}", LocalDateTime.now());
     }

@@ -46,10 +46,6 @@ public class DiskCollector {
             long readSpeed = this.getDiskReadSpeed(index);
             long writeSpeed = this.getDiskWriteSpeed(index);
 
-            //Total disk percentage is calculated in ProcessCollector, need an instance to access the getter method
-            ProcessCollector processCollector = new ProcessCollector();
-            double utilization = processCollector.getTotalDiskPercentage();
-
             disks.add(new Disk(
                 null,
                 name, 
@@ -60,8 +56,7 @@ public class DiskCollector {
                 totalReadBytes, 
                 totalWriteBytes,
                 readSpeed,
-                writeSpeed, 
-                utilization
+                writeSpeed
             ));
 
             index++;

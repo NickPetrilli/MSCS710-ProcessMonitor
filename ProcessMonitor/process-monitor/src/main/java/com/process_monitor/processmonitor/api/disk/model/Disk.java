@@ -12,7 +12,6 @@ public class Disk {
     private long totalWriteBytes;
     private long readSpeed;
     private long writeSpeed;
-    private double utilization;
 
     public Disk(String timestamp,
                 String name,
@@ -23,8 +22,7 @@ public class Disk {
                 long totalReadBytes,
                 long totalWriteBytes,
                 long readSpeed,
-                long writeSpeed,
-                double utilization) {
+                long writeSpeed) {
 
         this.timestamp = timestamp;
         this.name = name;
@@ -36,7 +34,6 @@ public class Disk {
         this.totalWriteBytes = totalWriteBytes;
         this.readSpeed = readSpeed;
         this.writeSpeed = writeSpeed;
-        this.utilization = utilization;
     }
 
     public String getTimestamp() {
@@ -69,10 +66,6 @@ public class Disk {
 
     public long getTotalWriteBytes() {
         return this.totalWriteBytes;
-    }
-
-    public double getUtilization() {
-        return this.utilization;
     }
 
     public long getReadSpeed() {
