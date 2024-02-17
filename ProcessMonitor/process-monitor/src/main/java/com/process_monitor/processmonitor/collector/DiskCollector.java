@@ -48,7 +48,7 @@ public class DiskCollector {
 
             //Total disk percentage is calculated in ProcessCollector, need an instance to access the getter method
             ProcessCollector processCollector = new ProcessCollector();
-            double utilization = processCollector.getDiskPercentage();
+            double utilization = processCollector.getTotalDiskPercentage();
 
             disks.add(new Disk(
                 null,

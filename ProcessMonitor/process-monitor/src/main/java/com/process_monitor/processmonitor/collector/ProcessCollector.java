@@ -29,12 +29,19 @@ public class ProcessCollector {
     private OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
     private List<OSProcess> allOSProcesses = operatingSystem.getProcesses();
     private double totalDiskUsagePercentage = 0.0;
+    private double totalCpuUsagePercentage = 0.0;
 
     /**
      * Gets running process metrics using the Oshi library to interact with Operating System.
      * @return List of all the running process on the user's computer.
      */
-    public List<Process> getProcessMetrics() {
+    /*
+     * Syncronized method to ensure that access to shared variable allOSProcesses is synchronized
+     * to prevent multiple threads from accessing or modifying it
+     * Needed because the thread sleeps for one second to calculate read/write speed
+     * Prevents processes ending in that one second wait which causes a null pointer error 
+     */
+    public synchronized List<Process> getProcessMetrics() {
 
         List<Process> processList = new ArrayList<>();
 
@@ -128,17 +135,31 @@ public class ProcessCollector {
 
         }
 
-        int sum = 0;
-        for (double d : cpuUsages) {
-            sum += d;
+        
+        for (double processCpuUsage : cpuUsages) {
+            totalCpuUsagePercentage += processCpuUsage;
         }
-        System.out.println("\n\n" + sum + "\n\n");
+        System.out.println("\n\n" + totalCpuUsagePercentage + "\n\n");
+
+        System.out.println("\n\n" + totalDiskUsagePercentage + "\n\n");
 
         return processList;
     }
 
-    public double getDiskPercentage() {
+    /**
+     * Gets the sum of all processes disk usage
+     * @return the total disk usage percentage
+     */
+    public double getTotalDiskPercentage() {
         return totalDiskUsagePercentage;
+    }
+
+    /**
+     * Gets the sum of all processes cpu usage
+     * @return the total cpu usage percentage
+     */
+    public double getTotalCpuPercentage() {
+        return totalCpuUsagePercentage;
     }
 
 }

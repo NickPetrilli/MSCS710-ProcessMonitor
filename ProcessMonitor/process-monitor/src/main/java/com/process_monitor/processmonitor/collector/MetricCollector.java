@@ -54,7 +54,7 @@ public class MetricCollector {
         int numCores = cpuCollector.getCoreCount();
         int numProcesses = cpuCollector.getProcessCount();
         int numThreads = cpuCollector.getThreadCount();
-        double cpuUtilization = 0; //TODO: Calculate utilization
+        double cpuUtilization = cpuCollector.getUtilization();
 
         //Timestamp is null because DatabaseFunctions handles it
         Cpu cpu = new Cpu(null, name, speed, maxSpeed, numCores, numProcesses, numThreads, cpuUtilization);

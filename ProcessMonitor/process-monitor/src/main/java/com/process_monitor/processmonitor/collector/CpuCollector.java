@@ -2,7 +2,6 @@ package com.process_monitor.processmonitor.collector;
 
 import java.util.List;
 
-import com.process_monitor.processmonitor.api.cpu.model.Cpu;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.software.os.OSProcess;
@@ -81,6 +80,20 @@ public class CpuCollector {
      */
     public int getThreadCount() {
         return os.getThreadCount();
+    }
+
+    /**
+     * ProcessCollector sums all process cpu usage
+     * @return total cpu utilization
+     */
+    public double getUtilization() {
+        //Total cpu percentage is calculated in ProcessCollector, need an instance to access the getter method
+        ProcessCollector processCollector = new ProcessCollector();
+        double utilization = processCollector.getTotalCpuPercentage();
+        //Total cpu percentage can exceed 100% due to multithreading
+        utilization = utilization / this.getCoreCount() * 2;
+        System.out.println("Total cpu utilization: " + utilization);
+        return utilization;
     }
 
 }
