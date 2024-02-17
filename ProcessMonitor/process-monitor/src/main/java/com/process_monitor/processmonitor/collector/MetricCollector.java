@@ -1,9 +1,9 @@
 package com.process_monitor.processmonitor.collector;
 
 import com.process_monitor.processmonitor.api.cpu.model.Cpu;
+import com.process_monitor.processmonitor.api.disk.model.Disk;
 import com.process_monitor.processmonitor.api.memory.model.Memory;
 import com.process_monitor.processmonitor.api.process.model.Process;
-import org.hibernate.dialect.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -78,6 +78,17 @@ public class MetricCollector {
         logger.info("Begin insert of memory metrics at {}", LocalDateTime.now());
         databaseFunctions.insertMemory(memory);
         logger.info("Finished insert of memory metrics at {}", LocalDateTime.now());
+
+        //Object to handle collecting disk metrics
+        DiskCollector diskCollector = new DiskCollector();
+
+        List<Disk> diskStores = diskCollector.getDiskMetrics();
+
+        logger.info("Begin insert of disk metrics at {}", LocalDateTime.now());
+        for (Disk disk : diskStores) {
+            databaseFunctions.insertDisk(disk);
+        }
+        logger.info("Finished insert of disk metrics at {}", LocalDateTime.now());
     }
 
 }

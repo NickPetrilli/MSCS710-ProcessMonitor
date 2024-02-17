@@ -53,8 +53,10 @@ public class DatabaseInit {
             + "swapTotal INTEGER,"
             + "swapUsed INTEGER,"
             + "swapUtilization REAL,"
-            + "totalReadBytes REAL,"
-            + "totalWriteBytes REAL,"
+            + "totalReadBytes INTEGER,"
+            + "totalWriteBytes INTEGER,"
+            + "readSpeed INTEGER,"
+            + "writeSpeed INTEGER,"
             + "utilization REAL"
             + ")";
 

@@ -3,6 +3,14 @@ package com.process_monitor.processmonitor.collector;
 import oshi.SystemInfo;
 import oshi.hardware.GlobalMemory;
 
+/**
+ * Class to handle collection of physical memory metrics on the user's computer.
+ * Important metrics are:
+ *      - total memory in bytes
+ *      - available memory in bytes
+ *      - used memory in bytes
+ *      - utilization percentage
+ */
 public class MemoryCollector {
 
     private static SystemInfo systemInfo = new SystemInfo();

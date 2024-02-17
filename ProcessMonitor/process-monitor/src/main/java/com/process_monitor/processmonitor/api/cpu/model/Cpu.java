@@ -2,14 +2,14 @@ package com.process_monitor.processmonitor.api.cpu.model;
 
 public class Cpu {
 
-    String timestamp;
-    String name;
-    long speed;
-    long maxSpeed;
-    int numCores;
-    int numProcesses;
-    int numThreads;
-    double utilization;
+    private String timestamp;
+    private String name;
+    private long speed;
+    private long maxSpeed;
+    private int numCores;
+    private int numProcesses;
+    private int numThreads;
+    private double utilization;
 
     public Cpu(String timestamp, String name, long speed, long maxSpeed, int numCores, int numProcesses, 
                int numThreads, double utilization) {
@@ -20,6 +20,7 @@ public class Cpu {
         this.numCores = numCores;
         this.numProcesses = numProcesses;
         this.numThreads = numThreads;
+        this.utilization = utilization;
     }
 
     public String getTimestamp() {

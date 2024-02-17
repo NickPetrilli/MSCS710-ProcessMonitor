@@ -2,6 +2,7 @@ package com.process_monitor.processmonitor.db;
 
 import com.process_monitor.processmonitor.api.memory.model.Memory;
 import com.process_monitor.processmonitor.api.cpu.model.Cpu;
+import com.process_monitor.processmonitor.api.disk.model.Disk;
 import com.process_monitor.processmonitor.api.process.model.Process;
 import com.process_monitor.processmonitor.collector.MetricCollector;
 
@@ -35,13 +36,7 @@ public class DatabaseFunctions {
 
     /**
      * Inserts CPU metrics into the database.
-     * @param name Name of the computer's processor
-     * @param speed Speed of CPU
-     * @param maxSpeed Max speed of CPU
-     * @param cores Total cores in the computer's processor
-     * @param processes Total processes running
-     * @param threads Number of threads used on computer
-     * @param utilization CPU utilization
+     * @param cpu Cpu object containing cpu metrics of the user's computer.
      */
     public void insertCpu(Cpu cpu) {
 
@@ -97,15 +92,15 @@ public class DatabaseFunctions {
             // Connect to the database
             connection = DriverManager.getConnection(URL);
 
-            // Create statement and insert into cpu
-            String sql = """
+            // Create statement and insert into process
+            String processQuery = """
                     INSERT INTO
                         process (process_id, timestamp, name, status, cpuPercentage, memUsageBytes, memPercentage, diskSpeed, diskPercentage)
                     VALUES
                         (?, ?, ?, ?, ?, ?, ?, ?, ?);
                     """;
 
-            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement = connection.prepareStatement(processQuery);
 
             preparedStatement.setInt(1, process.getId());
             preparedStatement.setString(2, timestamp);
@@ -135,20 +130,24 @@ public class DatabaseFunctions {
 
     }
 
+    /**
+     * Inserts Memory metrics into the database.
+     * @param memory Memory object containing phsyical memory metrics of the user's computer.
+     */
     public void insertMemory(Memory memory) {
         try {
             // Connect to the database
             connection = DriverManager.getConnection(URL);
 
-            // Create statement and insert into cpu
-            String sql = """
+            // Create statement and insert into memory
+            String memoryQuery = """
                     INSERT INTO
                         memory (timestamp, totalMemory, availableMemory, usedMemory, utilization)
                     VALUES
                         (?, ?, ?, ?, ?);
                     """;
 
-            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement = connection.prepareStatement(memoryQuery);
 
             preparedStatement.setString(1, timestamp);
             preparedStatement.setLong(2, memory.getTotalMemory());
@@ -160,6 +159,55 @@ public class DatabaseFunctions {
 
         } catch (SQLException e) {
             logger.error("Error inserting memory data.");
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    /**
+     * Inserts Disk metrics into the database.
+     * @param disk Disk object containing disk metrics of the user's computer.
+     */
+    public void insertDisk(Disk disk) {
+        try {
+            // Connect to the database
+            connection = DriverManager.getConnection(URL);
+
+            // Create statement and insert into disk
+            String diskQuery = """
+                    INSERT INTO
+                        disk (timestamp, name, model, swapTotal, swapUsed, swapUtilization, totalReadBytes, totalWriteBytes, readSpeed, writeSpeed, utilization)
+                    VALUES
+                        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                    """;
+
+            preparedStatement = connection.prepareStatement(diskQuery);
+
+            preparedStatement.setString(1, timestamp);
+            preparedStatement.setString(2, disk.getName());
+            preparedStatement.setString(3, disk.getModel());
+            preparedStatement.setLong(4, disk.getSwapTotal());
+            preparedStatement.setLong(5, disk.getSwapUsed());
+            preparedStatement.setDouble(6, disk.getSwapUtilization());
+            preparedStatement.setLong(7, disk.getTotalReadBytes());
+            preparedStatement.setLong(8, disk.getTotalWriteBytes());
+            preparedStatement.setLong(9, disk.getReadSpeed());
+            preparedStatement.setLong(10, disk.getWriteSpeed());
+            preparedStatement.setDouble(11, disk.getUtilization());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            logger.error("Error inserting disk data.");
             e.printStackTrace();
         } finally {
             // Close resources

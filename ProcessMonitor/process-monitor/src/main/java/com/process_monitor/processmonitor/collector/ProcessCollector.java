@@ -8,7 +8,6 @@ import oshi.software.os.OperatingSystem;
 
 import com.process_monitor.processmonitor.api.process.model.Process;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +28,7 @@ public class ProcessCollector {
     private SystemInfo systemInfo = new SystemInfo();
     private OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
     private List<OSProcess> allOSProcesses = operatingSystem.getProcesses();
+    private double totalDiskUsagePercentage = 0.0;
 
     /**
      * Gets running process metrics using the Oshi library to interact with Operating System.
@@ -108,12 +108,11 @@ public class ProcessCollector {
             diskTotalSpeed += hardDisk.getReadBytes() + hardDisk.getWriteBytes();
         }
 
-        float totalDiskUsagePer = 0.0f;
         for (int i = 0; i < allOSProcesses.size(); i++) {
 
             float diskUsagePercentage = ((float)diskSpeeds.get(i) / diskTotalSpeed) * 100;
 
-            totalDiskUsagePer += diskUsagePercentage;
+            totalDiskUsagePercentage += diskUsagePercentage;
 
             processList.add(new Process(
                     allOSProcesses.get(i).getProcessID(),
@@ -136,6 +135,10 @@ public class ProcessCollector {
         System.out.println("\n\n" + sum + "\n\n");
 
         return processList;
+    }
+
+    public double getDiskPercentage() {
+        return totalDiskUsagePercentage;
     }
 
 }
