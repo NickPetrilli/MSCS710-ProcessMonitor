@@ -12,6 +12,7 @@ public class Disk {
     private long totalWriteBytes;
     private long readSpeed;
     private long writeSpeed;
+    private double utilization;
 
     public Disk(String timestamp,
                 String name,
@@ -36,6 +37,34 @@ public class Disk {
         this.writeSpeed = writeSpeed;
     }
 
+    /*
+     * This second constructor is used when retrieving disk data from the database
+     * So this one has utilization and the above one doesn't
+     */
+    public Disk(String timestamp,
+                String name,
+                String model,
+                long swapTotal,
+                long swapUsed,
+                double swapUtilization,
+                long totalReadBytes,
+                long totalWriteBytes,
+                long readSpeed,
+                long writeSpeed,
+                double utilization) {
+
+        this.timestamp = timestamp;
+        this.name = name;
+        this.model = model;
+        this.swapTotal = swapTotal;
+        this.swapUsed = swapUsed;
+        this.swapUtilization = swapUtilization;
+        this.totalReadBytes = totalReadBytes;
+        this.totalWriteBytes = totalWriteBytes;
+        this.readSpeed = readSpeed;
+        this.writeSpeed = writeSpeed;
+        this.utilization = utilization;
+    }
     public String getTimestamp() {
         return this.timestamp;
     }
@@ -74,6 +103,10 @@ public class Disk {
 
     public long getWriteSpeed() {
         return this.writeSpeed;
+    }
+
+    public double getUtilization() {
+        return this.utilization;
     }
     
 }
