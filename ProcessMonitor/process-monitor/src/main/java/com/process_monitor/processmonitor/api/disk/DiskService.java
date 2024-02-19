@@ -11,12 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.process_monitor.processmonitor.api.disk.model.Disk;
-import com.process_monitor.processmonitor.collector.MetricCollector;
 
 @Service
 public class DiskService {
 
-    private static final Logger logger = LoggerFactory.getLogger(MetricCollector.class);
+    private static final Logger logger = LoggerFactory.getLogger(DiskService.class);
 
     // Database URL
     private final String URL = "jdbc:sqlite:ProcessMonitor.db";
@@ -54,13 +53,13 @@ public class DiskService {
                 String timestamp = resultSet.getString("timestamp");
                 String name = resultSet.getString("name");
                 String model = resultSet.getString("model");
-                long swapTotal = resultSet.getInt("swapTotal");
-                long swapUsed = resultSet.getInt("swapUsed");
+                long swapTotal = resultSet.getLong("swapTotal");
+                long swapUsed = resultSet.getLong("swapUsed");
                 double swapUtilization = resultSet.getDouble("swapUtilization");
-                long totalReadBytes = resultSet.getInt("totalReadBytes");
-                long totalWriteBytes = resultSet.getInt("totalWriteBytes");
-                long readSpeed = resultSet.getInt("readSpeed");
-                long writeSpeed = resultSet.getInt("writeSpeed");
+                long totalReadBytes = resultSet.getLong("totalReadBytes");
+                long totalWriteBytes = resultSet.getLong("totalWriteBytes");
+                long readSpeed = resultSet.getLong("readSpeed");
+                long writeSpeed = resultSet.getLong("writeSpeed");
                 double utilization = resultSet.getDouble("utilization");
             
                 //Creat disk object to pass to DiskController

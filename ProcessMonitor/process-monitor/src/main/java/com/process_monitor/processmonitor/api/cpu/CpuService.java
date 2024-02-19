@@ -11,12 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.process_monitor.processmonitor.api.cpu.model.Cpu;
-import com.process_monitor.processmonitor.collector.MetricCollector;
 
 @Service
 public class CpuService {
 
-    private static final Logger logger = LoggerFactory.getLogger(MetricCollector.class);
+    private static final Logger logger = LoggerFactory.getLogger(CpuService.class);
 
     // Database URL
     private final String URL = "jdbc:sqlite:ProcessMonitor.db";
@@ -51,12 +50,12 @@ public class CpuService {
                 // Retrieve data from the result set
                 String timestamp = resultSet.getString("timestamp");
                 String name = resultSet.getString("name");
-                long speed = resultSet.getInt("speed");
-                long maxSpeed = resultSet.getInt("maxSpeed");
+                long speed = resultSet.getLong("speed");
+                long maxSpeed = resultSet.getLong("maxSpeed");
                 int cores = resultSet.getInt("cores");
                 int processes = resultSet.getInt("processes");
                 int threads = resultSet.getInt("threads");
-                double utilization = resultSet.getInt("utilization");
+                double utilization = resultSet.getDouble("utilization");
             
                 //Creat cpu object to pass to CpuController
                 cpu = new Cpu(timestamp, name, speed, maxSpeed, cores, processes, threads, utilization);
