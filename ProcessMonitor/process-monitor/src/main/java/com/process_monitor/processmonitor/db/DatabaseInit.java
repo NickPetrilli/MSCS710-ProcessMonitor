@@ -47,7 +47,7 @@ public class DatabaseInit {
             + ")";
             
     private final String CREATE_DISK_TABLE_SQL = "CREATE TABLE IF NOT EXISTS disk ("
-            + "timestamp TEXT PRIMARY KEY,"
+            + "timestamp TEXT,"
             + "name TEXT,"
             + "model TEXT,"
             + "swapTotal INTEGER,"
@@ -57,7 +57,8 @@ public class DatabaseInit {
             + "totalWriteBytes INTEGER,"
             + "readSpeed INTEGER,"
             + "writeSpeed INTEGER,"
-            + "utilization REAL"
+            + "utilization REAL,"
+            + "PRIMARY KEY (timestamp, name)" 
             + ")";
 
     Connection connection = null;
