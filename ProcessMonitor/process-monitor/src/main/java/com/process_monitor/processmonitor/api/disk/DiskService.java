@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +26,8 @@ public class DiskService {
     private Statement statement = null;
     private ResultSet resultSet = null;
 
-    //TODO: Might need to handle if machine has multiple drives
-    public Disk getDiskData() {
-        Disk disk = null;
+    public List<Disk> getDiskData() {
+        List<Disk> disks = new ArrayList<>();
 
         try {
             // Connect to the database
@@ -63,7 +64,7 @@ public class DiskService {
                 double utilization = resultSet.getDouble("utilization");
             
                 //Creat disk object to pass to DiskController
-                disk = new Disk(timestamp, name, model, swapTotal, swapUsed, swapUtilization, totalReadBytes, totalWriteBytes, readSpeed, writeSpeed, utilization);
+                disks.add(new Disk(timestamp, name, model, swapTotal, swapUsed, swapUtilization, totalReadBytes, totalWriteBytes, readSpeed, writeSpeed, utilization));
             }
 
         } catch (SQLException e) {
@@ -80,7 +81,7 @@ public class DiskService {
             }
         }
 
-        return disk;
+        return disks;
     }
     
 }

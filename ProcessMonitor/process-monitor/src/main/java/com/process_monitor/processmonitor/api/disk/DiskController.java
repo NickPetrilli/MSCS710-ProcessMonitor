@@ -1,5 +1,8 @@
 package com.process_monitor.processmonitor.api.disk;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +22,9 @@ public class DiskController {
     }
 
     @GetMapping
-    public Disk getDiskData() {
-        Disk disk = diskService.getDiskData();
+    public List<Disk> getDiskData() {
+         List<Disk> disks = diskService.getDiskData();
 
-        return disk;
+        return disks;
     }
 }
