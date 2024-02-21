@@ -10,6 +10,7 @@ import com.process_monitor.processmonitor.api.process.model.Process;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
 /**
  * Class to handle collection of running process metrics on the user's computer.
@@ -74,11 +75,22 @@ public class ProcessCollector {
             e.printStackTrace();
         }
 
+        Iterator<OSProcess> procIterator = allOSProcesses.iterator();
+
         // UPDATE NEEDED TO REFRESH PROCESSES
-        for (OSProcess proc : allOSProcesses) {
-            if (!proc.updateAttributes()) {
+        while(procIterator.hasNext()) {
+
+            OSProcess proc = procIterator.next();
+
+            try {
+                if (!proc.updateAttributes()) {System.out.println("Process info update FAIL: " + proc.getName());}
+            }
+
+            catch (NullPointerException e) {
+                System.out.println("UH OH! Process w/ update null error: " + proc.getName());
+                
                 int index = allOSProcesses.indexOf(proc);
-                allOSProcesses.remove(proc);
+                procIterator.remove();
                 initReads.remove(index);
                 initWrites.remove(index);
             }
