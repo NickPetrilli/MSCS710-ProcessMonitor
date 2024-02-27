@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png'
 // import UtilTextBox from '../../../utils/getUtilBackgroundColor';
 
 const CpuSection = () => {
+
+  const [jsonData, setJsonData] = useState({}); // Initialize an empty JSON object
 
   // Directly initializing text
   const text = '80% Utilization';
@@ -20,10 +22,23 @@ const CpuSection = () => {
 
   const backgroundColor = getUtilBackgroundColor(text);
 
+  useEffect(() => {
+    // Fetch data from an API endpoint
+    fetch('http://localhost:8080/api/v1/cpu')
+      .then(response => response.json())
+      .then(data => {
+        // Update the JSON object with fetched data
+        setJsonData(data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []); // Empty dependency array means this effect runs once after the first render
+
   return (
     <div className="section-Cpu">
       <h1 className="title">CPU</h1>
-      <h4>AMD Ryzen 7 4800H</h4>
+      <h4>{jsonData.name}</h4>
 
       <div>
         {/* Graph side */}
@@ -33,7 +48,7 @@ const CpuSection = () => {
           {/* Utilization / Top Processes Side */}
           <div className="col">
             <div className="row">
-              <div className="utilBox" style={{ backgroundColor }}> {text} </div>
+              <div className="utilBox" style={{ backgroundColor }}> {jsonData.utilization} </div>
             </div>
 
             <h4 className="top-processes-table-TITLE"> Top Processes </h4>
