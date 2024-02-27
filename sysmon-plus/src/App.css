@@ -1,0 +1,127 @@
+h1.title {
+  margin-bottom: -2%;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+hr {
+  height: 0.5rem;
+  background-color: black;
+}
+
+.App {
+  text-align: center;
+  background-color: lightgrey;
+  min-height: 100vh;
+}
+
+.App-logo-header {
+  height: 5em;
+  pointer-events: none;
+  /* padding-left: 10%;
+  padding-right: 105%; */
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.App-title-header {
+  flex: 10;
+}
+
+/* @media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+} */
+
+.App-header {
+  background-color: white;
+  height: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: calc(10px + 2vmin);
+  color: black;
+  border-bottom: .25rem solid black;
+}
+
+/* .App-link {
+  color: #61dafb;
+} */
+
+.center-container {
+  display:flex;
+  justify-content: center;
+}
+
+/* styles.css */
+.row {
+  display: flex;
+  /* flex-wrap: wrap; Allow items to wrap to the next line if needed */
+  justify-content: space-between; /* Space items out evenly across the main axis */
+}
+
+.section {
+  /* width: calc(50% - 10px); Each section takes up 50% width with some margin */
+  width: 100%; /* Each section takes up 50% width with some margin */
+  padding: 5%; /* Add margin between sections */
+}
+
+.section-Cpu {
+  width: 100%;
+  padding: 5%;
+  border-right: .5rem solid black;
+}
+
+.section .section-Mem {
+  width: inherit;
+  padding: inherit;
+  border-left: .5rem solid black;
+}
+
+/* @keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+.utilBox {
+  color: white;
+  background-color: black;
+  font-weight: bold;
+}
+
+.graph {
+  padding-right: 10%;
+}
+
+.top-processes-table-TITLE {
+  background-color: white;
+  border-top: .1rem solid black;
+  border-left: .1rem solid black;
+  border-right: .1rem solid black;
+}
+
+.top-processes-table {
+  margin-top: -20%;
+  background-color: white;
+  border-bottom: .1rem solid black;
+  border-left: .1rem solid black;
+  border-right: .1rem solid black;
+}
+
+.processes-table {
+  background-color: white;
+  /* border-bottom: .1rem solid black;
+  border-left: .1rem solid black;
+  border-right: .1rem solid black; */
+}
+
+.processes-table-row {
+  outline: auto;
+}
