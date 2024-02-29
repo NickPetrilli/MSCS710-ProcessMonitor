@@ -26,9 +26,9 @@ import java.util.Iterator;
  */
 public class ProcessCollector {
 
-    private SystemInfo systemInfo = new SystemInfo();
-    private OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
-    private List<OSProcess> allOSProcesses = operatingSystem.getProcesses();
+    private final SystemInfo systemInfo = new SystemInfo();
+    private final OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
+    private final List<OSProcess> allOSProcesses = operatingSystem.getProcesses();
     private double totalDiskUsagePercentage = 0.0;
     private double totalCpuUsagePercentage = 0.0;
 
@@ -151,6 +151,7 @@ public class ProcessCollector {
         for (double processCpuUsage : cpuUsages) {
             totalCpuUsagePercentage += processCpuUsage;
         }
+
         System.out.println("\n\n" + totalCpuUsagePercentage + "\n\n");
 
         System.out.println("\n\n" + totalDiskUsagePercentage + "\n\n");

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Service class for responding to Process requests.
+ * Service class for responding to Process API requests.
  */
 @Service
 public class ProcessService {
@@ -19,9 +19,6 @@ public class ProcessService {
 
     // Database URL
     private final String URL = "jdbc:sqlite:ProcessMonitor.db";
-
-    private Connection connection = null;
-    private Statement statement = null;
     private ResultSet resultSet = null;
 
     /**
@@ -31,8 +28,8 @@ public class ProcessService {
     public List<Process> getProcesses() {
         List<Process> processList = new ArrayList<>();
 
-        try {
-            connection = DriverManager.getConnection(URL);
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
 
             // Create select query - get all attributes for the latest timestamp
             String sql = """
@@ -44,7 +41,6 @@ public class ProcessService {
                     )
                     """;
 
-            statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
@@ -62,17 +58,7 @@ public class ProcessService {
             }
 
         } catch (SQLException e) {
-            logger.error("Error selecting CPU data.");
-            e.printStackTrace();
-        } finally {
-            // Close resources
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            logger.error("Error selecting Process data.");
         }
 
         return processList.isEmpty() ? null : processList;
@@ -86,14 +72,13 @@ public class ProcessService {
     public List<Process> getProcessByName(String name) {
         List<Process> processList = new ArrayList<>();
 
-        try {
-            connection = DriverManager.getConnection(URL);
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
 
             // Create select query - get all process information via name
             String sql = "SELECT * FROM process WHERE name = \"" + name + "\""
                     + " ORDER BY timestamp";
 
-            statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
@@ -111,17 +96,7 @@ public class ProcessService {
             }
 
         } catch (SQLException e) {
-            logger.error("Error selecting CPU data.");
-            e.printStackTrace();
-        } finally {
-            // Close resources
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            logger.error("Error getting Process data via the process name: \"" + name + "\"");
         }
 
         return processList.isEmpty() ? null : processList;

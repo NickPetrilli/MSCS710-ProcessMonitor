@@ -39,7 +39,7 @@ public class ProcessController {
      * @param name Process name (ex: chrome)
      * @return List of process data
      */
-    @GetMapping("{name}")
+    @GetMapping(path = "{name}")
     public List<Process> getProcessHistoryByName(@PathVariable("name") String name) {
         return processService.getProcessByName(name);
     }

@@ -8,30 +8,33 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.process_monitor.processmonitor.api.process.model.Process;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.process_monitor.processmonitor.api.disk.model.Disk;
 
+/**
+ * Service class for responding to Disk API requests.
+ */
 @Service
 public class DiskService {
 
     private static final Logger logger = LoggerFactory.getLogger(DiskService.class);
-
     // Database URL
     private final String URL = "jdbc:sqlite:ProcessMonitor.db";
-
-    private Connection connection = null;
-    private Statement statement = null;
     private ResultSet resultSet = null;
 
+    /**
+     * Retrieves most recent disk information.
+     * @return List of disks on user's machine
+     */
     public List<Disk> getDiskData() {
         List<Disk> disks = new ArrayList<>();
 
-        try {
-            // Connect to the database
-            connection = DriverManager.getConnection(URL);
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
 
             // Create select query - get all attributes for the latest timestamp
             String diskSelectQuery = """
@@ -43,45 +46,69 @@ public class DiskService {
                     )
                     """;
 
-            // Create a SQL statement
-            statement = connection.createStatement();
-
-            // Execute the query and get the result set
             resultSet = statement.executeQuery(diskSelectQuery);
 
             while (resultSet.next()) {
-                // Retrieve data from the result set
-                String timestamp = resultSet.getString("timestamp");
-                String name = resultSet.getString("name");
-                String model = resultSet.getString("model");
-                long swapTotal = resultSet.getLong("swapTotal");
-                long swapUsed = resultSet.getLong("swapUsed");
-                double swapUtilization = resultSet.getDouble("swapUtilization");
-                long totalReadBytes = resultSet.getLong("totalReadBytes");
-                long totalWriteBytes = resultSet.getLong("totalWriteBytes");
-                long readSpeed = resultSet.getLong("readSpeed");
-                long writeSpeed = resultSet.getLong("writeSpeed");
-                double utilization = resultSet.getDouble("utilization");
-            
-                //Creat disk object to pass to DiskController
-                disks.add(new Disk(timestamp, name, model, swapTotal, swapUsed, swapUtilization, totalReadBytes, totalWriteBytes, readSpeed, writeSpeed, utilization));
+                disks.add(new Disk(
+                        resultSet.getString("timestamp"),
+                        resultSet.getString("name"),
+                        resultSet.getString("model"),
+                        resultSet.getLong("swapTotal"),
+                        resultSet.getLong("swapUsed"),
+                        resultSet.getDouble("swapUtilization"),
+                        resultSet.getLong("totalReadBytes"),
+                        resultSet.getLong("totalWriteBytes"),
+                        resultSet.getLong("readSpeed"),
+                        resultSet.getLong("writeSpeed"),
+                        resultSet.getDouble("utilization"))
+                );
             }
 
         } catch (SQLException e) {
             logger.error("Error selecting Disk data.");
-            e.printStackTrace();
-        } finally {
-            // Close resources
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
-        return disks;
+        return disks.isEmpty() ? null : disks;
     }
-    
+
+    /**
+     * Retrieves list of top 3 processes based on diskUsage (diskPercentage).
+     * @return List of Processes
+     */
+    public List<Process> getTopProcessesByDiskUsage() {
+        List<Process> processList = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                    SELECT *
+                    FROM process
+                    WHERE timestamp = (SELECT MAX(timestamp) FROM process)
+                    ORDER BY diskPercentage DESC
+                    LIMIT 3;
+                    """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                processList.add(new Process(
+                        resultSet.getInt("process_id"),
+                        resultSet.getString("timestamp"),
+                        resultSet.getString("name"),
+                        resultSet.getString("status"),
+                        resultSet.getDouble("cpuPercentage"),
+                        resultSet.getLong("memUsageBytes"),
+                        resultSet.getDouble("memPercentage"),
+                        resultSet.getDouble("diskSpeed"),
+                        resultSet.getDouble("diskPercentage")
+                ));
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting top-processes via DiskUsage.");
+        }
+
+        return processList.isEmpty() ? null : processList;
+    }
 }
