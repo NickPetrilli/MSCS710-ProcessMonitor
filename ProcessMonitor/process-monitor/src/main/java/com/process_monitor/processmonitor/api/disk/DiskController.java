@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.process_monitor.processmonitor.api.disk.model.Disk;
+import com.process_monitor.processmonitor.api.process.model.Process;
 
+/**
+ * RESTful API for Disk information.
+ */
 @RestController
 @RequestMapping(path = "api/v1/disk")
 @CrossOrigin
@@ -22,10 +26,23 @@ public class DiskController {
         this.diskService = diskService;
     }
 
+
+    /**
+     * GET Request endpoint to handle getting and returning disk information.
+     * @return
+     */
     @GetMapping
     public List<Disk> getDiskData() {
-         List<Disk> disks = diskService.getDiskData();
+        return diskService.getDiskData();
+    }
 
-        return disks;
+
+    /**
+     * GET Request endpoint to handles getting and returning the top-3 processes based on disk usage.
+     * @return List of processes with most disk usage.
+     */
+    @GetMapping(path = "top-processes")
+    public List<Process> getTopProcesses() {
+        return diskService.getTopProcessesByDiskUsage();
     }
 }
