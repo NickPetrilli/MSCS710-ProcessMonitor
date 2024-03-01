@@ -45,4 +45,14 @@ public class DiskController {
     public List<Process> getTopProcesses() {
         return diskService.getTopProcessesByDiskUsage();
     }
+
+
+    /**
+     * GET Request endpoint to handle getting and returning processes based on their disk usage.
+     * @return List of current running processes.
+     */
+    @GetMapping(path = "processes")
+    public List<Process> getProcessesByDiskSpeed() {
+        return diskService.getProcessesByDiskUsage();
+    }
 }
