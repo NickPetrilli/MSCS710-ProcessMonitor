@@ -43,7 +43,7 @@ const DiskSection = () => {
             <div id='disk-top-processes'>
                 {topProcesses.length > 0 ? (
                         topProcesses.map((item, index) => (
-                            <pre>{item.name}      {item.diskSpeed} bytes/second</pre>
+                            <pre>{item.name}      {item.diskSpeed / 1000000} MB/s</pre>
                         ))
                     ) : (
                     <p>No data available</p>
