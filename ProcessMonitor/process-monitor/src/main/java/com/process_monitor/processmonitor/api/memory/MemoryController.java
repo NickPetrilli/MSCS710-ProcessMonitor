@@ -1,6 +1,7 @@
 package com.process_monitor.processmonitor.api.memory;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -36,6 +37,15 @@ public class MemoryController {
         ArrayList<Process> processList = memoryService.getMemoryTopProcesses();
 
         return processList;
+    }
+
+    /**
+     * GET Request endpoint to handle getting and returning processes based on their memory usage.
+     * @return List of processes
+     */
+    @GetMapping(path = "processes")
+    public List<Process> getProcessesByMemory() {
+        return memoryService.getProcessesByMemoryUsage();
     }
 
 }

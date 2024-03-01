@@ -31,12 +31,22 @@ public class CpuController {
     }
 
     /**
-     * GET Request endpoint to handles getting and returning the top-3 processes based on disk usage.
+     * GET Request endpoint to handle getting and returning the top-3 processes based on CPU usage.
      * @return List of processes with most disk usage.
      */
     @GetMapping(path = "top-processes")
     public List<Process> getTopProcesses() {
         return cpuService.getTopProcessesByCpUsage();
+    }
+
+
+    /**
+     * GET Request endpoint to handle getting and returning most recent processes based on CPU usage.
+     * @return List of processes with most disk usage.
+     */
+    @GetMapping(path = "processes")
+    public List<Process> getProcessesByCpuUsage() {
+        return cpuService.getProcessesOrderByCpuUsage();
     }
 
 }

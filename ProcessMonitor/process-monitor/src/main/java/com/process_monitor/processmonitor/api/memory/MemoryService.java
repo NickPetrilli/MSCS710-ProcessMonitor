@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -145,5 +146,47 @@ public class MemoryService {
         }
 
         return processList;
+    }
+
+    /**
+     * Retrieves list of processes based sorted by their Memory Usage (memUsageBytes).
+     * @return List of Processes
+     */
+    public List<Process> getProcessesByMemoryUsage() {
+        List<Process> processList = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                    SELECT *
+                    FROM process
+                    WHERE timestamp = (SELECT MAX(timestamp) FROM process)
+                    GROUP BY name
+                    ORDER BY memUsageBytes DESC
+                    LIMIT 50;
+                    """;
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                processList.add(new Process(
+                        resultSet.getInt("process_id"),
+                        resultSet.getString("timestamp"),
+                        resultSet.getString("name"),
+                        resultSet.getString("status"),
+                        resultSet.getDouble("cpuPercentage"),
+                        resultSet.getLong("memUsageBytes"),
+                        resultSet.getDouble("memPercentage"),
+                        resultSet.getDouble("diskSpeed"),
+                        resultSet.getDouble("diskPercentage")
+                ));
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting all processes ordered by Memory Usage.");
+        }
+
+        return processList.isEmpty() ? null : processList;
     }
 }

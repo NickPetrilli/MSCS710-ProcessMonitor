@@ -81,6 +81,7 @@ public class CpuService {
         return cpu;
     }
 
+
     /**
      * Retrieves list of top 3 processes based on cpUsage (cpuPercentage).
      * @return List of Processes
@@ -123,4 +124,46 @@ public class CpuService {
         return processList.isEmpty() ? null : processList;
     }
 
+
+    /**
+     * Retrieves list of processes based on cpUsage (cpuPercentage).
+     * @return List of Processes
+     */
+    public List<Process> getProcessesOrderByCpuUsage() {
+        List<Process> processList = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                    SELECT *
+                    FROM process
+                    WHERE timestamp = (SELECT MAX(timestamp) FROM process)
+                        AND name <> "Idle"
+                    ORDER BY cpuPercentage DESC
+                    LIMIT 50;
+                    """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                processList.add(new Process(
+                        resultSet.getInt("process_id"),
+                        resultSet.getString("timestamp"),
+                        resultSet.getString("name"),
+                        resultSet.getString("status"),
+                        resultSet.getDouble("cpuPercentage"),
+                        resultSet.getLong("memUsageBytes"),
+                        resultSet.getDouble("memPercentage"),
+                        resultSet.getDouble("diskSpeed"),
+                        resultSet.getDouble("diskPercentage")
+                ));
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting top-processes via DiskUsage.");
+        }
+
+        return processList.isEmpty() ? null : processList;
+    }
 }
