@@ -5,12 +5,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.process_monitor.processmonitor.api.cpu.model.Cpu;
+import com.process_monitor.processmonitor.api.process.model.Process;
 
 @Service
 public class CpuService {
@@ -76,6 +79,48 @@ public class CpuService {
         }
 
         return cpu;
+    }
+
+    /**
+     * Retrieves list of top 3 processes based on cpUsage (cpuPercentage).
+     * @return List of Processes
+     */
+    public List<Process> getTopProcessesByCpUsage() {
+        List<Process> processList = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                    SELECT *
+                    FROM process
+                    WHERE timestamp = (SELECT MAX(timestamp) FROM process)
+                        AND name <> "Idle"
+                    ORDER BY cpuPercentage DESC
+                    LIMIT 3;
+                    """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                processList.add(new Process(
+                        resultSet.getInt("process_id"),
+                        resultSet.getString("timestamp"),
+                        resultSet.getString("name"),
+                        resultSet.getString("status"),
+                        resultSet.getDouble("cpuPercentage"),
+                        resultSet.getLong("memUsageBytes"),
+                        resultSet.getDouble("memPercentage"),
+                        resultSet.getDouble("diskSpeed"),
+                        resultSet.getDouble("diskPercentage")
+                ));
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting top-processes via DiskUsage.");
+        }
+
+        return processList.isEmpty() ? null : processList;
     }
 
 }

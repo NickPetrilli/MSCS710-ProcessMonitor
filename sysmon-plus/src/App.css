@@ -90,6 +90,14 @@ hr {
   }
 } */
 
+.utilandTopProc-sec {
+  display: flex; /* Let them grow to occupy available space */
+  /* text-align: center; Optionally center the text */
+  justify-content: center;
+
+  margin-right: 10%;
+}
+
 .utilBox {
   color: white;
   background-color: black;
@@ -108,11 +116,21 @@ hr {
 }
 
 .top-processes-table {
-  margin-top: -20%;
+  /* display: flex;
+  justify-content: center; */
+  font-weight: bold;
+
+  table-layout: auto;
+
+  margin-top: -8%;
   background-color: white;
   border-bottom: .1rem solid black;
   border-left: .1rem solid black;
   border-right: .1rem solid black;
+}
+
+.top-processes-table-row {
+  font-weight: normal;
 }
 
 .processes-table {
@@ -123,5 +141,11 @@ hr {
 }
 
 .processes-table-row {
+  display: flex;
   outline: auto;
+}
+
+.utilBox, .top-processes-table-TITLE, .top-processes-table, .top-processes-table-row {
+  flex-grow: 1;
+  margin-right: 10%;
 }

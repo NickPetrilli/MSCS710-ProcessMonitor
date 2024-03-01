@@ -47,8 +47,7 @@ const DiskSection = () => {
                         ))
                     ) : (
                     <p>No data available</p>
-                )
-                }
+                )}
             </div>
         </div>
     );
