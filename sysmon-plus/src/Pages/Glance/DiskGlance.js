@@ -6,46 +6,56 @@ const DiskSection = () => {
     const [topProcesses, setTopProcesses] = useState([]);
 
     useEffect(() => {
-      // Fetch data from an API endpoint
-      fetch('http://localhost:8080/api/v1/disk')
-        .then(response => response.json())
-        .then(data => {
-          // Update the JSON object with fetched data
-          setDisk(data);
-        })
-        .catch(error => {
-          console.error('Error fetching memory data:', error);
-        });
-  
-      // Fetch data from an API endpoint
-      fetch('http://localhost:8080/api/v1/disk/top-processes')
-        .then(response => response.json())
-        .then(data => {
-          // Update the JSON object with fetched data
-          setTopProcesses(data);
-        })
-        .catch(error => {
-          console.error('Error fetching memory top process data:', error);
-        });
+      const fetchData = () => {
+        // Fetch disk utilization from API endpoint
+        fetch('http://localhost:8080/api/v1/disk')
+          .then(response => response.json())
+          .then(data => {
+            // Update the JSON object with fetched data
+            setDisk(data);
+          })
+          .catch(error => {
+            console.error('Error in GET request for general disk information:', error);
+          });
+
+        // Fetch top 3 processes (based on disk usage) from an API endpoint
+        fetch('http://localhost:8080/api/v1/disk/top-processes')
+          .then(response => response.json())
+          .then(data => {
+            // Update the JSON object with fetched data
+            setTopProcesses(data);
+          })
+          .catch(error => {
+            console.error('Error in GET request for disk top processes:', error);
+          });
+      }
+
+    // Run the function immediately when the component mounts
+    fetchData();
+
+    // Set up interval to run the function every 10 seconds
+    const intervalId = setInterval(fetchData, 10000);
+
+    return () => clearInterval(intervalId);
     }, []); // Empty dependency array means this effect runs once after the first render
 
-    // Logging
-    console.error({disk});
+        // Logging
+        console.error({disk});
 
-  // Directly initializing text
-  var util = Math.floor(disk.utilization);
-
-  const getUtilBackgroundColor = (percentage) => {
-    if (percentage < 40) {
-      return 'green';
-    } else if (percentage >= 40 && percentage < 80) {
-      return 'orange';
-    } else {
-      return 'red';
-    }
-  };
-
-  var backgroundColor = getUtilBackgroundColor(util);
+        // Directly initializing text
+        var util = Math.floor(disk.utilization);
+      
+        const getUtilBackgroundColor = (percentage) => {
+          if (percentage < 40) {
+            return 'green';
+          } else if (percentage >= 40 && percentage < 80) {
+            return 'orange';
+          } else {
+            return 'red';
+          }
+        };
+      
+        var backgroundColor = getUtilBackgroundColor(util);
 
     return (
       <div className="section">
