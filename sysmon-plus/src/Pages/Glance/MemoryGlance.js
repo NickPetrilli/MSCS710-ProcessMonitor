@@ -9,26 +9,36 @@ const MemSection = () => {
 
   useEffect(() => {
     // Fetch data from an API endpoint
-    fetch('http://localhost:8080/api/v1/memory')
-      .then(response => response.json())
-      .then(data => {
-        // Update the JSON object with fetched data
-        setJsonMemoryData(data);
-      })
-      .catch(error => {
-        console.error('Error fetching memory data:', error);
-      });
+    const fetchData = () => {
+      fetch('http://localhost:8080/api/v1/memory')
+        .then(response => response.json())
+        .then(data => {
+          // Update the JSON object with fetched data
+          setJsonMemoryData(data);
+        })
+        .catch(error => {
+          console.error('Error fetching memory data:', error);
+        });
 
-    // Fetch data from an API endpoint
-    fetch('http://localhost:8080/api/v1/memory/top-processes')
-      .then(response => response.json())
-      .then(data => {
-        // Update the JSON object with fetched data
-        setJsonProcessData(data);
-      })
-      .catch(error => {
-        console.error('Error fetching memory top process data:', error);
-      });
+      // Fetch data from an API endpoint
+      fetch('http://localhost:8080/api/v1/memory/top-processes')
+        .then(response => response.json())
+        .then(data => {
+          // Update the JSON object with fetched data
+          setJsonProcessData(data);
+        })
+        .catch(error => {
+          console.error('Error fetching memory top process data:', error);
+        });
+    }
+
+    // Run the function immediately when the component mounts
+    fetchData();
+
+    // Set up interval to run the function every 10 seconds
+    const intervalId = setInterval(fetchData, 10000);
+      
+    return () => clearInterval(intervalId);
   }, []); // Empty dependency array means this effect runs once after the first render
 
   // Directly initializing text

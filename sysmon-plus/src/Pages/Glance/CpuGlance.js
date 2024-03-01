@@ -9,26 +9,36 @@ const CpuSection = () => {
 
   useEffect(() => {
     // Fetch data from an API endpoint
-    fetch('http://localhost:8080/api/v1/cpu')
-      .then(response => response.json())
-      .then(data => {
-        // Update the JSON object with fetched data
-        setJsonData(data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
+    const fetchData = () => {
+      fetch('http://localhost:8080/api/v1/cpu')
+        .then(response => response.json())
+        .then(data => {
+          // Update the JSON object with fetched data
+          setJsonData(data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
 
-      // Fetch top 3 processes (based on disk usage) from an API endpoint
+      // Fetch top 3 processes (based on cpu usage) from an API endpoint
       fetch('http://localhost:8080/api/v1/cpu/top-processes')
-      .then(response => response.json())
-      .then(data => {
-        // Update the JSON object with fetched data
-        setTopProcesses(data);
-      })
-      .catch(error => {
-        console.error('Error in GET request for disk top processes:', error);
-      });
+        .then(response => response.json())
+        .then(data => {
+          // Update the JSON object with fetched data
+          setTopProcesses(data);
+        })
+        .catch(error => {
+          console.error('Error in GET request for disk top processes:', error);
+        });
+    }
+
+    // Run the function immediately when the component mounts
+    fetchData();
+
+    // Set up interval to run the function every 10 seconds
+    const intervalId = setInterval(fetchData, 10000);
+
+    return () => clearInterval(intervalId);
   }, []); // Empty dependency array means this effect runs once after the first render
 
   // Directly initializing text
