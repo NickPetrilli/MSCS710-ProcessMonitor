@@ -1,5 +1,7 @@
 package com.process_monitor.processmonitor.api.memory;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.process_monitor.processmonitor.api.memory.model.Memory;
+import com.process_monitor.processmonitor.api.process.model.Process;
 
 
 @RestController
@@ -26,6 +29,13 @@ public class MemoryController {
         Memory memory = memoryService.getMemoryData();
         
         return memory;
+    }
+
+    @GetMapping("/top-processes")
+    public ArrayList<Process> getMemoryTopProcesses() {
+        ArrayList<Process> processList = memoryService.getMemoryTopProcesses();
+
+        return processList;
     }
 
 }
