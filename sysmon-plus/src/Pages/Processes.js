@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Processes = () => {
+    
+    const [jsonData, setJsonData] = useState({}); // Initialize an empty JSON object
+
+    useEffect(() => {
+        // Fetch data from an API endpoint
+        fetch('http://localhost:8080/api/v1/process')
+          .then(response => response.json())
+          .then(data => {
+            // Update the JSON object with fetched data
+            setJsonData(data);
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+      }, []);
 
   return (
     <div className="Processes">
@@ -17,96 +32,18 @@ const Processes = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr className='process-row'>
-                        <th> Firefox </th>
-                        <th> 13.2% </th>
-                        <th> 2,146.2 MB </th>
-                        <th> 0.0 Mb/s </th>
-                        </tr>
-
-                    <tr className='process-row'>
-                        <th> Avast Antivirus </th>
-                        <th> 1.1% </th>
-                        <th> 114.4 MB </th>
-                        <th> 0.0 Mb/s </th>
-                    </tr>
-                    
-                    <tr className='process-row'>
-                        <th> Microsoft Edge </th>
-                        <th> 0.8% </th>
-                        <th> 475.3 MB </th>
-                        <th> 0.0 Mb/s </th>
-                    </tr>
-
-                    <tr className='process-row'>
-                        <th> NVIDIA Control Panel </th>
-                        <th> 0.0% </th>
-                        <th> 5.6 MB </th>
-                        <th> 0.0 Mb/s </th>
-                    </tr>
-
-                    <tr className='process-row'>
-                        <th> NVIDIA Controller </th>
-                        <th> 0.0% </th>
-                        <th> 9.8 MB </th>
-                        <th> 0.0 Mb/s </th>
-                    </tr>
-
-                    <tr className='process-row'>
-                        <th> Runtime Broker </th>
-                        <th> 0.0% </th>
-                        <th> 19.7 MB </th>
-                        <th> 0.0 Mb/s </th>
-                    </tr>
-
-                    <tr className='process-row'>
-                        <th> AMD Software </th>
-                        <th> 0.0% </th>
-                        <th> 6.2 MB </th>
-                        <th> 0.0 Mb/s </th>
-                    </tr>
-
-                    <tr className='process-row'>
-                        <th> Notepad </th>
-                        <th> 0.0% </th>
-                        <th> 1.1 MB </th>
-                        <th> 0.0 Mb/s </th>
-                    </tr>
-
-                    <tr className='process-row'>
-                        <th> GNU Manipulation </th>
-                        <th> 0.0% </th>
-                        <th> 5.3 MB </th>
-                        <th> 0.0 Mb/s </th>
-                    </tr>
-
-                    <tr className='process-row'>
-                        <th> Office Click-N-Run </th>
-                        <th> 0.0% </th>
-                        <th> 4.0 MB </th>
-                        <th> 0.0 Mb/s </th>
-                    </tr>
-
-                    <tr className='process-row'>
-                        <th> NordVPN </th>
-                        <th> 0.0% </th>
-                        <th> 26.2 MB </th>
-                        <th> 0.0 Mb/s </th>
-                    </tr>
-
-                    <tr className='process-row'>
-                        <th> Gaming Services </th>
-                        <th> 0.0% </th>
-                        <th> 11.9 MB </th>
-                        <th> 0.0 Mb/s </th>
-                    </tr>
-
-                    <tr className='process-row'>
-                        <th> f.lux </th>
-                        <th> 0.0% </th>
-                        <th> 1.3 MB </th>
-                        <th> 0.0 Mb/s </th>
-                    </tr>
+                {jsonData.length > 0 ? (
+                        jsonData.map((jsonData, index) => (
+                          <tr key={jsonData.id} className = "processes-row">
+                            <td>{jsonData.name}</td>
+                            <td>{jsonData.cpuPercentage.toFixed(1)}%</td>
+                            <td>{(jsonData.memoryUsageBytes / 1000000).toFixed(1)}MB</td>
+                            <td>{(jsonData.diskSpeed / 1000000).toFixed(1)}MB/s</td>
+                          </tr>
+                        ))
+                    ) : (
+                    <p>No data available</p>
+                )}
                 </tbody>
             </table>
         </div>
