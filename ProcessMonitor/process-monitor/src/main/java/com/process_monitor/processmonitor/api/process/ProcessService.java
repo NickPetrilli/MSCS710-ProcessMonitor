@@ -38,7 +38,8 @@ public class ProcessService {
                     WHERE timestamp = (
                         SELECT MAX(timestamp)
                         FROM process
-                    )
+                    ) AND name <> "Idle"
+                    GROUP BY name
                     """;
 
             resultSet = statement.executeQuery(sql);

@@ -66,10 +66,10 @@ const CpuSection = () => {
             <table className="top-processes-table">
               <tbody>
               {topProcesses.length > 0 ? (
-                        topProcesses.map((item, index) => (
-                          <tr key={item.id} className = "top-processes-table-row">
-                            <td>{item.name}</td>
-                            <td>{item.cpuPercentage.toFixed(1)}%</td>
+                        topProcesses.map((jsonData, index) => (
+                          <tr key={jsonData.id} className = "top-processes-table-row">
+                            <td>{jsonData.name}</td>
+                            <td>{jsonData.cpuPercentage.toFixed(1)}%</td>
                           </tr>
                         ))
                     ) : (
