@@ -5,22 +5,7 @@ import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png'
 const CpuSection = () => {
 
   const [jsonData, setJsonData] = useState({}); // Initialize an empty JSON object
-
-  // Directly initializing text
-  const text = '80% Utilization';
-
-  const getUtilBackgroundColor = (text) => {
-    const percentage = parseInt(text.substring(0, text.indexOf("U")).trim());
-    if (percentage < 40) {
-      return 'green';
-    } else if (percentage >= 40 && percentage < 80) {
-      return 'orange';
-    } else {
-      return 'red';
-    }
-  };
-
-  const backgroundColor = getUtilBackgroundColor(text);
+  const [topProcesses, setTopProcesses] = useState([]);
 
   useEffect(() => {
     // Fetch data from an API endpoint
@@ -33,7 +18,33 @@ const CpuSection = () => {
       .catch(error => {
         console.error('Error fetching data:', error);
       });
+
+      // Fetch top 3 processes (based on disk usage) from an API endpoint
+      fetch('http://localhost:8080/api/v1/cpu/top-processes')
+      .then(response => response.json())
+      .then(data => {
+        // Update the JSON object with fetched data
+        setTopProcesses(data);
+      })
+      .catch(error => {
+        console.error('Error in GET request for disk top processes:', error);
+      });
   }, []); // Empty dependency array means this effect runs once after the first render
+
+  // Directly initializing text
+  var util = Math.floor(jsonData.utilization);
+
+  const getUtilBackgroundColor = (percentage) => {
+    if (percentage < 40) {
+      return 'green';
+    } else if (percentage >= 40 && percentage < 80) {
+      return 'orange';
+    } else {
+      return 'red';
+    }
+  };
+
+  var backgroundColor = getUtilBackgroundColor(util);
 
   return (
     <div className="section-Cpu">
@@ -46,28 +57,24 @@ const CpuSection = () => {
           <img src={graphTemplate} alt="" className="graph" />
 
           {/* Utilization / Top Processes Side */}
-          <div className="col">
+          <div className=".utilandTopProc-sec">
             <div className="row">
-              <div className="utilBox" style={{ backgroundColor }}> {jsonData.utilization} </div>
+              <div className="utilBox" style={{ backgroundColor }}> {util}% Utilization </div>
             </div>
 
             <h4 className="top-processes-table-TITLE"> Top Processes </h4>
             <table className="top-processes-table">
               <tbody>
-                <tr>
-                  <th> Firefox </th>
-                  <th> 13.2% </th>
-                </tr>
-
-                <tr>
-                  <th> Discord </th>
-                  <th> 1.8% </th>
-                </tr>
-
-                <tr>
-                  <th> Avast </th>
-                  <th> 1.1% </th>
-                </tr>
+              {topProcesses.length > 0 ? (
+                        topProcesses.map((item, index) => (
+                          <tr key={item.id} className = "top-processes-table-row">
+                            <td>{item.name}</td>
+                            <td>{item.cpuPercentage.toFixed(1)}%</td>
+                          </tr>
+                        ))
+                    ) : (
+                    <p>No data available</p>
+                )}
               </tbody>
             </table>
           </div>
