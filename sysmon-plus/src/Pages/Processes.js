@@ -5,6 +5,7 @@ const Processes = () => {
     const [jsonData, setJsonData] = useState({}); // Initialize an empty JSON object
 
     useEffect(() => {
+      const fetchData = () => {
         // Fetch data from an API endpoint
         fetch('http://localhost:8080/api/v1/process')
           .then(response => response.json())
@@ -15,7 +16,16 @@ const Processes = () => {
           .catch(error => {
             console.error('Error fetching data:', error);
           });
-      }, []);
+      }
+
+      // Run the function immediately when the component mounts
+      fetchData();
+
+      // Set up interval to run the function every 10 seconds
+      const intervalId = setInterval(fetchData, 10000);
+      
+      return () => clearInterval(intervalId);
+    }, []);
 
   return (
     <div className="Processes">
