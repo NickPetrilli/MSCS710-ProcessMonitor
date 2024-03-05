@@ -1,5 +1,6 @@
 // memSection.js
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png'
 
 const MemSection = () => {
@@ -59,7 +60,7 @@ const MemSection = () => {
 
   return (
     <div className="section-Memory">
-      <h1 className="title">Memory</h1>
+      <Link to="/memory-detail"> <h1> Memory </h1> </Link> 
 
       <div>
         {/* Graph side */}

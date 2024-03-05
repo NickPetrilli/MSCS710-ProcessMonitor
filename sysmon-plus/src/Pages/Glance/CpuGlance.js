@@ -57,13 +57,9 @@ const CpuSection = () => {
 
   var backgroundColor = getUtilBackgroundColor(util);
 
-  const handleClick = () => {
-    console.log('Header clicked!');
-  }
-
   return (
-    <div className="section-Cpu" onClick = {handleClick}>
-      <Link to="/cpu-detail"> <h4> CPU </h4> </Link> 
+    <div className="section-Cpu">
+      <Link to="/cpu-detail"> <h1> CPU </h1> </Link> 
       <h4>{jsonData.name}</h4>
 
       <div>
