@@ -1,5 +1,6 @@
 // cpuSection.js
 import React, { useState, useEffect } from 'react';
+import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png';
 
 const CpuDetail = () => {
 
@@ -30,6 +31,9 @@ const CpuDetail = () => {
 
   return (
     <div className="CpuDetail">
+      <div className="row">
+        <img src={graphTemplate} alt="" className="graph" />
+      </div>
       <h2>CPU</h2>
       <p> Processor Name: {jsonData.name}</p>
       <p> Processor Speed: {jsonData.speed}</p>
