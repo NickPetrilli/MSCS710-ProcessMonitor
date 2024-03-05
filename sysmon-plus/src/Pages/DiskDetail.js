@@ -1,13 +1,13 @@
 // diskSection.js
 import React from 'react';
 
-const DiskSection = () => {
+const DiskDetail = () => {
   return (
-    <div className="DiskSection">
+    <div className="DiskDetail">
       <h2>Disk</h2>
       <p>**ENTER DISK NAME HERE**</p>
     </div>
   );
 };
 
-export default DiskSection;
+export default DiskDetail;

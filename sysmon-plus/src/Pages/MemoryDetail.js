@@ -1,13 +1,13 @@
 // memSection.js
 import React from 'react';
 
-const MemSection = () => {
+const MemoryDetail = () => {
   return (
-    <div className="MemSection">
+    <div className="MemoryDetail">
       <h2>Memory</h2>
       <p>**ENTER MEMORY NAME HERE**</p>
     </div>
   );
 };
 
-export default MemSection;
+export default MemoryDetail;

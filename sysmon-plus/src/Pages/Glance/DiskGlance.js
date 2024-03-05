@@ -43,7 +43,7 @@ const DiskSection = () => {
         console.error({disk});
 
         // Directly initializing text
-        var util = Math.floor(disk[0].utilization);
+        var util = Math.floor(disk.utilization);
       
         const getUtilBackgroundColor = (percentage) => {
           if (percentage < 40) {
@@ -70,7 +70,7 @@ const DiskSection = () => {
             {/* Utilization / Top Processes Side */}
             <div className=".utilandTopProc-sec">
               <div className="row">
-                <div className="utilBox" style={{ backgroundColor }}> {disk[0].utilization}% Utilization </div>
+              {disk.length > 0 ? (<div className="utilBox" style={{ backgroundColor }}> {disk[0].utilization.toFixed(5)}% Utilization </div>) : (<p>No data available</p>)}
               </div>
 
               <h4 className="top-processes-table-TITLE"> Top Processes </h4>
