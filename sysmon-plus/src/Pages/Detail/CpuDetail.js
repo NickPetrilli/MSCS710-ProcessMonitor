@@ -32,13 +32,13 @@ const CpuDetail = () => {
     return () => clearInterval(intervalId);
   }, []); // Empty dependency array means this effect runs once after the first render
 
-  const handleClick = () => {
+  const goBack = () => {
     navigate(-1);
   };
 
   return (
     <div className="CpuDetail">
-      <button onClick={handleClick}>Back</button>
+      <button onClick={goBack}>Back</button>
       <div className="row">
         <img src={graphTemplate} alt="" className="graph" />
       </div>

@@ -73,7 +73,7 @@ const MemSection = () => {
               <Link to="/memory-detail"> <div className="utilBox" style={{ backgroundColor }}> {Math.floor(jsonMemoryData.utilization)}% Utilization</div> </Link>
             </div>
 
-            <Link to="/processes"> <h4 className="top-processes-table-TITLE"> Top Processes </h4> </Link>
+            <Link to="/memory-processes"> <h4 className="top-processes-table-TITLE"> Top Processes </h4> </Link>
             <table className="top-processes-table">
             <tbody>
             {jsonProcessData.length > 0 ? (
