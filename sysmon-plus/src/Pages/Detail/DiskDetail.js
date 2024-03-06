@@ -1,10 +1,13 @@
 // diskSection.js
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png';
 
 const DiskDetail = () => {
 
   const [disks, setDisks] = useState([]);
+
+  const navigate = useNavigate();
   
   useEffect(() => {
     const fetchData = () => {
@@ -29,8 +32,13 @@ const DiskDetail = () => {
   return () => clearInterval(intervalId);
   }, []); // Empty dependency array means this effect runs once after the first render
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="DiskDetail">
+      <button onClick={goBack}>Back</button>
       <div className="row">
         <img src={graphTemplate} alt="" className="graph" />
       </div>
