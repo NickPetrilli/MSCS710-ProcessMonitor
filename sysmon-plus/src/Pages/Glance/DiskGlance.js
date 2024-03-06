@@ -62,20 +62,20 @@ const DiskSection = () => {
     return (
       <div className="section">
       <Link to="/disk-detail"> <h1> Disk </h1> </Link> 
-      {disk.length > 0 ? (<h4>{disk[0].model}</h4>) : (<p>No data available</p>)}
+      <Link to="/disk-detail"> {disk.length > 0 ? (<h4>{disk[0].model}</h4>) : (<p>No data available</p>)} </Link>
 
         <div>
           {/* Graph side */}
           <div className="row">
-            <img src={graphTemplate} alt="" className="graph" />
+            <Link to="/disk-detail"> <img src={graphTemplate} alt="" className="graph" /> </Link>
 
             {/* Utilization / Top Processes Side */}
             <div className=".utilandTopProc-sec">
               <div className="row">
-              {disk.length > 0 ? (<div className="utilBox" style={{ backgroundColor }}> {disk[0].utilization.toFixed(5)}% Utilization </div>) : (<p>No data available</p>)}
+              <Link to="/disk-detail"> {disk.length > 0 ? (<div className="utilBox" style={{ backgroundColor }}> {disk[0].utilization.toFixed(5)}% Utilization </div>) : (<p>No data available</p>)} </Link>
               </div>
 
-              <h4 className="top-processes-table-TITLE"> Top Processes </h4>
+              <Link to="/processes"> <h4 className="top-processes-table-TITLE"> Top Processes </h4> </Link>
               <table className="top-processes-table">
                 <tbody>
                 {topProcesses.length > 0 ? (

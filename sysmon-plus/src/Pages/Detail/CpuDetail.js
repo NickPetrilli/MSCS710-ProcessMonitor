@@ -1,10 +1,13 @@
 // cpuSection.js
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png';
 
 const CpuDetail = () => {
 
   const [jsonData, setJsonData] = useState({}); // Initialize an empty JSON object
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch data from an API endpoint
@@ -29,8 +32,13 @@ const CpuDetail = () => {
     return () => clearInterval(intervalId);
   }, []); // Empty dependency array means this effect runs once after the first render
 
+  const handleClick = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="CpuDetail">
+      <button onClick={handleClick}>Back</button>
       <div className="row">
         <img src={graphTemplate} alt="" className="graph" />
       </div>

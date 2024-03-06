@@ -65,15 +65,15 @@ const MemSection = () => {
       <div>
         {/* Graph side */}
         <div className="row">
-          <img src={graphTemplate} alt="" className="graph" />
+          <Link to="/memory-detail"> <img src={graphTemplate} alt="" className="graph" /> </Link>
 
           {/* Utilization / Top Processes Side */}
           <div className="col">
             <div className="row">
-              <div className="utilBox" style={{ backgroundColor }}> {Math.floor(jsonMemoryData.utilization)}% Utilization</div>
+              <Link to="/memory-detail"> <div className="utilBox" style={{ backgroundColor }}> {Math.floor(jsonMemoryData.utilization)}% Utilization</div> </Link>
             </div>
 
-            <h4 className="top-processes-table-TITLE"> Top Processes </h4>
+            <Link to="/processes"> <h4 className="top-processes-table-TITLE"> Top Processes </h4> </Link>
             <table className="top-processes-table">
             <tbody>
             {jsonProcessData.length > 0 ? (
