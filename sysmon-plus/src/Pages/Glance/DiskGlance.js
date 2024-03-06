@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png'
 
 const DiskSection = () => {
-    const [disk, setDisk] = useState([]);
-    const [topProcesses, setTopProcesses] = useState([]);
+
+  const [disk, setDisk] = useState([]);
+  const [topProcesses, setTopProcesses] = useState([]);
 
     useEffect(() => {
       const fetchData = () => {
@@ -59,7 +61,7 @@ const DiskSection = () => {
 
     return (
       <div className="section">
-      <h1 className="title">Disk</h1>
+      <Link to="/disk-detail"> <h1> Disk </h1> </Link> 
       {disk.length > 0 ? (<h4>{disk[0].model}</h4>) : (<p>No data available</p>)}
 
         <div>
