@@ -1,5 +1,69 @@
 import React, { useState, useEffect } from 'react';
 
+//Process class will be broken up into CpuProcesses, MemoryProcesses, and DiskProcesses
+//Depending on which "Top Processes" the user clicks, processes will be sorted by that metric
+
+const CpuProcesses = () => {
+    
+  const [cpuProcessData, setCpuProcessData] = useState({});
+
+  useEffect(() => {
+    const fetchData = () => {
+      // Fetch data from an API endpoint
+      fetch('http://localhost:8080/api/v1/cpu/processes')
+        .then(response => response.json())
+        .then(data => {
+          // Update the JSON object with fetched data
+          setCpuProcessData(data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+
+    // Run the function immediately when the component mounts
+    fetchData();
+
+    // Set up interval to run the function every 10 seconds
+    const intervalId = setInterval(fetchData, 10000);
+    
+    return () => clearInterval(intervalId);
+  }, []);
+
+return (
+  <div className="CpuProcesses">
+      <h1>CPU Processes</h1>
+      
+      <div>
+          <table className="processes-table">
+              <thead>
+                  <tr className='process-table-row'>
+                      <th> Name </th>
+                      <th> CPU </th>
+                      <th> Memory </th>
+                      <th> Disk </th>
+                  </tr>
+              </thead>
+              <tbody>
+              {cpuProcessData.length > 0 ? (
+                      cpuProcessData.map((process, index) => (
+                        <tr key={process.id} className = "processes-row">
+                          <td>{process.name}</td>
+                          <td>{process.cpuPercentage.toFixed(1)}%</td>
+                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)}MB</td>
+                          <td>{(process.diskSpeed / 1000000).toFixed(1)}MB/s</td>
+                        </tr>
+                      ))
+                  ) : (
+                  <p>No data available</p>
+              )}
+              </tbody>
+          </table>
+      </div>
+  </div>
+);
+};
+
 const Processes = () => {
     
     const [jsonData, setJsonData] = useState({}); // Initialize an empty JSON object
@@ -62,3 +126,4 @@ const Processes = () => {
 };
 
 export default Processes;
+export { CpuProcesses };

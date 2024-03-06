@@ -60,20 +60,20 @@ const CpuSection = () => {
   return (
     <div className="section-Cpu">
       <Link to="/cpu-detail"> <h1> CPU </h1> </Link> 
-      <h4>{jsonData.name}</h4>
+      <Link to="/cpu-detail"> <h4>{jsonData.name}</h4> </Link>
 
       <div>
         {/* Graph side */}
         <div className="row">
-          <img src={graphTemplate} alt="" className="graph" />
+          <Link to="/cpu-detail"> <img src={graphTemplate} alt="" className="graph" /> </Link>
 
           {/* Utilization / Top Processes Side */}
           <div className=".utilandTopProc-sec">
             <div className="row">
-              <div className="utilBox" style={{ backgroundColor }}> {util}% Utilization </div>
+              <Link to="/cpu-detail"> <div className="utilBox" style={{ backgroundColor }}> {util}% Utilization </div> </Link>
             </div>
 
-            <h4 className="top-processes-table-TITLE"> Top Processes </h4>
+            <Link to="/cpu-processes"> <h4 className="top-processes-table-TITLE"> Top Processes </h4> </Link>
             <table className="top-processes-table">
               <tbody>
               {topProcesses.length > 0 ? (
