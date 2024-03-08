@@ -14,6 +14,9 @@ import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Class for inserting metrics into the database
+ */
 public class DatabaseFunctions {
     
     private static final Logger logger = LoggerFactory.getLogger(MetricCollector.class);
