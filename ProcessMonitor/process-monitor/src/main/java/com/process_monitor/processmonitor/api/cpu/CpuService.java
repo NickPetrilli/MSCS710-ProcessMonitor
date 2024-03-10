@@ -83,7 +83,7 @@ public class CpuService {
 
 
     /**
-     * Retrieves list of top 3 processes based on cpUsage (cpuPercentage).
+     * Retrieves list of top 3 processes based on cpu usage (cpuPercentage).
      * @return List of Processes
      */
     public List<Process> getTopProcessesByCpUsage() {
@@ -118,7 +118,7 @@ public class CpuService {
             }
 
         } catch (SQLException e) {
-            logger.error("Error while getting top-processes via DiskUsage.");
+            logger.error("Error while getting top-processes via CpuUsage.");
         }
 
         return processList.isEmpty() ? null : processList;
@@ -126,7 +126,7 @@ public class CpuService {
 
 
     /**
-     * Retrieves list of processes based on cpUsage (cpuPercentage).
+     * Retrieves list of processes based on cpu usage (cpuPercentage).
      * @return List of Processes
      */
     public List<Process> getProcessesOrderByCpuUsage() {
@@ -161,7 +161,49 @@ public class CpuService {
             }
 
         } catch (SQLException e) {
-            logger.error("Error while getting top-processes via DiskUsage.");
+            logger.error("Error while getting processes via Cpu Usage descending.");
+        }
+
+        return processList.isEmpty() ? null : processList;
+    }
+
+    /**
+     * Retrieves list of processes based on cpUsage ascending (cpuPercentage).
+     * @return List of Processes
+    */
+    public List<Process> getProcessesOrderByCpuUsageAsc() {
+        List<Process> processList = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                    SELECT *
+                    FROM process
+                    WHERE timestamp = (SELECT MAX(timestamp) FROM process)
+                        AND name <> "Idle"
+                    ORDER BY cpuPercentage ASC
+                    LIMIT 50;
+                    """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                processList.add(new Process(
+                        resultSet.getInt("process_id"),
+                        resultSet.getString("timestamp"),
+                        resultSet.getString("name"),
+                        resultSet.getString("status"),
+                        resultSet.getDouble("cpuPercentage"),
+                        resultSet.getLong("memUsageBytes"),
+                        resultSet.getDouble("memPercentage"),
+                        resultSet.getDouble("diskSpeed"),
+                        resultSet.getDouble("diskPercentage")
+                ));
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting via Cpu Usage ascending.");
         }
 
         return processList.isEmpty() ? null : processList;

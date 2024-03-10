@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 //Process class will be broken up into CpuProcesses, MemoryProcesses, and DiskProcesses
@@ -47,9 +48,79 @@ return (
               <thead>
                   <tr className='process-table-row'>
                       <th> Name </th>
-                      <th> CPU </th>
-                      <th> Memory </th>
-                      <th> Disk </th>
+                      <th> <Link to="/cpu-processes-asc"> CPU </Link> </th>
+                      <th> <Link to="/memory-processes"> Memory </Link> </th>
+                      <th> <Link to="/disk-processes"> Disk </Link> </th>
+                  </tr>
+              </thead>
+              <tbody>
+              {cpuProcessData.length > 0 ? (
+                      cpuProcessData.map((process, index) => (
+                        <tr key={process.id} className = "processes-row">
+                          <td>{process.name}</td>
+                          <td>{process.cpuPercentage.toFixed(1)}%</td>
+                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)}MB</td>
+                          <td>{(process.diskSpeed / 1000000).toFixed(1)}MB/s</td>
+                        </tr>
+                      ))
+                  ) : (
+                  <p>No data available</p>
+              )}
+              </tbody>
+          </table>
+      </div>
+  </div>
+);
+};
+
+//Similar to Task Manager, users can click on the column names to change the way metrics are sorted
+//Default is descending order, but user can click to change to ascending (and back to descending)
+const CpuProcessesAscending = () => {
+    
+  const [cpuProcessData, setCpuProcessData] = useState({});
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = () => {
+      // Fetch data from an API endpoint
+      fetch('http://localhost:8080/api/v1/cpu/processes-asc')
+        .then(response => response.json())
+        .then(data => {
+          // Update the JSON object with fetched data
+          setCpuProcessData(data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+
+    // Run the function immediately when the component mounts
+    fetchData();
+
+    // Set up interval to run the function every 10 seconds
+    const intervalId = setInterval(fetchData, 10000);
+    
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
+return (
+  <div className="CpuProcesses">
+    <button onClick={goBack}>Back</button>
+      <h1>CPU Processes</h1>
+      
+      <div>
+          <table className="processes-table">
+              <thead>
+                  <tr className='process-table-row'>
+                      <th> Name </th>
+                      <th> <Link to="/cpu-processes"> CPU </Link> </th>
+                      <th> <Link to="/memory-processes"> Memory </Link> </th>
+                      <th> <Link to="/disk-processes"> Disk </Link> </th>
                   </tr>
               </thead>
               <tbody>
@@ -272,5 +343,6 @@ const Processes = () => {
 
 export default Processes;
 export { CpuProcesses };
+export { CpuProcessesAscending };
 export { MemoryProcesses };
 export { DiskProcesses };
