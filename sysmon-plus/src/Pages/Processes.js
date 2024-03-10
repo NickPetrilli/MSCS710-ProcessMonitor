@@ -109,7 +109,7 @@ const CpuProcessesAscending = () => {
   };
 
 return (
-  <div className="CpuProcesses">
+  <div className="CpuProcessesAscending">
     <button onClick={goBack}>Back</button>
       <h1>CPU Processes</h1>
       
@@ -186,9 +186,77 @@ return (
               <thead>
                   <tr className='process-table-row'>
                       <th> Name </th>
-                      <th> CPU </th>
-                      <th> Memory </th>
-                      <th> Disk </th>
+                      <th> <Link to="/cpu-processes"> CPU </Link> </th>
+                      <th> <Link to="/memory-processes-asc"> Memory </Link> </th>
+                      <th> <Link to="/disk-processes"> Disk </Link> </th>
+                  </tr>
+              </thead>
+              <tbody>
+              {memProcessData.length > 0 ? (
+                      memProcessData.map((process, index) => (
+                        <tr key={process.id} className = "processes-row">
+                          <td>{process.name}</td>
+                          <td>{process.cpuPercentage.toFixed(1)}%</td>
+                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)}MB</td>
+                          <td>{(process.diskSpeed / 1000000).toFixed(1)}MB/s</td>
+                        </tr>
+                      ))
+                  ) : (
+                  <p>No data available</p>
+              )}
+              </tbody>
+          </table>
+      </div>
+  </div>
+);
+};
+
+const MemoryProcessesAscending = () => {
+    
+  const [memProcessData, setMemProcessData] = useState({});
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = () => {
+      // Fetch data from an API endpoint
+      fetch('http://localhost:8080/api/v1/memory/processes-asc')
+        .then(response => response.json())
+        .then(data => {
+          // Update the JSON object with fetched data
+          setMemProcessData(data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+
+    // Run the function immediately when the component mounts
+    fetchData();
+
+    // Set up interval to run the function every 10 seconds
+    const intervalId = setInterval(fetchData, 10000);
+    
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
+return (
+  <div className="MemoryProcessesAscending">
+    <button onClick={goBack}>Back</button>
+      <h1>Memory Processes</h1>
+      
+      <div>
+          <table className="processes-table">
+              <thead>
+                  <tr className='process-table-row'>
+                      <th> Name </th>
+                      <th> <Link to="/cpu-processes"> CPU </Link> </th>
+                      <th> <Link to="/memory-processes"> Memory </Link> </th>
+                      <th> <Link to="/disk-processes"> Disk </Link> </th>
                   </tr>
               </thead>
               <tbody>
@@ -220,7 +288,7 @@ const DiskProcesses = () => {
   useEffect(() => {
     const fetchData = () => {
       // Fetch data from an API endpoint
-      fetch('http://localhost:8080/api/v1/memory/processes')
+      fetch('http://localhost:8080/api/v1/disk/processes')
         .then(response => response.json())
         .then(data => {
           // Update the JSON object with fetched data
@@ -254,9 +322,9 @@ return (
               <thead>
                   <tr className='process-table-row'>
                       <th> Name </th>
-                      <th> CPU </th>
-                      <th> Memory </th>
-                      <th> Disk </th>
+                      <th> <Link to="/cpu-processes"> CPU </Link> </th>
+                      <th> <Link to="/memory-processes"> Memory </Link> </th>
+                      <th> <Link to="/disk-processes-asc"> Disk </Link> </th>
                   </tr>
               </thead>
               <tbody>
@@ -279,6 +347,73 @@ return (
 );
 };
 
+const DiskProcessesAscending = () => {
+    
+  const [diskProcessData, setDiskProcessData] = useState({});
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = () => {
+      // Fetch data from an API endpoint
+      fetch('http://localhost:8080/api/v1/disk/processes-asc')
+        .then(response => response.json())
+        .then(data => {
+          // Update the JSON object with fetched data
+          setDiskProcessData(data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+
+    // Run the function immediately when the component mounts
+    fetchData();
+
+    // Set up interval to run the function every 10 seconds
+    const intervalId = setInterval(fetchData, 10000);
+    
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
+return (
+  <div className="DiskProcessesAscending">
+    <button onClick={goBack}>Back</button>
+      <h1>Disk Processes</h1>
+      
+      <div>
+          <table className="processes-table">
+              <thead>
+                  <tr className='process-table-row'>
+                      <th> Name </th>
+                      <th> <Link to="/cpu-processes"> CPU </Link> </th>
+                      <th> <Link to="/memory-processes"> Memory </Link> </th>
+                      <th> <Link to="/disk-processes"> Disk </Link> </th>
+                  </tr>
+              </thead>
+              <tbody>
+              {diskProcessData.length > 0 ? (
+                      diskProcessData.map((process, index) => (
+                        <tr key={process.id} className = "processes-row">
+                          <td>{process.name}</td>
+                          <td>{process.cpuPercentage.toFixed(1)}%</td>
+                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)}MB</td>
+                          <td>{(process.diskSpeed / 1000000).toFixed(1)}MB/s</td>
+                        </tr>
+                      ))
+                  ) : (
+                  <p>No data available</p>
+              )}
+              </tbody>
+          </table>
+      </div>
+  </div>
+);
+};
 
 const Processes = () => {
     
@@ -345,4 +480,6 @@ export default Processes;
 export { CpuProcesses };
 export { CpuProcessesAscending };
 export { MemoryProcesses };
+export { MemoryProcessesAscending };
 export { DiskProcesses };
+export { DiskProcessesAscending };

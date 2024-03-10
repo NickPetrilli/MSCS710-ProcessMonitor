@@ -11,7 +11,9 @@ import Processes from './Pages/Processes';
 import { CpuProcesses } from './Pages/Processes';
 import { CpuProcessesAscending } from './Pages/Processes';
 import { MemoryProcesses } from './Pages/Processes';
+import { MemoryProcessesAscending } from './Pages/Processes';
 import { DiskProcesses } from './Pages/Processes';
+import { DiskProcessesAscending } from './Pages/Processes';
 import './App.css';
 
 const App = () => {
@@ -27,7 +29,9 @@ const App = () => {
           <Route path = "/cpu-processes" element={<CpuProcesses />} />
           <Route path = "/cpu-processes-asc" element={<CpuProcessesAscending />} />
           <Route path = "/memory-processes" element={<MemoryProcesses />} />
+          <Route path = "/memory-processes-asc" element={<MemoryProcessesAscending />} />
           <Route path = "/disk-processes" element={<DiskProcesses />} />
+          <Route path = "/disk-processes-asc" element={<DiskProcessesAscending />} />
         </Routes>
       </div>
     );

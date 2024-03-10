@@ -154,4 +154,45 @@ public class DiskService {
 
         return processList.isEmpty() ? null : processList;
     }
+
+    /**
+     * Retrieves fuller list processes based on diskUsage ascending (diskSpeed).
+     * @return List of Processes
+     */
+    public List<Process> getProcessesByDiskUsageAsc() {
+        List<Process> processList = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                    SELECT *
+                    FROM process
+                    WHERE timestamp = (SELECT MAX(timestamp) FROM process)
+                    ORDER BY diskSpeed ASC
+                    LIMIT 50;
+                    """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                processList.add(new Process(
+                        resultSet.getInt("process_id"),
+                        resultSet.getString("timestamp"),
+                        resultSet.getString("name"),
+                        resultSet.getString("status"),
+                        resultSet.getDouble("cpuPercentage"),
+                        resultSet.getLong("memUsageBytes"),
+                        resultSet.getDouble("memPercentage"),
+                        resultSet.getDouble("diskSpeed"),
+                        resultSet.getDouble("diskPercentage")
+                ));
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting top-processes via DiskUsage.");
+        }
+
+        return processList.isEmpty() ? null : processList;
+    }
 }

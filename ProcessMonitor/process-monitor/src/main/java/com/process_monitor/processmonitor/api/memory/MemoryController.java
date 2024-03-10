@@ -48,4 +48,13 @@ public class MemoryController {
         return memoryService.getProcessesByMemoryUsage();
     }
 
+    /**
+     * GET Request endpoint to handle getting and returning processes based on their memory usage ascending.
+     * @return List of processes
+     */
+    @GetMapping(path = "processes-asc")
+    public List<Process> getProcessByMemoryAsc() {
+        return memoryService.getProcessesByMemoryUsageAsc();
+    }
+
 }

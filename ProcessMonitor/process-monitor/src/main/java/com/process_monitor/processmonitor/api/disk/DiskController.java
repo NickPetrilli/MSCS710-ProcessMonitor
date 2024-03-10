@@ -55,4 +55,13 @@ public class DiskController {
     public List<Process> getProcessesByDiskSpeed() {
         return diskService.getProcessesByDiskUsage();
     }
+
+    /**
+     * GET Request endpoint to handle getting and returning processes based on their disk usage in ascending order
+     * @return List of current running processes.
+     */
+    @GetMapping(path = "processes-asc")
+    public List<Process> getProcessByDiskSpeedAsc() {
+        return diskService.getProcessesByDiskUsageAsc();
+    }
 }

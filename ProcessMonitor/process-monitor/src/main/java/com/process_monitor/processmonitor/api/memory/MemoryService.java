@@ -189,4 +189,46 @@ public class MemoryService {
 
         return processList.isEmpty() ? null : processList;
     }
+
+    /**
+     * Retrieves list of processes based sorted by their Memory Usage ascending (memUsageBytes).
+     * @return List of Processes
+     */
+    public List<Process> getProcessesByMemoryUsageAsc() {
+        List<Process> processList = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                    SELECT *
+                    FROM process
+                    WHERE timestamp = (SELECT MAX(timestamp) FROM process)
+                    GROUP BY name
+                    ORDER BY memUsageBytes ASC
+                    LIMIT 50;
+                    """;
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                processList.add(new Process(
+                        resultSet.getInt("process_id"),
+                        resultSet.getString("timestamp"),
+                        resultSet.getString("name"),
+                        resultSet.getString("status"),
+                        resultSet.getDouble("cpuPercentage"),
+                        resultSet.getLong("memUsageBytes"),
+                        resultSet.getDouble("memPercentage"),
+                        resultSet.getDouble("diskSpeed"),
+                        resultSet.getDouble("diskPercentage")
+                ));
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting all processes ordered by Memory Usage ascending.");
+        }
+
+        return processList.isEmpty() ? null : processList;
+    }
 }
