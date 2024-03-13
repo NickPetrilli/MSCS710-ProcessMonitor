@@ -49,4 +49,14 @@ public class CpuController {
         return cpuService.getProcessesOrderByCpuUsage();
     }
 
+    /**
+     * GET Request endpoint to handle getting CPU chart metrics
+     * @return List of utilization metrics
+     */
+    @GetMapping(path = "chart")
+    public List<Double> getChartUtilizationMetrics() {
+        return cpuService.getUtilizationMetrics();
+    }
+
+
 }

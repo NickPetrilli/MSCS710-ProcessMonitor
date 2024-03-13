@@ -48,4 +48,14 @@ public class MemoryController {
         return memoryService.getProcessesByMemoryUsage();
     }
 
+
+    /**
+     * GET Request endpoint to handle getting Memory chart metrics
+     * @return List of utilization metrics
+     */
+    @GetMapping(path = "chart")
+    public List<Double> getChartUtilizationMetrics() {
+        return memoryService.getUtilizationMetrics();
+    }
+
 }

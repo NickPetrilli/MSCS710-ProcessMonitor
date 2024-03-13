@@ -166,4 +166,36 @@ public class CpuService {
 
         return processList.isEmpty() ? null : processList;
     }
+
+    /**
+     * Retrieves CPU utilization chart metrics from the past 3 minutes
+     * @return List of CPU utilization
+     */
+    public List<Double> getUtilizationMetrics() {
+        List<Double> utilizationList = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+        Statement statement = connection.createStatement()) {
+
+            String sql = """
+                        SELECT 
+                            timestamp, utilization 
+                        FROM 
+                            cpu
+                        WHERE 
+                            timestamp BETWEEN datetime('now', 'localtime', '-3 minutes') AND datetime('now', 'localtime');
+                             """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                utilizationList.add(resultSet.getDouble("utilization"));
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting cpu chart metrics.");
+        }
+
+        return utilizationList.isEmpty() ? null : utilizationList;
+    }
 }

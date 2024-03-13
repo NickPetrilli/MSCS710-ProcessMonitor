@@ -29,11 +29,11 @@ public class MetricCollector {
     // Collects metrics every 30 seconds.
     @Scheduled(fixedRate = 10000)
     public void collectMetrics() {
-        LocalDateTime currentTimestamp = LocalDateTime.now();
+        LocalDateTime currentTimestamp = LocalDateTime.now().withNano(0);
         logger.info("Metric Collection performed at {}", currentTimestamp);
 
         // Object to handle database functions
-        DatabaseFunctions databaseFunctions = new DatabaseFunctions(currentTimestamp.toString());
+        DatabaseFunctions databaseFunctions = new DatabaseFunctions(currentTimestamp.toString().replace('T', ' '));
 
         // Object to handle collecting running process metrics
         ProcessCollector processCollector = new ProcessCollector();
