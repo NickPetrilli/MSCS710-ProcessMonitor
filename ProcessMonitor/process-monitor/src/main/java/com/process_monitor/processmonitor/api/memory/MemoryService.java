@@ -231,4 +231,37 @@ public class MemoryService {
 
         return processList.isEmpty() ? null : processList;
     }
+
+
+    /**
+     * Retrieves Memory utilization chart metrics from the past 3 minutes
+     * @return List of Memory utilization
+     */
+    public List<Double> getUtilizationMetrics() {
+        List<Double> utilizationList = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                        SELECT 
+                            timestamp, utilization 
+                        FROM 
+                            memory
+                        WHERE 
+                            timestamp BETWEEN datetime('now', 'localtime', '-3 minutes') AND datetime('now', 'localtime');
+                             """;
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                utilizationList.add(resultSet.getDouble("utilization"));
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting memory chart metrics.");
+        }
+
+        return utilizationList.isEmpty() ? null : utilizationList;
+    }
 }

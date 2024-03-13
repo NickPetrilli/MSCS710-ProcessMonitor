@@ -33,7 +33,7 @@ public class MetricCollector {
         logger.info("Metric Collection performed at {}", currentTimestamp);
 
         // Object to handle database functions
-        DatabaseFunctions databaseFunctions = new DatabaseFunctions(currentTimestamp.toString());
+        DatabaseFunctions databaseFunctions = new DatabaseFunctions(currentTimestamp.toString().replace('T', ' '));
 
         // Object to handle collecting running process metrics
         ProcessCollector processCollector = new ProcessCollector();

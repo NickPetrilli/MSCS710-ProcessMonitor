@@ -3,10 +3,7 @@ package com.process_monitor.processmonitor.api.disk;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.process_monitor.processmonitor.api.disk.model.Disk;
 import com.process_monitor.processmonitor.api.process.model.Process;
@@ -63,5 +60,16 @@ public class DiskController {
     @GetMapping(path = "processes-asc")
     public List<Process> getProcessByDiskSpeedAsc() {
         return diskService.getProcessesByDiskUsageAsc();
+    }
+
+
+    /**
+     * GET Request endpoint to handle getting disk chart metrics
+     * @param name Disk name
+     * @return List of utilization metrics
+     */
+    @GetMapping(path = "chart/{name}")
+    public List<Double> getChartUtilizationMetrics(@PathVariable("name") String name) {
+        return diskService.getUtilizationMetrics(name);
     }
 }

@@ -195,4 +195,39 @@ public class DiskService {
 
         return processList.isEmpty() ? null : processList;
     }
+
+
+    /**
+     * Retrieves Memory utilization chart metrics from the past 3 minutes
+     * @param name Disk name
+     * @return List of utilization metrics for the specified disk
+     */
+    public List<Double> getUtilizationMetrics(String name) {
+        List<Double> utilizationList = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                        SELECT 
+                            timestamp, utilization 
+                        FROM 
+                            disk
+                        WHERE 
+                            timestamp BETWEEN datetime('now', 'localtime', '-3 minutes') AND datetime('now', 'localtime')
+                            AND name = '
+                             """ + name + "';";
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                utilizationList.add(resultSet.getDouble("utilization"));
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting disk chart metrics");
+        }
+
+        return utilizationList.isEmpty() ? null : utilizationList;
+    }
 }
