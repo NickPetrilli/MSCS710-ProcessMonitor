@@ -222,11 +222,11 @@ public class CpuService {
 
             String sql = """
                         SELECT 
-                            timestamp, utilization 
+                            timestamp, utilization
                         FROM 
                             cpu
                         WHERE 
-                            timestamp BETWEEN datetime('now', 'localtime', '-3 minutes') AND datetime('now', 'localtime');
+                            timestamp BETWEEN datetime((SELECT MAX(timestamp) FROM cpu), '-3 minutes') AND datetime((SELECT MAX(timestamp) FROM cpu));
                              """;
 
             resultSet = statement.executeQuery(sql);
