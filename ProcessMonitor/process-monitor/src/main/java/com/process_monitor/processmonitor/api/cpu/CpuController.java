@@ -2,6 +2,7 @@ package com.process_monitor.processmonitor.api.cpu;
 
 import java.util.List;
 
+import com.process_monitor.processmonitor.api.util.ChartData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,7 +64,7 @@ public class CpuController {
      * @return List of utilization metrics
      */
     @GetMapping(path = "chart")
-    public List<Double> getChartUtilizationMetrics() {
+    public List<ChartData> getChartUtilizationMetrics() {
         return cpuService.getUtilizationMetrics();
     }
 

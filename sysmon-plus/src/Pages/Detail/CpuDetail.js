@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png';
+import CpuLineChartFromAPI from '../../charts/CpuLineChartFromAPI';
 
 const CpuDetail = () => {
 
@@ -40,7 +41,7 @@ const CpuDetail = () => {
     <div className="CpuDetail">
       <button onClick={goBack}>Back</button>
       <div className="row">
-        <img src={graphTemplate} alt="" className="graph" />
+        <CpuLineChartFromAPI />
       </div>
       <h2>CPU</h2>
       <p> Processor Name: {jsonData.name}</p>

@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.process_monitor.processmonitor.api.util.ChartData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -213,8 +214,8 @@ public class CpuService {
      * Retrieves CPU utilization chart metrics from the past 3 minutes
      * @return List of CPU utilization
      */
-    public List<Double> getUtilizationMetrics() {
-        List<Double> utilizationList = new ArrayList<>();
+    public List<ChartData> getUtilizationMetrics() {
+        List<ChartData> chartList = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(URL);
              Statement statement = connection.createStatement()) {
@@ -231,13 +232,14 @@ public class CpuService {
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                utilizationList.add(resultSet.getDouble("utilization"));
+                chartList.add(new ChartData(resultSet.getDouble("utilization"),
+                                            resultSet.getString("timestamp").substring(11, 19)));
             }
 
         } catch (SQLException e) {
             logger.error("Error while getting cpu chart metrics.");
         }
 
-        return utilizationList.isEmpty() ? null : utilizationList;
+        return chartList.isEmpty() ? null : chartList;
     }
 }
