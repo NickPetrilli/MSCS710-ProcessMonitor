@@ -5,9 +5,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.process_monitor.processmonitor.api.util.ChartData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -237,8 +239,8 @@ public class MemoryService {
      * Retrieves Memory utilization chart metrics from the past 3 minutes
      * @return List of Memory utilization
      */
-    public List<Double> getUtilizationMetrics() {
-        List<Double> utilizationList = new ArrayList<>();
+    public List<ChartData> getUtilizationMetrics() {
+        List<ChartData> chartList = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(URL);
              Statement statement = connection.createStatement()) {
@@ -255,13 +257,14 @@ public class MemoryService {
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                utilizationList.add(resultSet.getDouble("utilization"));
+                chartList.add(new ChartData(resultSet.getDouble("utilization"),
+                                            resultSet.getString("timestamp").substring(11, 19)));
             }
 
         } catch (SQLException e) {
             logger.error("Error while getting memory chart metrics.");
         }
 
-        return utilizationList.isEmpty() ? null : utilizationList;
+        return chartList.isEmpty() ? null : chartList;
     }
 }

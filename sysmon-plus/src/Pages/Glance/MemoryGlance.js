@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png'
+import MemoryLineChartFromAPI from '../../charts/MemoryLineChartFromAPI';
 
 const MemSection = () => {
 
@@ -65,7 +66,7 @@ const MemSection = () => {
       <div>
         {/* Graph side */}
         <div className="row">
-          <Link to="/memory-detail"> <img src={graphTemplate} alt="" className="graph" /> </Link>
+          <MemoryLineChartFromAPI />
 
           {/* Utilization / Top Processes Side */}
           <div className="col">

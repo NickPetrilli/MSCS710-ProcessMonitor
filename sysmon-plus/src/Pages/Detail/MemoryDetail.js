@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png';
+import MemoryLineChartFromAPI from '../../charts/MemoryLineChartFromAPI';
 
 const MemoryDetail = () => {
 
@@ -40,7 +41,7 @@ const MemoryDetail = () => {
     <div className="MemoryDetail">
       <button onClick={goBack}>Back</button>
       <div className="row">
-        <img src={graphTemplate} alt="" className="graph" />
+        <MemoryLineChartFromAPI />
       </div>
       <h2>Memory</h2>
       <p> Total Memory: {jsonData.totalMemory}</p>
