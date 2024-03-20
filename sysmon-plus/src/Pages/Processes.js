@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import logo from '../Images/DoTTed Team Logo.png';
 
 //Process class will be broken up into CpuProcesses, MemoryProcesses, and DiskProcesses
 //Depending on which "Top Processes" the user clicks, processes will be sorted by that metric
@@ -40,6 +41,12 @@ const CpuProcesses = () => {
 
 return (
   <div className="CpuProcesses">
+      <header className="App-header">
+          <div className="row">
+          <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
+            <h1 className="App-title-header"> SysMon+ </h1>
+          </div>
+        </header>
     <button onClick={goBack}>Back</button>
       <h1>CPU Processes</h1>
       
@@ -110,6 +117,12 @@ const CpuProcessesAscending = () => {
 
 return (
   <div className="CpuProcessesAscending">
+      <header className="App-header">
+          <div className="row">
+          <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
+            <h1 className="App-title-header"> SysMon+ </h1>
+          </div>
+        </header>
     <button onClick={goBack}>Back</button>
       <h1>CPU Processes</h1>
       
@@ -178,6 +191,12 @@ const MemoryProcesses = () => {
 
 return (
   <div className="MemoryProcesses">
+      <header className="App-header">
+          <div className="row">
+          <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
+            <h1 className="App-title-header"> SysMon+ </h1>
+          </div>
+        </header>
     <button onClick={goBack}>Back</button>
       <h1>Memory Processes</h1>
       
@@ -246,6 +265,12 @@ const MemoryProcessesAscending = () => {
 
 return (
   <div className="MemoryProcessesAscending">
+      <header className="App-header">
+          <div className="row">
+          <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
+            <h1 className="App-title-header"> SysMon+ </h1>
+          </div>
+        </header>
     <button onClick={goBack}>Back</button>
       <h1>Memory Processes</h1>
       
@@ -314,6 +339,12 @@ const DiskProcesses = () => {
 
 return (
   <div className="DiskProcesses">
+      <header className="App-header">
+          <div className="row">
+          <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
+            <h1 className="App-title-header"> SysMon+ </h1>
+          </div>
+        </header>
     <button onClick={goBack}>Back</button>
       <h1>Disk Processes</h1>
       
@@ -382,6 +413,12 @@ const DiskProcessesAscending = () => {
 
 return (
   <div className="DiskProcessesAscending">
+      <header className="App-header">
+          <div className="row">
+          <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
+            <h1 className="App-title-header"> SysMon+ </h1>
+          </div>
+        </header>
     <button onClick={goBack}>Back</button>
       <h1>Disk Processes</h1>
       
