@@ -1,6 +1,8 @@
 // diskSection.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import logo from '../../Images/DoTTed Team Logo.png';
 import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png';
 
 const DiskDetail = () => {
@@ -38,6 +40,12 @@ const DiskDetail = () => {
 
   return (
     <div className="DiskDetail">
+      <header className="App-header">
+          <div className="row">
+          <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
+            <h1 className="App-title-header"> SysMon+ </h1>
+          </div>
+        </header>
       <button onClick={goBack}>Back</button>
       <div className="row">
         <img src={graphTemplate} alt="" className="graph" />

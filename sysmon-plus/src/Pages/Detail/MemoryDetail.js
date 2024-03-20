@@ -1,8 +1,9 @@
 // memSection.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png';
-import MemoryLineChartFromAPI from '../../charts/MemoryLineChartFromAPI';
+import { Link } from 'react-router-dom';
+import logo from '../../Images/DoTTed Team Logo.png';
+import MemoryLineChartFromAPI from '../../Charts/MemoryLineChartFromAPI';
 
 const MemoryDetail = () => {
 
@@ -39,7 +40,13 @@ const MemoryDetail = () => {
 
   return (
     <div className="MemoryDetail">
-      <button onClick={goBack}>Back</button>
+      <header className="App-header">
+          <div className="row">
+          <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
+            <h1 className="App-title-header"> SysMon+ </h1>
+          </div>
+        </header>
+        <button onClick={goBack}>Back</button>
       <div className="row">
         <MemoryLineChartFromAPI />
       </div>

@@ -1,8 +1,9 @@
 // cpuSection.js
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png';
-import CpuLineChartFromAPI from '../../charts/CpuLineChartFromAPI';
+import logo from '../../Images/DoTTed Team Logo.png';
+import CpuLineChartFromAPI from '../../Charts/CpuLineChartFromAPI';
 
 const CpuDetail = () => {
 
@@ -39,7 +40,13 @@ const CpuDetail = () => {
 
   return (
     <div className="CpuDetail">
-      <button onClick={goBack}>Back</button>
+      <header className="App-header">
+          <div className="row">
+          <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
+            <h1 className="App-title-header"> SysMon+ </h1>
+          </div>
+        </header>
+        <button onClick={goBack}>Back</button>
       <div className="row">
         <CpuLineChartFromAPI />
       </div>

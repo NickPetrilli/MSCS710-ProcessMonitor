@@ -1,8 +1,7 @@
 // memSection.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png'
-import MemoryLineChartFromAPI from '../../charts/MemoryLineChartFromAPI';
+import MemoryGlanceLineChartFromAPI from '../../Charts/MemoryGlanceLineChartFromAPI';
 
 const MemSection = () => {
 
@@ -66,7 +65,7 @@ const MemSection = () => {
       <div>
         {/* Graph side */}
         <div className="row">
-          <MemoryLineChartFromAPI />
+          <MemoryGlanceLineChartFromAPI />
 
           {/* Utilization / Top Processes Side */}
           <div className="col">
