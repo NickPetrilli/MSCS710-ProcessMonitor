@@ -61,7 +61,7 @@ const CpuGlanceLineChartFromAPI = () => {
   }
 
   return (
-    <div style={{ width: '50%' }}>
+    <div>
       <h3>CPU Usage Over Time</h3>
       <Line data={chartData} />
     </div>

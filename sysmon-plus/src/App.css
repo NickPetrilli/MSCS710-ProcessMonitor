@@ -63,22 +63,28 @@ hr {
   justify-content: space-between; /* Space items out evenly across the main axis */
 }
 
+.home-top-glance-row {
+  display: flex;
+  width: 100%;
+  /* flex-wrap: wrap; Allow items to wrap to the next line if needed */
+  justify-content: space-between; /* Space items out evenly across the main axis */
+}
+
+.glance-row {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .section {
   /* width: calc(50% - 10px); Each section takes up 50% width with some margin */
   width: 100%; /* Each section takes up 50% width with some margin */
   padding: 5%; /* Add margin between sections */
 }
 
-.section-Cpu {
-  width: 100%;
-  padding: 5%;
-  border-right: .5rem solid black;
-}
-
-.section .section-Mem {
-  width: inherit;
-  padding: inherit;
-  border-left: .5rem solid black;
+.section-Cpu, .section-Mem {
+  flex: 1;
+  border-right: .25rem solid black;
+  padding: 2%;
 }
 
 /* @keyframes App-logo-spin {
@@ -91,11 +97,12 @@ hr {
 } */
 
 .utilandTopProc-sec {
-  display: flex; /* Let them grow to occupy available space */
+  display: grid; /* Let them grow to occupy available space */
   /* text-align: center; Optionally center the text */
-  justify-content: center;
+  place-items: center;
 
-  margin-right: 10%;
+  /* margin-right: 10%; */
+  margin-top: 3%;
 }
 
 .utilBox {
@@ -104,29 +111,31 @@ hr {
   font-weight: bold;
 }
 
+.utilBox-glance {
+  padding: 25%;
+  color: white;
+  background-color: black;
+  font-weight: bold;
+}
+
 .graph {
-  padding-right: 10%;
+  width: '75%'; 
+  padding: '5%';
 }
 
 .top-processes-table-TITLE {
   background-color: white;
-  border-top: .1rem solid black;
-  border-left: .1rem solid black;
-  border-right: .1rem solid black;
+  text-align: center;
 }
 
 .top-processes-table {
-  /* display: flex;
-  justify-content: center; */
   font-weight: bold;
 
   table-layout: auto;
 
-  margin-top: -8%;
+  /* margin-top: 15%; */
   background-color: white;
-  border-bottom: .1rem solid black;
-  border-left: .1rem solid black;
-  border-right: .1rem solid black;
+  border: .1rem solid black;
 }
 
 .top-processes-table-row {
@@ -147,5 +156,10 @@ hr {
 
 .utilBox, .top-processes-table-TITLE, .top-processes-table, .top-processes-table-row {
   flex-grow: 1;
-  margin-right: 10%;
+}
+
+.glance-table {
+  margin-top: 10%;
+  font-weight: bold;
+  border-spacing: 1em;
 }

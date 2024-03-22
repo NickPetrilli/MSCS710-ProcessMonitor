@@ -75,8 +75,8 @@ const DiskSection = () => {
               <Link to="/disk-detail"> {disk.length > 0 ? (<div className="utilBox" style={{ backgroundColor }}> {disk[0].utilization.toFixed(5)}% Utilization </div>) : (<p>No data available</p>)} </Link>
               </div>
 
-              <Link to="/disk-processes"> <h4 className="top-processes-table-TITLE"> Top Processes </h4> </Link>
               <table className="top-processes-table">
+                <Link to="/cpu-processes"> <caption className="top-processes-table-TITLE"> Top Processes </caption> </Link>
                 <tbody>
                 {topProcesses.length > 0 ? (
                           topProcesses.map((item, index) => (

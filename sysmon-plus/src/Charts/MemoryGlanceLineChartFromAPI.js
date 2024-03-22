@@ -60,7 +60,7 @@ const MemoryGlanceLineChartFromAPI = () => {
   }
 
   return (
-    <div style={{ width: '500px' }}>
+    <div>
       <h3>Memory Usage Over Time</h3>
       <Line data={chartData} />
     </div>

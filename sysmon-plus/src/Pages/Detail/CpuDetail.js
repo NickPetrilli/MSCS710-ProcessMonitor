@@ -38,26 +38,76 @@ const CpuDetail = () => {
     navigate(-1);
   };
 
+  // Directly initializing text
+  var util = Math.floor(jsonData.utilization);
+
+  const getUtilBackgroundColor = (percentage) => {
+    if (percentage < 40) {
+      return 'green';
+    } else if (percentage >= 40 && percentage < 80) {
+      return 'orange';
+    } else {
+      return 'red';
+    }
+  };
+
+  var backgroundColor = getUtilBackgroundColor(util);
+
+  
+
   return (
-    <div className="CpuDetail">
-      <header className="App-header">
-          <div className="row">
-          <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
-            <h1 className="App-title-header"> SysMon+ </h1>
+    <div className="section-Cpu">
+      <h1> CPU </h1>
+      <h4>{jsonData.name}</h4>
+
+      <div>
+        {/* Graph side */}
+        <div className="glance-row">
+          <CpuLineChartFromAPI />
+
+          {/* Utilization / Top Processes Side */}
+          <div className="utilandTopProc-sec">
+            <div className="row">
+              <Link to="/cpu-detail"> <div className="utilBox-glance" style={{ backgroundColor }}> {util}% Utilization </div> </Link>
+            </div>
+
+            <table className="glance-table">
+              <caption> Processor Info </caption>
+              <tbody>
+                <tr>
+                  <td> Processor Speed: </td>
+                  <td>{jsonData.speed}</td>
+                </tr>
+
+                <tr>
+                  <td> Processor Max Speed: </td>
+                  <td> {jsonData.maxSpeed}</td>
+                </tr>
+
+                <tr>
+                  <td> Cores: </td>
+                  <td> {jsonData.numCores} </td>
+                </tr>
+
+                <tr>
+                  <td> Processes: </td>
+                  <td> {jsonData.numProcesses} </td>
+                </tr>
+
+                <tr> 
+                  <td> Threads: </td>
+                  <td> {jsonData.numThreads} </td>
+                </tr>
+
+                <tr> 
+                  <td> Utilization: </td>
+                  <td> {jsonData.utilization} </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </header>
-        <button onClick={goBack}>Back</button>
-      <div className="row">
-        <CpuLineChartFromAPI />
+        </div>
       </div>
-      <h2>CPU</h2>
-      <p> Processor Name: {jsonData.name}</p>
-      <p> Processor Speed: {jsonData.speed}</p>
-      <p> Processor Max Speed: {jsonData.maxSpeed}</p>
-      <p> Cores: {jsonData.numCores}</p>
-      <p> Processes: {jsonData.numProcesses}</p>
-      <p> Threads: {jsonData.numThreads}</p>
-      <p> Utilization: {jsonData.utilization}</p>
     </div>
   );
 };

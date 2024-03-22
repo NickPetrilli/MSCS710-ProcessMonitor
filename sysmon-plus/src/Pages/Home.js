@@ -18,7 +18,7 @@ const Home = () => {
         </header>
         
         <div>
-          <div className="row">
+          <div className="home-top-glance-row">
             <CpuSection />
             <MemSection />
           </div>

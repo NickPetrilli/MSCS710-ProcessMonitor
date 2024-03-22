@@ -59,22 +59,22 @@ const MemSection = () => {
 
 
   return (
-    <div className="section-Memory">
+    <div className="section-Mem">
       <Link to="/memory-detail"> <h1> Memory </h1> </Link> 
 
       <div>
         {/* Graph side */}
-        <div className="row">
+        <div className="glance-row">
           <MemoryGlanceLineChartFromAPI />
 
           {/* Utilization / Top Processes Side */}
-          <div className="col">
+          <div className="utilandTopProc-sec">
             <div className="row">
               <Link to="/memory-detail"> <div className="utilBox" style={{ backgroundColor }}> {Math.floor(jsonMemoryData.utilization)}% Utilization</div> </Link>
             </div>
 
-            <Link to="/memory-processes"> <h4 className="top-processes-table-TITLE"> Top Processes </h4> </Link>
             <table className="top-processes-table">
+              <Link to="/cpu-processes"> <caption className="top-processes-table-TITLE"> Top Processes </caption> </Link>
             <tbody>
             {jsonProcessData.length > 0 ? (
                         jsonProcessData.map((process, index) => (

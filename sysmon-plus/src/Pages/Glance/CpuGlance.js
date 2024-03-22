@@ -64,17 +64,17 @@ const CpuSection = () => {
 
       <div>
         {/* Graph side */}
-        <div className="row">
+        <div className="glance-row">
           <CpuGlanceLineChartFromAPI />
 
           {/* Utilization / Top Processes Side */}
-          <div className=".utilandTopProc-sec">
+          <div className="utilandTopProc-sec">
             <div className="row">
               <Link to="/cpu-detail"> <div className="utilBox" style={{ backgroundColor }}> {util}% Utilization </div> </Link>
             </div>
 
-            <Link to="/cpu-processes"> <h4 className="top-processes-table-TITLE"> Top Processes </h4> </Link>
             <table className="top-processes-table">
+              <Link to="/cpu-processes"> <caption className="top-processes-table-TITLE"> Top Processes </caption> </Link>
               <tbody>
               {topProcesses.length > 0 ? (
                         topProcesses.map((jsonData, index) => (
