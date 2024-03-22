@@ -251,7 +251,8 @@ public class MemoryService {
                     FROM 
                         memory
                     WHERE 
-                        timestamp BETWEEN datetime((SELECT MAX(timestamp) FROM memory), '-3 minutes') AND datetime((SELECT MAX(timestamp) FROM memory));
+                        timestamp BETWEEN datetime((SELECT MAX(timestamp) FROM memory), '-3 minutes') AND datetime((SELECT MAX(timestamp) FROM memory))
+                        OR timestamp = (SELECT MAX(timestamp) FROM memory);
                              """;
 
             ResultSet resultSet = statement.executeQuery(sql);

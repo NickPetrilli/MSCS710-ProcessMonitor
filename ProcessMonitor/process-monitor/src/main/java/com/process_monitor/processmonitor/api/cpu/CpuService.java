@@ -226,7 +226,8 @@ public class CpuService {
                         FROM 
                             cpu
                         WHERE 
-                            timestamp BETWEEN datetime((SELECT MAX(timestamp) FROM cpu), '-3 minutes') AND datetime((SELECT MAX(timestamp) FROM cpu));
+                            timestamp BETWEEN datetime((SELECT MAX(timestamp) FROM cpu), '-3 minutes') AND datetime((SELECT MAX(timestamp) FROM cpu))
+                            OR timestamp = (SELECT MAX(timestamp) FROM cpu);
                              """;
 
             resultSet = statement.executeQuery(sql);
