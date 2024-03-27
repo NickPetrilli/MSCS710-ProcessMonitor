@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import graphTemplate from '../../Images/Capping GRAPH TEMPLATE.png'
+import DiskGlanceLineChartFromAPI from '../../Charts/DiskGlanceLineChartFromAPI';
 
 const DiskSection = () => {
 
   const [disk, setDisk] = useState([]);
+  const [diskNameForChart, setDiskNameForChart] = useState(null);
   const [topProcesses, setTopProcesses] = useState([]);
 
     useEffect(() => {
@@ -15,6 +16,7 @@ const DiskSection = () => {
           .then(data => {
             // Update the JSON object with fetched data
             setDisk(data);
+            setDiskNameForChart(data[0].name);
           })
           .catch(error => {
             console.error('Error in GET request for general disk information:', error);
@@ -67,7 +69,7 @@ const DiskSection = () => {
         <div>
           {/* Graph side */}
           <div className="row">
-            <Link to="/disk-detail"> <img src={graphTemplate} alt="" className="graph" /> </Link>
+            <DiskGlanceLineChartFromAPI />
 
             {/* Utilization / Top Processes Side */}
             <div className=".utilandTopProc-sec">

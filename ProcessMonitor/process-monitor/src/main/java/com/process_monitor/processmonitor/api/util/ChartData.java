@@ -7,10 +7,12 @@ public class ChartData {
 
     private double utilization;
     private String timestamp;
+    private String diskModel;  // ALWAYS NULL, except for disk
 
-    public ChartData(double utilization, String timestamp) {
+    public ChartData(double utilization, String timestamp, String diskModel) {
         this.utilization = utilization;
         this.timestamp = timestamp;
+        this.diskModel = diskModel;
     }
 
     public double getUtilization() {
@@ -29,11 +31,20 @@ public class ChartData {
         this.timestamp = timestamp;
     }
 
+    public String getDiskModel() {
+        return diskModel;
+    }
+
+    public void setDiskModel(String diskModel) {
+        this.diskModel = diskModel;
+    }
+
     @Override
     public String toString() {
         return "ChartData{" +
                 "utilization=" + utilization +
                 ", timestamp='" + timestamp + '\'' +
+                ", diskModel='" + diskModel + '\'' +
                 '}';
     }
 }
