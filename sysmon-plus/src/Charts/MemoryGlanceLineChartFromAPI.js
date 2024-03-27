@@ -40,7 +40,22 @@ const MemoryGlanceLineChartFromAPI = () => {
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1
           }
-        ]
+        ],
+
+        options : {
+          responsive: true,
+          keepAspectRatio: true,
+
+          scales: {
+            y: {
+              min: 0,
+              max: 100,
+              ticks: {
+                stepSize: 10.0
+              }
+            }
+          }
+        }
       });
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -60,7 +75,7 @@ const MemoryGlanceLineChartFromAPI = () => {
   }
 
   return (
-    <div>
+    <div className='glance-graph'>
       <h3>Memory Usage Over Time</h3>
       <Line data={chartData} />
     </div>

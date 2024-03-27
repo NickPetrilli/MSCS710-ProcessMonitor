@@ -5,6 +5,11 @@ import MemoryGlanceLineChartFromAPI from '../../Charts/MemoryGlanceLineChartFrom
 
 const MemSection = () => {
 
+  const rowStyle = {
+    paddingTop: '7.25%'
+  };
+  const MAX_PROC_LENGTH = 7;  
+
   const [jsonMemoryData, setJsonMemoryData] = useState({}); // Initialize an empty JSON object
   const [jsonProcessData, setJsonProcessData] = useState([]);
 
@@ -57,30 +62,38 @@ const MemSection = () => {
 
   var backgroundColor = getUtilBackgroundColor(util);
 
+  function truncateString(str, maxLength) {
+    if (str.length <= maxLength) {
+      return str;
+    } else {
+      return str.substring(0, maxLength + 1) + '...';
+    }
+  }
+
 
   return (
     <div className="section-Mem">
-      <Link to="/memory-detail"> <h1> Memory </h1> </Link> 
+      <Link to="/memory-detail"> <h1 className='section-title'> Memory </h1> </Link> 
 
       <div>
         {/* Graph side */}
-        <div className="glance-row">
+        <div className="glance-row" style={rowStyle}>
           <MemoryGlanceLineChartFromAPI />
 
           {/* Utilization / Top Processes Side */}
           <div className="utilandTopProc-sec">
             <div className="row">
-              <Link to="/memory-detail"> <div className="utilBox" style={{ backgroundColor }}> {Math.floor(jsonMemoryData.utilization)}% Utilization</div> </Link>
+              <Link to="/memory-detail"> <div className="utilBox-glance" style={{ backgroundColor }}> {util}% Utilization</div> </Link>
             </div>
 
             <table className="top-processes-table">
-              <Link to="/cpu-processes"> <caption className="top-processes-table-TITLE"> Top Processes </caption> </Link>
+              <Link to="/mem-processes"> <caption className="top-processes-table-TITLE"> Top Processes </caption> </Link>
             <tbody>
             {jsonProcessData.length > 0 ? (
                         jsonProcessData.map((process, index) => (
                           <tr key={process.id} className = "top-processes-table-row">
-                            <td>{process.name}</td>
-                            <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
+                            <td className='top-processes-table-proc'>{truncateString(process.name, MAX_PROC_LENGTH)}</td>
+                            <td className='top-processes-table-util'>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
                           </tr>
                         ))
                     ) : (
