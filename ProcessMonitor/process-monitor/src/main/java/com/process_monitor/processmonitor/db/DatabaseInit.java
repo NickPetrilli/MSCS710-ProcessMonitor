@@ -5,9 +5,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PostConstruct;
+
 /**
  * Class for initializing the database tables
  */
+//Component is needed for PostConstruct
+@Component
 public class DatabaseInit {
 
     // Database URL
@@ -64,6 +70,8 @@ public class DatabaseInit {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
 
+    //PostConstruct runs this function only once at startup
+    @PostConstruct
     public void createTables() {
 
         try {
@@ -95,10 +103,5 @@ public class DatabaseInit {
                 }
             }
         }
-    }
-
-    public static void main(String[] args) {
-        DatabaseInit db = new DatabaseInit();
-        db.createTables();
     }
 }
