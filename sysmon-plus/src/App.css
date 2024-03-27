@@ -2,13 +2,32 @@ h1.title {
   margin-bottom: -2%;
 }
 
+h1.section-title, h4.section-title {
+  text-align: left;
+  margin-left: 5%;
+}
+
+h1.section-title {
+  font-size: 2.75rem;
+  margin-bottom: -1%;
+}
+
 h4 {
   font-size: 18px;
+}
+
+h4.section-title {
+  font-size: 1.25rem;
 }
 
 hr {
   height: 0.5rem;
   background-color: black;
+}
+
+a {
+  color: black;
+  text-decoration: none;
 }
 
 .App {
@@ -65,15 +84,23 @@ hr {
 
 .home-top-glance-row {
   display: flex;
-  width: 100%;
   /* flex-wrap: wrap; Allow items to wrap to the next line if needed */
   justify-content: space-between; /* Space items out evenly across the main axis */
 }
 
 .glance-row {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: space-around;
 }
+
+.glance-graph {
+  flex: 1;
+  max-height: 50%;
+  max-width: 50%;
+  padding-bottom: 3%;
+}
+
 
 .section {
   /* width: calc(50% - 10px); Each section takes up 50% width with some margin */
@@ -84,7 +111,8 @@ hr {
 .section-Cpu, .section-Mem {
   flex: 1;
   border-right: .25rem solid black;
-  padding: 2%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /* @keyframes App-logo-spin {
@@ -102,7 +130,7 @@ hr {
   place-items: center;
 
   /* margin-right: 10%; */
-  margin-top: 3%;
+  /* margin-top: 10%; */
 }
 
 .utilBox {
@@ -112,10 +140,11 @@ hr {
 }
 
 .utilBox-glance {
-  padding: 25%;
+  padding: 5%;
   color: white;
   background-color: black;
   font-weight: bold;
+  border: .1rem solid black;
 }
 
 .graph {
@@ -126,6 +155,7 @@ hr {
 .top-processes-table-TITLE {
   background-color: white;
   text-align: center;
+  caption-side: top;
 }
 
 .top-processes-table {
@@ -133,13 +163,25 @@ hr {
 
   table-layout: auto;
 
-  /* margin-top: 15%; */
+  margin-top: -20%;
   background-color: white;
   border: .1rem solid black;
+
+  width: 90%;
 }
 
 .top-processes-table-row {
   font-weight: normal;
+  display: flexbox;
+}
+
+.top-processes-table-proc {
+  flex: 0;
+  /* text-indent: 5%; */
+}
+
+.top-processes-table-util {
+  flex: 1;
 }
 
 .processes-table {

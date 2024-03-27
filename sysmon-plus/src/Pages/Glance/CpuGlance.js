@@ -5,6 +5,8 @@ import CpuGlanceLineChartFromAPI from '../../Charts/CpuGlanceLineChartFromAPI';
 
 const CpuSection = () => {
 
+  const MAX_PROC_LENGTH = 7;
+
   const [jsonData, setJsonData] = useState({}); // Initialize an empty JSON object
   const [topProcesses, setTopProcesses] = useState([]);
 
@@ -57,10 +59,18 @@ const CpuSection = () => {
 
   var backgroundColor = getUtilBackgroundColor(util);
 
+  function truncateString(str, maxLength) {
+    if (str.length <= maxLength) {
+      return str;
+    } else {
+      return str.substring(0, maxLength + 1) + '...';
+    }
+  }
+
   return (
     <div className="section-Cpu">
-      <Link to="/cpu-detail"> <h1> CPU </h1> </Link> 
-      <Link to="/cpu-detail"> <h4>{jsonData.name}</h4> </Link>
+      <Link to="/cpu-detail"> <h1 className='section-title'> CPU </h1> </Link> 
+      <Link to="/cpu-detail"> <h4 className='section-title'>{jsonData.name}</h4> </Link>
 
       <div>
         {/* Graph side */}
@@ -70,7 +80,7 @@ const CpuSection = () => {
           {/* Utilization / Top Processes Side */}
           <div className="utilandTopProc-sec">
             <div className="row">
-              <Link to="/cpu-detail"> <div className="utilBox" style={{ backgroundColor }}> {util}% Utilization </div> </Link>
+              <Link to="/cpu-detail"> <div className="utilBox-glance" style={{ backgroundColor }}> {util}% Utilization </div> </Link>
             </div>
 
             <table className="top-processes-table">
@@ -79,8 +89,8 @@ const CpuSection = () => {
               {topProcesses.length > 0 ? (
                         topProcesses.map((jsonData, index) => (
                           <tr key={jsonData.id} className = "top-processes-table-row">
-                            <td>{jsonData.name}</td>
-                            <td>{jsonData.cpuPercentage.toFixed(1)}%</td>
+                            <td className='top-processes-table-proc'>{truncateString(jsonData.name, MAX_PROC_LENGTH)}</td>
+                            <td className='top-processes-table-util'>{jsonData.cpuPercentage.toFixed(1)}%</td>
                           </tr>
                         ))
                     ) : (
