@@ -211,7 +211,7 @@ public class CpuService {
     }
 
     /**
-     * Retrieves CPU utilization chart metrics from the past 3 minutes
+     * Retrieves CPU utilization chart metrics.
      * @return List of CPU utilization
      */
     public List<ChartData> getUtilizationMetrics() {

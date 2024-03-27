@@ -2,6 +2,7 @@ package com.process_monitor.processmonitor.api.disk;
 
 import java.util.List;
 
+import com.process_monitor.processmonitor.api.util.ChartData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,7 +55,7 @@ public class DiskController {
     }
 
     /**
-     * GET Request endpoint to handle getting and returning processes based on their disk usage in ascending order
+     * GET Request endpoint to handle getting and returning processes based on their disk usage in ascending order.
      * @return List of current running processes.
      */
     @GetMapping(path = "processes-asc")
@@ -64,12 +65,12 @@ public class DiskController {
 
 
     /**
-     * GET Request endpoint to handle getting disk chart metrics
+     * GET Request endpoint to handle getting disk chart metrics.
      * @param name Disk name
      * @return List of utilization metrics
      */
     @GetMapping(path = "chart/{name}")
-    public List<Double> getChartUtilizationMetrics(@PathVariable("name") String name) {
+    public List<ChartData> getChartUtilizationMetrics(@PathVariable("name") String name) {
         return diskService.getUtilizationMetrics(name);
     }
 }

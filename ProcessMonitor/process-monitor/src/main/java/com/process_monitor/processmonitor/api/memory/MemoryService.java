@@ -236,7 +236,7 @@ public class MemoryService {
 
 
     /**
-     * Retrieves Memory utilization chart metrics from the past 3 minutes
+     * Retrieves Memory utilization chart metrics.
      * @return List of Memory utilization
      */
     public List<ChartData> getUtilizationMetrics() {

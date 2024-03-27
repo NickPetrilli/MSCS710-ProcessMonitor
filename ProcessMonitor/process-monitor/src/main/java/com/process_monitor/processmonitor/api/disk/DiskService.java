@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.process_monitor.processmonitor.api.process.model.Process;
+import com.process_monitor.processmonitor.api.util.ChartData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -198,36 +199,31 @@ public class DiskService {
 
 
     /**
-     * Retrieves Memory utilization chart metrics from the past 3 minutes
+     * Retrieves Disk utilization metrics for charts.
      * @param name Disk name
      * @return List of utilization metrics for the specified disk
      */
-    public List<Double> getUtilizationMetrics(String name) {
-        List<Double> utilizationList = new ArrayList<>();
+    public List<ChartData> getUtilizationMetrics(String name) {
+        List<ChartData> chartList = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(URL);
              Statement statement = connection.createStatement()) {
 
-            String sql = """
-                        SELECT 
-                            timestamp, utilization 
-                        FROM 
-                            disk
-                        WHERE 
-                            timestamp BETWEEN datetime('now', 'localtime', '-3 minutes') AND datetime('now', 'localtime')
-                            AND name = '
-                             """ + name + "';";
+            String sql = "SELECT timestamp, utilization, name" +
+                    " FROM disk WHERE name = '" + name + "'" +
+                    " ORDER BY timestamp DESC LIMIT 20;";
 
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                utilizationList.add(resultSet.getDouble("utilization"));
+                chartList.add(new ChartData(resultSet.getDouble("utilization"),
+                                            resultSet.getString("timestamp")));
             }
 
         } catch (SQLException e) {
             logger.error("Error while getting disk chart metrics");
         }
 
-        return utilizationList.isEmpty() ? null : utilizationList;
+        return chartList.isEmpty() ? null : chartList;
     }
 }
