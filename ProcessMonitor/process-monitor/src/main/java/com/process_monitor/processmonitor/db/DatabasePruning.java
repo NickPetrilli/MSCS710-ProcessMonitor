@@ -23,9 +23,8 @@ public class DatabasePruning {
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     
-    //4,320,000 milliseconds = 12 hours
-    //Might want to decrease this, could mean that the program has to running for 12 hours for it to prune
-    @Scheduled(fixedRate = 43200000)
+    //180000 milliseconds = 3 minutes
+    @Scheduled(fixedRate = 180000)
     public void pruneDatabase() {
         
         try {

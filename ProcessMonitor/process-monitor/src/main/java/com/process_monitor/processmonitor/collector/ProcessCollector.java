@@ -152,9 +152,9 @@ public class ProcessCollector {
             totalCpuUsagePercentage += processCpuUsage;
         }
 
-        System.out.println("\n\n" + totalCpuUsagePercentage + "\n\n");
+        //System.out.println("\n\n" + totalCpuUsagePercentage + "\n\n");
 
-        System.out.println("\n\n" + totalDiskUsagePercentage + "\n\n");
+        //System.out.println("\n\n" + totalDiskUsagePercentage + "\n\n");
 
         return processList;
     }
