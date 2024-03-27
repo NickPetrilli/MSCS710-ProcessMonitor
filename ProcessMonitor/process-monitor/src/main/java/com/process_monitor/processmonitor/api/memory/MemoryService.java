@@ -246,13 +246,10 @@ public class MemoryService {
              Statement statement = connection.createStatement()) {
 
             String sql = """
-                    SELECT 
-                        timestamp, utilization
-                    FROM 
-                        memory
-                    WHERE 
-                        timestamp BETWEEN datetime((SELECT MAX(timestamp) FROM memory), '-3 minutes') AND datetime((SELECT MAX(timestamp) FROM memory))
-                        OR timestamp = (SELECT MAX(timestamp) FROM memory);
+                    SELECT timestamp, utilization
+                    FROM memory
+                    ORDER BY timestamp DESC 
+                    LIMIT 20;
                              """;
 
             ResultSet resultSet = statement.executeQuery(sql);
