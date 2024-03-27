@@ -28,6 +28,8 @@ public class DiskCollector {
     private static SystemInfo systemInfo = new SystemInfo();
     private static List<HWDiskStore> diskStores = systemInfo.getHardware().getDiskStores();
     private static VirtualMemory virtualMemory = systemInfo.getHardware().getMemory().getVirtualMemory();
+
+    private static String unsafeCharactersRegex = "[\\s#%&{}\\\\<>*?/|\":^~\\[\\]`]+";
     
 
     public List<Disk> getDiskMetrics() {
@@ -48,7 +50,7 @@ public class DiskCollector {
 
             disks.add(new Disk(
                 null,
-                name, 
+                name.replaceAll(unsafeCharactersRegex, "_"),
                 model, 
                 swapTotal, 
                 swapUsed, 
