@@ -219,8 +219,7 @@ public class DiskService {
 
             while (resultSet.next()) {
                 chartList.add(new ChartData(resultSet.getDouble("utilization"),
-                                            resultSet.getString("timestamp").substring(11, 19),
-                                            resultSet.getString("model")));
+                                            resultSet.getString("timestamp").substring(11, 19)));
             }
 
         } catch (SQLException e) {
@@ -241,7 +240,7 @@ public class DiskService {
         try (Connection connection = DriverManager.getConnection(URL);
              Statement statement = connection.createStatement()) {
 
-            String sql = "SELECT timestamp, readSpeed, writeSpeed, name, model" +
+            String sql = "SELECT timestamp, readSpeed, writeSpeed, name" +
                     " FROM disk WHERE name = '" + name + "'" +
                     " ORDER BY timestamp DESC LIMIT 20;";
 

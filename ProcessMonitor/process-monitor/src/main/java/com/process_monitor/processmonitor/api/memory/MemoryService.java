@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -256,8 +255,7 @@ public class MemoryService {
 
             while (resultSet.next()) {
                 chartList.add(new ChartData(resultSet.getDouble("utilization"),
-                                            resultSet.getString("timestamp").substring(11, 19),
-                                            null));
+                                            resultSet.getString("timestamp").substring(11, 19)));
             }
 
         } catch (SQLException e) {

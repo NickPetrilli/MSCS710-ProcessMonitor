@@ -233,8 +233,7 @@ public class CpuService {
 
             while (resultSet.next()) {
                 chartList.add(new ChartData(resultSet.getDouble("utilization"),
-                                            resultSet.getString("timestamp").substring(11, 19),
-                                            null));
+                                            resultSet.getString("timestamp").substring(11, 19)));
             }
 
         } catch (SQLException e) {
