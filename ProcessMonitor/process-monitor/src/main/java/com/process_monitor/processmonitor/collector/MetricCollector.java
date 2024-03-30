@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * Class to collect computer metrics.
- * It is scheduled to collect every 30 seconds.
+ * It is scheduled to collect every 10 seconds.
  *
  * Documentation used to implement schedule:
  * https://medium.com/@AlexanderObregon/scheduling-tasks-in-spring-applications-a-practical-guide-8d28d35493c6#:~:text=The%20simplest%20way%20to%20schedule,according%20to%20the%20specified%20schedule.
@@ -26,7 +26,8 @@ public class MetricCollector {
 
     private static final Logger logger = LoggerFactory.getLogger(MetricCollector.class);
 
-    // Collects metrics every 30 seconds.
+    // Collects metrics every 10 seconds.
+    // fixedRate = 10000
     @Scheduled(fixedRate = 10000)
     public void collectMetrics() {
         LocalDateTime currentTimestamp = LocalDateTime.now();

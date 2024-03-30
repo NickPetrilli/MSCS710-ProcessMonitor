@@ -7,7 +7,7 @@ import { diskNameForChart } from '../Pages/Glance/DiskGlance.js';
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 
-const DiskGlanceLineChartFromAPI = () => {
+const DiskLineChartFromAPI = ({ diskName, view }) => {
   const [chartData, setChartData] = useState(null);
   const [disk, setDisk] = useState([]);
 
@@ -30,9 +30,10 @@ const DiskGlanceLineChartFromAPI = () => {
 
   const fetchChartData = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/v1/disk/chart/' + disk[0].name);
+      // const response = await fetch('http://localhost:8080/api/v1/disk/chart/' + disk[0].name);
+      const response = await fetch('http://localhost:8080/api/v1/disk/chart/' + diskName);
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Network response was not ok. Disk name is required to fetch chart data.');
       }
       const data = await response.json();
       if (data.length === 0) {
@@ -88,18 +89,21 @@ const DiskGlanceLineChartFromAPI = () => {
         const interval = setInterval(fetchData, 10000); // Refresh data every 10000ms (10 seconds)
 
         return () => clearInterval(interval); // Cleanup interval on component unmount
-      }, []);
+      }, [diskName]);
 
   if (chartData === null) {
     return <div>No data available to display.</div>;
   }
 
   return (
-    <div className='glance-graph'>
+    <div
+      style={view === 'detail' ? { width: '500px' } : undefined}
+      className={view !== 'detail' ? 'glance-graph' : undefined}
+    >
       <h3>Disk Usage Over Time</h3>
       <Line data={chartData} />
     </div>
   );
   }
 
-export default DiskGlanceLineChartFromAPI;
+export default DiskLineChartFromAPI;
