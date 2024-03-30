@@ -42,12 +42,14 @@ const DiskLineChartFromAPI = ({ diskName, view }) => {
         return;
       }
 
-      let diskUtilizationList = [];
+      let diskReadSpeedList = [];
+      let diskWriteSpeedList = [];
       let labels = [];
 
 
       data.forEach((element) => {
-            diskUtilizationList.push(element.utilization);
+            diskReadSpeedList.push(element.readSpeed);
+            diskWriteSpeedList.push(element.writeSpeed);
             labels.push(element.timestamp);
       })
 
@@ -55,10 +57,17 @@ const DiskLineChartFromAPI = ({ diskName, view }) => {
         labels, // Generated labels for each data point
         datasets: [
           {
-            label: 'Disk Usage',
-            data: diskUtilizationList, // The dataset is the array of disk utilization values
+            label: 'Disk Read Speed',
+            data: diskReadSpeedList, 
             fill: true,
             borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+          },
+          {
+            label: 'Disk Write Speed',
+            data: diskWriteSpeedList, // The dataset is the array of disk utilization values
+            fill: true,
+            borderColor: 'rgb(235, 52, 82)',
             tension: 0.1
           }
         ],

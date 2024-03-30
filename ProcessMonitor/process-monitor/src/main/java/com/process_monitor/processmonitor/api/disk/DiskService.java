@@ -10,6 +10,8 @@ import java.util.List;
 
 import com.process_monitor.processmonitor.api.process.model.Process;
 import com.process_monitor.processmonitor.api.util.ChartData;
+import com.process_monitor.processmonitor.api.util.DiskChartData;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -226,5 +228,35 @@ public class DiskService {
         }
 
         return chartList.isEmpty() ? null : chartList;
+    }
+
+    /**
+     * Retrieves Disk read speed and write speed metrics for charts.
+     * @param name Disk name
+     * @return List of read/write speed metrics for the specified disk
+     */
+    public List<DiskChartData> getChartMetrics(String name) {
+        List<DiskChartData> diskChartList = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = "SELECT timestamp, readSpeed, writeSpeed, name, model" +
+                    " FROM disk WHERE name = '" + name + "'" +
+                    " ORDER BY timestamp DESC LIMIT 20;";
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                diskChartList.add(new DiskChartData(resultSet.getDouble("readSpeed"),
+                                            resultSet.getDouble("writeSpeed"),
+                                            resultSet.getString("timestamp").substring(11, 19)));
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting disk chart metrics");
+        }
+
+        return diskChartList.isEmpty() ? null : diskChartList;
     }
 }

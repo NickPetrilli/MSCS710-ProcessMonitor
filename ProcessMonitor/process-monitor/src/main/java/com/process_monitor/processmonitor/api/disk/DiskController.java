@@ -3,6 +3,8 @@ package com.process_monitor.processmonitor.api.disk;
 import java.util.List;
 
 import com.process_monitor.processmonitor.api.util.ChartData;
+import com.process_monitor.processmonitor.api.util.DiskChartData;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,8 +71,18 @@ public class DiskController {
      * @param name Disk name
      * @return List of utilization metrics
      */
+    // @GetMapping(path = "chart/{name}")
+    // public List<ChartData> getChartUtilizationMetrics(@PathVariable("name") String name) {
+    //     return diskService.getUtilizationMetrics(name);
+    // }
+
+    /**
+     * GET Request endpoint to handle getting disk chart metrics.
+     * @param name Disk name
+     * @return List of utilization metrics
+     */
     @GetMapping(path = "chart/{name}")
-    public List<ChartData> getChartUtilizationMetrics(@PathVariable("name") String name) {
-        return diskService.getUtilizationMetrics(name);
+    public List<DiskChartData> getChartMetrics(@PathVariable("name") String name) {
+        return diskService.getChartMetrics(name);
     }
 }
