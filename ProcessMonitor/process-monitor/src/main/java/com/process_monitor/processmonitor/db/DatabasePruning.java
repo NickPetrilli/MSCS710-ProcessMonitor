@@ -9,11 +9,13 @@ import java.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 /**
  * Class to prune database
  * Scheduled to prune every 12 hours deleting records that are 1 week old
  */
+@Component
 public class DatabasePruning {
 
     private static final Logger logger = LoggerFactory.getLogger(DatabasePruning.class);
