@@ -7,17 +7,28 @@ h1.section-title, h4.section-title {
   margin-left: 5%;
 }
 
+h1.detail-title, h4.detail-title {
+  text-align: left;
+  margin-left: 5%;
+}
+
 h1.section-title {
   font-size: 2.75rem;
   margin-bottom: -1%;
 }
 
-h4 {
-  font-size: 18px;
+h1.detail-title {
+  padding-top: 2%;
+  font-size: 4.0rem;
+  margin-bottom: -1%;
 }
 
 h4.section-title {
   font-size: 1.25rem;
+}
+
+h4.detail-title {
+  font-size: 1.75rem;
 }
 
 hr {
@@ -99,6 +110,7 @@ a {
   max-height: 50%;
   max-width: 50%;
   padding-bottom: 3%;
+  position: relative;
 }
 
 
@@ -133,12 +145,6 @@ a {
   /* margin-top: 10%; */
 }
 
-.utilBox {
-  color: white;
-  background-color: black;
-  font-weight: bold;
-}
-
 .utilBox-glance {
   padding: 5%;
   color: white;
@@ -167,7 +173,11 @@ a {
   background-color: white;
   border: .1rem solid black;
 
-  width: 90%;
+  /* width: 90%; */
+}
+
+.top-processes-table caption {
+  white-space: nowrap;
 }
 
 .top-processes-table-row {
@@ -182,6 +192,7 @@ a {
 
 .top-processes-table-util {
   flex: 1;
+  white-space: nowrap;
 }
 
 .processes-table {
@@ -204,4 +215,66 @@ a {
   margin-top: 10%;
   font-weight: bold;
   border-spacing: 1em;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.utilandTopProc-sec-detail {
+  display: grid; /* Let them grow to occupy available space */
+  /* text-align: center; Optionally center the text */
+  place-items: center;
+
+  /* margin-right: 10%; */
+  /* margin-top: 10%; */
+}
+
+.detail-table {
+  margin-top: 15%;
+  font-weight: bold;
+  border-spacing: 1.25em;
+  background-color: white;
+  border: .1rem solid black;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.detail-table tr {
+  font-size: larger;
+}
+
+.detail-table-TITLE {
+  background-color: white;
+  text-align: center;
+  caption-side: top;
+  padding-top: 5%;
+  font-size:x-large;
+}
+
+.graph-detail {
+  flex: 1;
+  max-height: 45%;
+  max-width: 45%;
+}
+
+.detail-table td {
+  white-space: nowrap;
+}
+
+.utilBox-detail {
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 17%;
+  padding-right: 17%;
+
+  color: white;
+  background-color: black;
+  font-weight: bold;
+  font-size: 2.3rem;  
+  border: .1rem solid black;
+
+  white-space: nowrap;
 }

@@ -53,35 +53,39 @@ const CpuDetail = () => {
 
   var backgroundColor = getUtilBackgroundColor(util);
 
+  const divStyle = {
+    display: 'contents'
+  };
+
   
 
   return (
     <div className="section-Cpu">
-      <h1> CPU </h1>
-      <h4>{jsonData.name}</h4>
+      <h1 className='detail-title'> CPU </h1>
+      <h4 className='detail-title'>{jsonData.name}</h4>
 
       <div>
         {/* Graph side */}
-        <div className="glance-row">
+        <div className="detail-row">
           <CpuLineChartFromAPI />
 
           {/* Utilization / Top Processes Side */}
-          <div className="utilandTopProc-sec">
-            <div className="row">
-              <Link to="/cpu-detail"> <div className="utilBox-glance" style={{ backgroundColor }}> {util}% Utilization </div> </Link>
+          <div className="utilandTopProc-sec-detail">
+            <div style={divStyle}>
+              <div className="utilBox-detail" style={{ backgroundColor }}> {util}% Utilization </div>
             </div>
 
-            <table className="glance-table">
-              <caption> Processor Info </caption>
+            <table className="detail-table">
+              <caption className='detail-table-TITLE'> Processor Info </caption>
               <tbody>
                 <tr>
                   <td> Processor Speed: </td>
-                  <td>{jsonData.speed}</td>
+                  <td>{(jsonData.speed / 1000000000).toFixed(2)} GHz</td>
                 </tr>
 
                 <tr>
                   <td> Processor Max Speed: </td>
-                  <td> {jsonData.maxSpeed}</td>
+                  <td> {(jsonData.maxSpeed/ 1000000000).toFixed(2)} GHz</td>
                 </tr>
 
                 <tr>
@@ -97,11 +101,6 @@ const CpuDetail = () => {
                 <tr> 
                   <td> Threads: </td>
                   <td> {jsonData.numThreads} </td>
-                </tr>
-
-                <tr> 
-                  <td> Utilization: </td>
-                  <td> {jsonData.utilization} </td>
                 </tr>
               </tbody>
             </table>
