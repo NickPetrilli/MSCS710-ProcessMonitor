@@ -4,7 +4,6 @@ import logo from '../Images/DoTTed Team Logo.png';
 import CpuSection from './Glance/CpuGlance';
 import MemSection from './Glance/MemoryGlance';
 import DiskSection from './Glance/DiskGlance';
-import Processes from './Processes';
 
 
 const Home = () => {
@@ -28,12 +27,6 @@ const Home = () => {
   
         <div className="center-container">
           <DiskSection />
-        </div>
-  
-        <hr></hr>
-  
-        <div>
-          <Processes />
         </div>
   
         <hr></hr>
