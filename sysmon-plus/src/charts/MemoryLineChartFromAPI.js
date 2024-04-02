@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Chart, CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend } from 'chart.js';
+import { Chart, CategoryScale, PointElement, LineElement, Tooltip, Legend } from 'chart.js';
 
 // NEEDED to render the chart.  Sets the scale and other metadata for chart.
-Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
+Chart.register(CategoryScale, PointElement, LineElement, Tooltip, Legend);
 
 
 const MemoryLineChartFromAPI = () => {
   const [chartData, setChartData] = useState(null);
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
+    scales: {
+      y: {
+        min: 0, // Set custom minimum value for y-axis
+        max: 100, // Set custom maximum value for y-axis
+        ticks: {
+          stepSize: 10,
+        }
+      }
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -62,7 +76,7 @@ const MemoryLineChartFromAPI = () => {
   return (
     <div style={{ width: '500px' }}>
       <h3>Memory Usage Over Time</h3>
-      <Line data={chartData} />
+      <Line data={chartData} options={chartOptions}/>
     </div>
   );
 };
