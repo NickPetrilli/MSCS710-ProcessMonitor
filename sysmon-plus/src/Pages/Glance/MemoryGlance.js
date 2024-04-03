@@ -87,7 +87,7 @@ const MemSection = () => {
             </div>
 
             <table className="top-processes-table">
-              <Link to="/mem-processes"> <caption className="top-processes-table-TITLE"> Top Processes </caption> </Link>
+              <Link to="/memory-processes"> <caption className="top-processes-table-TITLE"> Top Processes </caption> </Link>
             <tbody>
             {jsonProcessData.length > 0 ? (
                         jsonProcessData.map((process, index) => (

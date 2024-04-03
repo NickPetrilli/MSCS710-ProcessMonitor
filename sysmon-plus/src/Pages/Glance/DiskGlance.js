@@ -93,7 +93,7 @@ const DiskSection = () => {
           </div>
 
           <table className="top-processes-table">
-            <Link to="/cpu-processes"><caption className="top-processes-table-TITLE">Top Processes</caption></Link>
+            <Link to="/disk-processes"><caption className="top-processes-table-TITLE">Top Processes</caption></Link>
             <tbody>
               {topProcesses.length > 0 ? (
                 topProcesses.map((item) => (
