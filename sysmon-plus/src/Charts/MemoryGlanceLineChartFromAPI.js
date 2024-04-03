@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Chart, CategoryScale, PointElement, LineElement, Tooltip, Legend } from 'chart.js';
+import { Chart, CategoryScale, PointElement, LineElement, Tooltip, Legend, Filler } from 'chart.js';
 
 // NEEDED to render the chart.  Sets the scale and other metadata for chart.
-Chart.register(CategoryScale, PointElement, LineElement, Tooltip, Legend);
+Chart.register(CategoryScale, PointElement, LineElement, Tooltip, Legend, Filler);
 
 
 const MemoryGlanceLineChartFromAPI = () => {
