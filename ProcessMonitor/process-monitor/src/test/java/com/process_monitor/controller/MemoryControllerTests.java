@@ -1,4 +1,4 @@
-package com.process_monitor;
+package com.process_monitor.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +13,20 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
-
+/**
+ * Class for testing all API endpoints for Memory Controller
+ */
 @SpringBootTest(classes = ProcessMonitorApplication.class)
 @AutoConfigureMockMvc
-public class CpuControllerTests {
+public class MemoryControllerTests {
     
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testGetCpuData() throws Exception {
-        // Perform a GET request to /api/v1/cpu
-        mockMvc.perform(get("/api/v1/cpu"))
+    public void testGetMemoryData() throws Exception {
+        // Perform a GET request to /api/v1/memory
+        mockMvc.perform(get("/api/v1/memory"))
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON
@@ -32,9 +34,9 @@ public class CpuControllerTests {
     }
 
     @Test
-    public void testGetCpuTopProcesses() throws Exception {
-        // Perform a GET request to /api/v1/cpu/top-processes
-        mockMvc.perform(get("/api/v1/cpu/top-processes"))
+    public void testGetMemoryTopProcesses() throws Exception {
+        // Perform a GET request to /api/v1/memory/top-processes
+        mockMvc.perform(get("/api/v1/memory/top-processes"))
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON
@@ -42,9 +44,9 @@ public class CpuControllerTests {
     }
 
     @Test
-    public void testGetCpuProcessesDesc() throws Exception {
-        // Perform a GET request to /api/v1/cpu/processes
-        mockMvc.perform(get("/api/v1/cpu/processes"))
+    public void testGetMemoryProcessesDesc() throws Exception {
+        // Perform a GET request to /api/v1/memory/processes
+        mockMvc.perform(get("/api/v1/memory/processes"))
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON
@@ -52,9 +54,9 @@ public class CpuControllerTests {
     }
 
     @Test
-    public void testGetCpuProcessesAsc() throws Exception {
-        // Perform a GET request to /api/v1/cpu/processes-asc
-        mockMvc.perform(get("/api/v1/cpu/processes-asc"))
+    public void testGetMemoryProcessesAsc() throws Exception {
+        // Perform a GET request to /api/v1/memory/processes-asc
+        mockMvc.perform(get("/api/v1/memory/processes-asc"))
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON
@@ -62,9 +64,9 @@ public class CpuControllerTests {
     }
 
     @Test
-    public void testGetCpuChartData() throws Exception {
-        // Perform a GET request to /api/v1/cpu/chart
-        mockMvc.perform(get("/api/v1/cpu/chart"))
+    public void testGetMemoryChartData() throws Exception {
+        // Perform a GET request to /api/v1/memory/chart
+        mockMvc.perform(get("/api/v1/memory/chart"))
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON

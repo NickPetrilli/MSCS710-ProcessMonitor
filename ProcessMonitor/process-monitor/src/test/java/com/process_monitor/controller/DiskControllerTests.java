@@ -1,4 +1,4 @@
-package com.process_monitor;
+package com.process_monitor.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
+/**
+ * Class for testing all API endpoints for Disk Controller
+ */
 @SpringBootTest(classes = ProcessMonitorApplication.class)
 @AutoConfigureMockMvc
 public class DiskControllerTests {
