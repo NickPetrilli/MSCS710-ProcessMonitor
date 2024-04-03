@@ -7,6 +7,10 @@ const DiskSection = () => {
   const [selectedDiskName, setSelectedDiskName] = useState('');
   const [topProcesses, setTopProcesses] = useState([]);
 
+  const divStyle = {
+    marginTop: '3%'
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,19 +59,19 @@ const DiskSection = () => {
   console.log('Selected disk details:', selectedDisk); // Debugging
 
   return (
-    <div className="section">
+    <div className="section-Disk">
       <Link to={{
             pathname: "/disk-detail"
       }}>
-        <h1>Disk</h1>
+        <h1 className='section-title'>Disk</h1>
       </Link>
-      {disks.length > 0 && (
-        <select onChange={handleDiskChange} value={selectedDiskName}>
+      <h4 className='section-title' style={divStyle}>{disks.length > 0 && (
+        <select className='disk-selection-menu' onChange={handleDiskChange} value={selectedDiskName}>
           {disks.map((diskItem) => (
-            <option key={diskItem.name} value={diskItem.name}>{diskItem.model} - {diskItem.name}</option>
+            <option className='disk-selection-option' key={diskItem.name} value={diskItem.name}>{diskItem.model} - {diskItem.name}</option>
           ))}
         </select>
-      )}
+      )} </h4>
 
       <div className="glance-row">
         {selectedDiskName && <DiskLineChartFromAPI key={selectedDiskName} diskName={selectedDiskName} view='glance' />}
@@ -80,7 +84,7 @@ const DiskSection = () => {
               }}>
               {selectedDisk ? (
                 <div className="utilBox-glance" style={{backgroundColor: selectedDisk.utilization < 40 ? 'green' : selectedDisk.utilization < 80 ? 'orange' : 'red'}}>
-                  {selectedDisk.utilization.toFixed(5)}% Utilization
+                  {Math.floor(selectedDisk.utilization)}% Utilization
                 </div>
               ) : (
                 <p>No data available</p>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Chart, CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend } from 'chart.js';
+import { Chart, CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler } from 'chart.js';
 import { diskNameForChart } from '../Pages/Glance/DiskGlance.js';
 
 // NEEDED to render the chart.  Sets the scale and other metadata for chart.
-Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
+Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler);
 
 
 const DiskLineChartFromAPI = ({ diskName, view }) => {
@@ -48,8 +48,8 @@ const DiskLineChartFromAPI = ({ diskName, view }) => {
 
 
       data.forEach((element) => {
-            diskReadSpeedList.push(element.readSpeed);
-            diskWriteSpeedList.push(element.writeSpeed);
+            diskReadSpeedList.push((element.readSpeed / 1000).toFixed(1));
+            diskWriteSpeedList.push((element.writeSpeed / 1000).toFixed(1));
             labels.push(element.timestamp);
       })
 
@@ -57,14 +57,14 @@ const DiskLineChartFromAPI = ({ diskName, view }) => {
         labels, // Generated labels for each data point
         datasets: [
           {
-            label: 'Disk Read Speed',
+            label: 'Disk Read Speed (KB/s)',
             data: diskReadSpeedList, 
             fill: true,
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1
           },
           {
-            label: 'Disk Write Speed',
+            label: 'Disk Write Speed (KB/s)',
             data: diskWriteSpeedList, // The dataset is the array of disk utilization values
             fill: true,
             borderColor: 'rgb(235, 52, 82)',
