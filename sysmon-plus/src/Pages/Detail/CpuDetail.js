@@ -2,14 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../Images/DoTTed Team Logo.png';
 import CpuLineChartFromAPI from '../../Charts/CpuLineChartFromAPI';
 
 const CpuDetail = () => {
 
   const [jsonData, setJsonData] = useState({}); // Initialize an empty JSON object
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch data from an API endpoint
@@ -34,9 +33,9 @@ const CpuDetail = () => {
     return () => clearInterval(intervalId);
   }, []); // Empty dependency array means this effect runs once after the first render
 
-  const goBack = () => {
-    navigate(-1);
-  };
+  // const goBack = () => {
+  //   navigate(-1);
+  // };
 
   // Directly initializing text
   var util = Math.floor(jsonData.utilization);
@@ -57,10 +56,16 @@ const CpuDetail = () => {
     display: 'contents'
   };
 
+  const buttonStyle = {
+    textAlign: 'left'
+  };
+
   
 
   return (
     <div className="section-Cpu">
+      <Link to="/"> <button className="back-button" style={buttonStyle}> BACK </button> </Link>
+
       <h1 className='detail-title'> CPU </h1>
       <h4 className='detail-title'>{jsonData.name}</h4>
 
