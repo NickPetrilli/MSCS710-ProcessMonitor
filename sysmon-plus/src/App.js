@@ -14,11 +14,16 @@ import { MemoryProcesses } from './Pages/Processes';
 import { MemoryProcessesAscending } from './Pages/Processes';
 import { DiskProcesses } from './Pages/Processes';
 import { DiskProcessesAscending } from './Pages/Processes';
-import './App.css';
+
+import Header from './Pages/Header';
+import Footer from './Pages/Footer';
 
 const App = () => {
   return (
       <div className="App">
+
+        <Header />
+
         <Routes>
           {/* Define routes */}
           <Route path = "/" exact element={<Home />} />
@@ -33,6 +38,8 @@ const App = () => {
           <Route path = "/disk-processes" element={<DiskProcesses />} />
           <Route path = "/disk-processes-asc" element={<DiskProcessesAscending />} />
         </Routes>
+
+        <Footer />
       </div>
     );
 };
