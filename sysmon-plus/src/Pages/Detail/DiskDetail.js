@@ -43,13 +43,8 @@ const DiskDetail = () => {
 
   return (
     <div className="DiskDetail">
-      <header className="App-header">
-          <div className="row">
-          <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
-            <h1 className="App-title-header"> SysMon+ </h1>
-          </div>
-        </header>
       <button onClick={goBack}>Back</button>
+      
       <h2>Disk</h2>
       {
         selectedDisk ? (

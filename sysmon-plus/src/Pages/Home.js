@@ -9,13 +9,6 @@ import DiskSection from './Glance/DiskGlance';
 const Home = () => {
     return (
       <div className="App">
-        <header className="App-header">
-          <div className="row">
-          <img src={logo} alt="" className="App-logo-header" />
-            <h1 className="App-title-header"> SysMon+ </h1>
-          </div>
-        </header>
-        
         <div>
           <div className="home-top-glance-row">
             <CpuSection />

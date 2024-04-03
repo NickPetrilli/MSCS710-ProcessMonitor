@@ -40,13 +40,8 @@ const MemoryDetail = () => {
 
   return (
     <div className="MemoryDetail">
-      <header className="App-header">
-          <div className="row">
-          <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
-            <h1 className="App-title-header"> SysMon+ </h1>
-          </div>
-        </header>
-        <button onClick={goBack}>Back</button>
+      <button onClick={goBack}>Back</button>
+      
       <div className="row">
         <MemoryLineChartFromAPI />
       </div>
