@@ -56,7 +56,7 @@ const MemoryLineChartFromAPI = (view) => {
             label: 'Memory Usage',
             data: memoryUtilizationList, // The dataset is the array of CPU utilization values
             fill: true,
-            borderColor: 'rgb(75, 192, 192)',
+            borderColor: 'rgb(153, 255, 51)',
             backgroundColor: 'rgb(102, 255, 102, 0.75)',
             tension: 0.1
           }
