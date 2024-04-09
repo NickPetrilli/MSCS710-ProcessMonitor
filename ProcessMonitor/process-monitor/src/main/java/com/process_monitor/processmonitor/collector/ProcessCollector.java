@@ -98,6 +98,11 @@ public class ProcessCollector {
 
         int procNum = 0;
         for (OSProcess process : allOSProcesses) {
+            //Don't add Idle process metrics to these other array lists
+            //Affecting our overall utilization
+            if (process.getName().equals("Idle")) {
+                continue;
+            }
             cpuUsages.add(process.getProcessCpuLoadCumulative() * 100);
 
             MemoryCollector memoryCollector = new MemoryCollector();
@@ -127,7 +132,10 @@ public class ProcessCollector {
             diskTotalSpeed += hardDisk.getReadBytes() + hardDisk.getWriteBytes();
         }
 
-        for (int i = 0; i < allOSProcesses.size(); i++) {
+        //After removing the Idle process, needed to adjust the following for loop
+        //Execution stops at size - 1 to account for this
+        //Otherwise results in an index out of bounds error
+        for (int i = 0; i < allOSProcesses.size() - 1; i++) {
 
             float diskUsagePercentage = ((float)diskSpeeds.get(i) / diskTotalSpeed) * 100;
 

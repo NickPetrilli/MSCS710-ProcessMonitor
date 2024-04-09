@@ -43,6 +43,12 @@ public class MetricCollector {
 
         logger.info("Begin insert of process list at {}", LocalDateTime.now());
         for (Process process : processList) {
+            //Don't add the 'Idle' process to the database
+            //It's CPU percentage can exceed well over 100% and messes up our overall utilization
+            if (process.getName().equals("Idle")) {
+                continue;
+            }
+            //System.out.println("Process Name: " + process.getName());
             databaseFunctions.insertProcess(process);
         }
         //CPU and Disk utilization are summed in the ProcessCollector
