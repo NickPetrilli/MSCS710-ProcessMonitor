@@ -152,12 +152,13 @@ public class ProcessCollector {
                     diskSpeeds.get(i),
                     diskUsagePercentage
             ));
-
         }
 
         
         for (double processCpuUsage : cpuUsages) {
+            System.out.println("Previous Usage: " + totalCpuUsagePercentage);
             totalCpuUsagePercentage += processCpuUsage;
+            System.out.println("NEW Usage: " + totalCpuUsagePercentage + " || CHANGE: " + processCpuUsage);
         }
 
         //System.out.println("\n\n" + totalCpuUsagePercentage + "\n\n");
