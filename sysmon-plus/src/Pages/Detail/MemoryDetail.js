@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import logo from '../../Images/DoTTed Team Logo.png';
 import MemoryLineChartFromAPI from '../../Charts/MemoryLineChartFromAPI';
 
 const MemoryDetail = () => {
@@ -34,22 +33,77 @@ const MemoryDetail = () => {
     return () => clearInterval(intervalId);
   }, []); // Empty dependency array means this effect runs once after the first render
 
-  const goBack = () => {
-    navigate(-1);
+  // const goBack = () => {
+  //   navigate(-1);
+  // };
+
+  // Directly initializing text
+  var util = Math.floor(jsonData.utilization);
+
+  const getUtilBackgroundColor = (percentage) => {
+    if (percentage < 40) {
+      return 'green';
+    } else if (percentage >= 40 && percentage < 80) {
+      return 'orange';
+    } else {
+      return 'red';
+    }
+  };
+
+  var backgroundColor = getUtilBackgroundColor(util);
+
+  const divStyle = {
+    display: 'contents'
+  };
+
+  const buttonStyle = {
+    textAlign: 'left'
   };
 
   return (
-    <div className="MemoryDetail">
-      <button onClick={goBack}>Back</button>
+    <div className="section-Mem">
+      <Link to="/"> <button className="back-button" style={buttonStyle}> BACK </button> </Link>
       
-      <div className="row">
-        <MemoryLineChartFromAPI />
+      <h1 className='detail-title'> Memory </h1>
+
+      <div>
+        {/* Graph side */}
+        <div className="detail-row">
+          <MemoryLineChartFromAPI view='detail'/>
+
+          {/* Utilization / Top Processes Side */}
+          <div className="utilandTopProc-sec-detail">
+            <div style={divStyle}>
+              <div className="utilBox-detail" style={{ backgroundColor }}> {util}% Utilization </div>
+            </div>
+
+            <table className="detail-table">
+              <caption className='detail-table-TITLE'> Memory Info </caption>
+              <tbody>
+                <tr>
+                  <td> Total Memory: </td>
+                  <td>{Math.floor(jsonData.totalMemory / 1000000)} MB</td>
+                </tr>
+
+                <tr>
+                  <td> Available Memory: </td>
+                  <td> {Math.floor(jsonData.availableMemory/ 1000000)} MB</td>
+                </tr>
+
+                <tr>
+                  <td> Used Memory: </td>
+                  <td> {Math.floor(jsonData.usedMemory / 1000000)} MB</td>
+                </tr>
+
+                {/* <tr>
+                  <td> Utilization: </td>
+                  <td> {(jsonData.utilization).toFixed(1)}%</td>
+                </tr> */}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <h2>Memory</h2>
-      <p> Total Memory: {jsonData.totalMemory}</p>
-      <p> Available Memory: {jsonData.availableMemory}</p>
-      <p> Used Memory: {jsonData.usedMemory}</p>
-      <p> Utilization: {jsonData.utilization}</p>
     </div>
   );
 };

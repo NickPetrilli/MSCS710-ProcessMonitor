@@ -1,12 +1,10 @@
-import logo from '../Images/DoTTed Team Logo.png';
+import logo from '../Images/SysMon+ Logo Dark.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
         <header className="App-header">
-          <div className="row">
-          <img src={logo} alt="" className="App-logo-header" />
-            <h1 className="App-title-header"> SysMon+ </h1>
-          </div>
+        <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
         </header>
     )
 };

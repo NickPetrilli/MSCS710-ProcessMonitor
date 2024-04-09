@@ -73,7 +73,7 @@ const DiskSection = () => {
         </select>
       )} </h4>
 
-      <div className="glance-row">
+      <div className="glance-row-disk">
         {selectedDiskName && <DiskLineChartFromAPI key={selectedDiskName} diskName={selectedDiskName} view='glance' />}
         {!selectedDiskName && <p>Select a disk to view its details.</p>}
 

@@ -1,7 +1,7 @@
 // memSection.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import MemoryGlanceLineChartFromAPI from '../../Charts/MemoryGlanceLineChartFromAPI';
+import MemoryLineChartFromAPI from '../../Charts/MemoryLineChartFromAPI';
 
 const MemSection = () => {
 
@@ -78,7 +78,7 @@ const MemSection = () => {
       <div>
         {/* Graph side */}
         <div className="glance-row" style={rowStyle}>
-          <MemoryGlanceLineChartFromAPI />
+          <MemoryLineChartFromAPI />
 
           {/* Utilization / Top Processes Side */}
           <div className="utilandTopProc-sec">

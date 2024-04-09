@@ -22,12 +22,6 @@ const Home = () => {
           <DiskSection />
         </div>
   
-        <hr></hr>
-  
-        <div>
-          
-        </div>
-  
       </div>
     );
   };

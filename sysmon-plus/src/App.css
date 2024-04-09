@@ -48,12 +48,12 @@ a {
 }
 
 .App-logo-header {
-  height: 5em;
+  height: 5rem;
   pointer-events: none;
   /* padding-left: 10%;
   padding-right: 105%; */
-  margin-left: 5%;
-  margin-right: 5%;
+  margin: 10%;
+
 }
 
 .App-title-header {
@@ -86,12 +86,11 @@ a {
 .App-footer {
   /* background-color: white; */
   height: 3%;
-  display: flex;
-  align-items: center;
   text-align: center;
-  justify-content: space-between;
   font-size: 100%;
   color: black;
+
+  padding-bottom: 1%;
 }
 
 .App-footer p {
@@ -146,10 +145,24 @@ a {
   justify-content: space-around;
 }
 
+.glance-row-disk{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .glance-graph {
   flex: 1;
-  max-height: 50%;
+  /* max-height: 50%; */
   max-width: 50%;
+  padding-bottom: 3%;
+  position: relative;
+}
+
+.glance-graph-disk {
+  flex: 1;
+  /* max-height: 50%; */
+  max-width: 60%;
   padding-bottom: 3%;
   position: relative;
 }
@@ -169,7 +182,7 @@ a {
 }
 
 .section-Disk {
-  width: 100%; /* Each section takes up 50% width with some margin */
+  width: 50%; /* Each section takes up 50% width with some margin */
 }
 
 /* @keyframes App-logo-spin {
@@ -205,24 +218,41 @@ a {
 
 .top-processes-table-TITLE {
   background-color: white;
-  text-align: center;
   caption-side: top;
+
+  white-space: nowrap;
+  font-weight: bold;
+
+  /* position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  padding-top: 2%; */
+
 }
 
 .top-processes-table {
   font-weight: bold;
 
-  table-layout: auto;
+  table-layout: fixed;
 
   margin-top: -20%;
   background-color: white;
   border: .1rem solid black;
 
-  /* width: 90%; */
+
 }
 
-.top-processes-table caption {
-  white-space: nowrap;
+.top-processes-table2 {
+  position: relative;
+  padding-top: 20%;
+
+  background-color: white;
+
+  border: .1rem solid black;
+
+  padding-bottom: 2%;
 }
 
 .top-processes-table-row {
@@ -267,9 +297,9 @@ a {
   outline: auto;
 }
 
-.utilBox, .top-processes-table-TITLE, .top-processes-table, .top-processes-table-row {
+/* .utilBox, .top-processes-table-TITLE, .top-processes-table, .top-processes-table-row {
   flex-grow: 1;
-}
+} */
 
 .glance-table {
   margin-top: 10%;

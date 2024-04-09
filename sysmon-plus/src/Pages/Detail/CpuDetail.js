@@ -72,7 +72,7 @@ const CpuDetail = () => {
       <div>
         {/* Graph side */}
         <div className="detail-row">
-          <CpuLineChartFromAPI />
+          <CpuLineChartFromAPI view='detail'/>
 
           {/* Utilization / Top Processes Side */}
           <div className="utilandTopProc-sec-detail">

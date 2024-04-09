@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // import UtilTextBox from '../../../utils/getUtilBackgroundColor';
-import CpuGlanceLineChartFromAPI from '../../Charts/CpuGlanceLineChartFromAPI';
+import CpuLineChartFromAPI from '../../Charts/CpuLineChartFromAPI';
 
 const CpuSection = () => {
 
@@ -75,7 +75,7 @@ const CpuSection = () => {
       <div>
         {/* Graph side */}
         <div className="glance-row">
-          <CpuGlanceLineChartFromAPI />
+          <CpuLineChartFromAPI />
 
           {/* Utilization / Top Processes Side */}
           <div className="utilandTopProc-sec">

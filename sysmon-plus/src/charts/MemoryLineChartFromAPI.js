@@ -6,7 +6,7 @@ import { Chart, CategoryScale, PointElement, LineElement, Tooltip, Legend, Fille
 Chart.register(CategoryScale, PointElement, LineElement, Tooltip, Legend, Filler);
 
 
-const MemoryLineChartFromAPI = () => {
+const MemoryLineChartFromAPI = (view) => {
   const [chartData, setChartData] = useState(null);
 
   const chartOptions = {
@@ -74,7 +74,7 @@ const MemoryLineChartFromAPI = () => {
   }
 
   return (
-    <div style={{ width: '500px' }}>
+    <div className={view === 'detail' ? 'graph-detail' : 'glance-graph'}>
       <h3>Memory Usage Over Time</h3>
       <Line data={chartData} options={chartOptions}/>
     </div>

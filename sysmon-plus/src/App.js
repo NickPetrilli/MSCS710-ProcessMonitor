@@ -3,6 +3,7 @@ import './App.css';
 // App.js
 import React from 'react';
 import { Route, Routes} from 'react-router-dom';
+
 import Home from './Pages/Home';
 import CpuDetail from './Pages/Detail/CpuDetail';
 import MemoryDetail from './Pages/Detail/MemoryDetail';

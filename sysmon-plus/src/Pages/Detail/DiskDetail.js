@@ -13,17 +13,20 @@ const DiskDetail = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = () => {
-      // Fetch disk utilization from API endpoint
-      fetch('http://localhost:8080/api/v1/disk')
-        .then(response => response.json())
-        .then(data => {
-          // Update the JSON object with fetched data
-          setDisks(data);
-        })
-        .catch(error => {
-          console.error('Error in GET request for general disk information:', error);
-        });
+    const fetchData = async () => {
+      try {
+        // Fetch disks data
+        const diskResponse = await fetch('http://localhost:8080/api/v1/disk');
+        const diskData = await diskResponse.json();
+        console.log('Fetched disks:', diskData); // Debugging
+        setDisks(diskData);
+
+        // Automatically select the first disk or restore selection from session storage
+        const initialDiskName = sessionStorage.getItem('selectedDiskName') || (diskData.length > 0 ? diskData[0].name : '');
+        setSelectedDiskName(initialDiskName);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     }
 
   // Run the function immediately when the component mounts
@@ -35,57 +38,98 @@ const DiskDetail = () => {
   return () => clearInterval(intervalId);
   }, []); // Empty dependency array means this effect runs once after the first render
 
-  const selectedDisk = useMemo(() => disks.find(disk => disk.name === selectedDiskName), [disks, selectedDiskName]);
+  useEffect(() => {
+    if (selectedDiskName) {
+      sessionStorage.setItem('selectedDiskName', selectedDiskName);
+      console.log('Selected disk name saved to session:', selectedDiskName); // Debugging
+    }
+  }, [selectedDiskName]);
 
-  const goBack = () => {
-    navigate(-1);
+  const handleDiskChange = (event) => {
+    console.log('Disk selection changed:', event.target.value); // Debugging
+    setSelectedDiskName(event.target.value);
+  };
+
+  const selectedDisk = useMemo(() => disks.find(disk => disk.name === selectedDiskName), [disks, selectedDiskName]);
+  // console.log('Selected disk details:', selectedDisk.name); // Debugging
+
+  // const goBack = () => {
+  //   navigate(-1);
+  // };
+
+  const divStyle = {
+    display: 'contents'
+  };
+
+  const buttonStyle = {
+    textAlign: 'left'
   };
 
   return (
-    <div className="DiskDetail">
-      <button onClick={goBack}>Back</button>
+    <div className="section-Disk">
+      <Link to="/"> <button className="back-button" style={buttonStyle}> BACK </button> </Link>
       
-      <h2>Disk</h2>
+      <h1 className='detail-title'> Disk </h1>
+      <h4 className='section-title' style={divStyle}>{disks.length > 0 && (
+        <select className='disk-selection-menu' onChange={handleDiskChange} value={selectedDiskName}>
+          {disks.map((diskItem) => (
+            <option className='disk-selection-option' key={diskItem.name} value={diskItem.name}>{diskItem.model} - {diskItem.name}</option>
+          ))}
+        </select>
+      )} </h4>
+
       {
         selectedDisk ? (
-          <div>
-            <DiskLineChartFromAPI diskName={selectedDisk.name} view='detail' />
-            <div>
-              <p>Name: {selectedDisk.name}</p>
-              <p>Model: {selectedDisk.model}</p>
-              <p>Total Swap Bytes: {selectedDisk.swapTotal}</p>
-              <p>Used Swap Bytes: {selectedDisk.swapUsed}</p>
-              <p>Swap Utilization: {selectedDisk.swapUtilization}</p>
-              <p>Total Read Bytes: {selectedDisk.totalReadBytes}</p>
-              <p>Total Write Bytes: {selectedDisk.totalWriteBytes}</p>
-              <p>Read Speed: {selectedDisk.readSpeed}</p>
-              <p>Write Speed: {selectedDisk.writeSpeed}</p>
-              <p>Utilization: {selectedDisk.utilization}</p>
+        <div>
+          {/* Graph side */}
+          <div className="detail-row">
+            {selectedDiskName && <DiskLineChartFromAPI diskName={selectedDisk.name} view='detail' />}
+
+            {/* Utilization / Top Processes Side */}
+            <div className="utilandTopProc-sec-detail">
+              <div style={divStyle}>
+                {selectedDisk ? (
+                  <div className="utilBox-glance" style={{backgroundColor: selectedDisk.utilization < 40 ? 'green' : selectedDisk.utilization < 80 ? 'orange' : 'red'}}>
+                    {Math.floor(selectedDisk.utilization)}% Utilization
+                  </div>
+                ) : (
+                  <p>No data available</p>
+                )}
+              </div>
+
+              <table className="detail-table">
+                <caption className='detail-table-TITLE'> Disk Info </caption>
+                <tbody>
+                  <tr>
+                    <td> Read Speed: </td>
+                    <td>{(selectedDisk.readSpeed / 1000).toFixed(1)} KB/s</td>
+                  </tr>
+
+                  <tr>
+                    <td> Write Speed: </td>
+                    <td> {(selectedDisk.writeSpeed / 1000).toFixed(1)} KB/s</td>
+                  </tr>
+
+                  <tr>
+                    <td> Swap Used: </td>
+                    <td> {(selectedDisk.swapUsed / 1000000).toFixed(1)} MB</td>
+                  </tr>
+
+                  <tr>
+                    <td> Swap Available: </td>
+                    <td> {(selectedDisk.swapAvailable / 1000000).toFixed(1)} MB</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
+        </div>
+          
         ) : (
           <p>No disk selected</p>
         )
       }
-      {/* If we wanted to display all disks. */}
-      {
-      /*
-      disks.map((disk, index) => (
-        <div key={index}>
-          <p>Name: {disk.name}</p>
-          <p>Model: {disk.model}</p>
-          <p>Total Swap Bytes: {disk.swapTotal}</p>
-          <p>Used Swap Bytes: {disk.swapUsed}</p>
-          <p>Swap Utilization: {disk.swapUtilization}</p>
-          <p>Total Read Bytes: {disk.totalReadBytes}</p>
-          <p>Total Write Bytes: {disk.totalWriteBytes}</p>
-          <p>Read Speed: {disk.readSpeed}</p>
-          <p>Write Speed: {disk.writeSpeed}</p>
-          <p>Utilization: {disk.utilization}</p>
-        </div>
-      ))
-      */
-      }
+      
     </div>
   );
 };

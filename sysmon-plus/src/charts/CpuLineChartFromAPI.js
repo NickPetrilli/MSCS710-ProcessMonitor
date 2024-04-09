@@ -6,7 +6,7 @@ import { Chart, CategoryScale, PointElement, LineElement, Tooltip, Legend, Fille
 Chart.register(CategoryScale, PointElement, LineElement, Tooltip, Legend, Filler);
 
 
-const CpuLineChartFromAPI = () => {
+const CpuLineChartFromAPI = (view) => {
   const [chartData, setChartData] = useState(null);
 
   const chartOptions = {
@@ -91,7 +91,7 @@ const CpuLineChartFromAPI = () => {
   }
 
   return (
-    <div className='graph-detail'>
+    <div className={view === 'detail' ? 'graph-detail' : 'glance-graph'}>
       <h3>CPU Usage Over Time</h3>
       <Line data={chartData} options={chartOptions}/>
     </div>
