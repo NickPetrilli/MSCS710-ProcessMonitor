@@ -1,7 +1,6 @@
 // cpuSection.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import CpuLineChartFromAPI from '../../Charts/CpuLineChartFromAPI';
 
 const CpuDetail = () => {
@@ -32,10 +31,6 @@ const CpuDetail = () => {
 
     return () => clearInterval(intervalId);
   }, []); // Empty dependency array means this effect runs once after the first render
-
-  // const goBack = () => {
-  //   navigate(-1);
-  // };
 
   // Directly initializing text
   var util = Math.floor(jsonData.utilization);

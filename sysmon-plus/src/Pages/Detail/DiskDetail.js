@@ -1,16 +1,12 @@
 // diskSection.js
 import React, { useState, useEffect, useMemo } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import logo from '../../Images/DoTTed Team Logo.png';
 import DiskLineChartFromAPI from '../../Charts/DiskLineChartFromAPI';
 
 const DiskDetail = () => {
 
   const [disks, setDisks] = useState([]);
   const [selectedDiskName, setSelectedDiskName] = useState(() => sessionStorage.getItem('selectedDiskName'));
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,10 +48,6 @@ const DiskDetail = () => {
 
   const selectedDisk = useMemo(() => disks.find(disk => disk.name === selectedDiskName), [disks, selectedDiskName]);
   // console.log('Selected disk details:', selectedDisk.name); // Debugging
-
-  // const goBack = () => {
-  //   navigate(-1);
-  // };
 
   const divStyle = {
     display: 'contents'

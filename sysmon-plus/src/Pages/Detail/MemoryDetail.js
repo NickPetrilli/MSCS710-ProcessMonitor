@@ -1,14 +1,11 @@
 // memSection.js
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import MemoryLineChartFromAPI from '../../Charts/MemoryLineChartFromAPI';
 
 const MemoryDetail = () => {
 
   const [jsonData, setJsonData] = useState({}); // Initialize an empty JSON object
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch data from an API endpoint
@@ -32,10 +29,6 @@ const MemoryDetail = () => {
       
     return () => clearInterval(intervalId);
   }, []); // Empty dependency array means this effect runs once after the first render
-
-  // const goBack = () => {
-  //   navigate(-1);
-  // };
 
   // Directly initializing text
   var util = Math.floor(jsonData.utilization);

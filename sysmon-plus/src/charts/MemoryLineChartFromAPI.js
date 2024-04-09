@@ -13,17 +13,22 @@ const MemoryLineChartFromAPI = (view) => {
     responsive: true,
     maintainAspectRatio: true,
     scales: {
+      x: {
+        type: 'category',
+        reverse: true
+      },
+
       y: {
         min: 0, // Set custom minimum value for y-axis
         max: 100, // Set custom maximum value for y-axis
         ticks: {
-          stepSize: 10,
+          stepSize: 10
         }
       }
     }
   };
 
-  const fetchData = async () => {
+  const fetchChartData = async () => {
     try {
       const response = await fetch('http://localhost:8080/api/v1/memory/chart');
       if (!response.ok) {
@@ -52,6 +57,7 @@ const MemoryLineChartFromAPI = (view) => {
             data: memoryUtilizationList, // The dataset is the array of CPU utilization values
             fill: true,
             borderColor: 'rgb(75, 192, 192)',
+            backgroundColor: 'rgb(102, 255, 102, 0.75)',
             tension: 0.1
           }
         ]
@@ -63,8 +69,8 @@ const MemoryLineChartFromAPI = (view) => {
   };
 
   useEffect(() => {
-        fetchData(); // Fetch data on component mount
-        const interval = setInterval(fetchData, 10000); // Refresh data every 10000ms (10 seconds)
+        fetchChartData(); // Fetch data on component mount
+        const interval = setInterval(fetchChartData, 10000); // Refresh data every 10000ms (10 seconds)
 
         return () => clearInterval(interval); // Cleanup interval on component unmount
       }, []);

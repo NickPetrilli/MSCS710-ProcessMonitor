@@ -8,12 +8,16 @@ Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, L
 
 const DiskLineChartFromAPI = ({ diskName, view }) => {
   const [chartData, setChartData] = useState(null);
-  const [disk, setDisk] = useState([]);
 
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: true,
     scales: {
+      x: {
+        type: 'category',
+        reverse: true
+      },
+
       y: {
         min: 0, // Set custom minimum value for y-axis
         suggestedMax: 100000,
@@ -22,23 +26,6 @@ const DiskLineChartFromAPI = ({ diskName, view }) => {
         }
       }
     }
-  };
-
-  const fetchData = async () => {
-    // Fetch disk utilization from API endpoint
-    fetch('http://localhost:8080/api/v1/disk')
-      .then(response => response.json())
-      .then(data => {
-        // Update the JSON object with fetched data
-        setDisk(data);
-
-        if (data && data.length > 0) {
-          fetchChartData(); // Ensure we have data and then call fetchChartData
-        }
-      })
-      .catch(error => {
-        console.error('Error in GET request for general disk information:', error);
-      });
   };
 
   const fetchChartData = async () => {
@@ -91,11 +78,11 @@ const DiskLineChartFromAPI = ({ diskName, view }) => {
   };
 
   useEffect(() => {
-        fetchData();
-        const interval = setInterval(fetchData, 10000); // Refresh data every 10000ms (10 seconds)
+        fetchChartData();
+        const interval = setInterval(fetchChartData, 10000); // Refresh data every 10000ms (10 seconds)
 
         return () => clearInterval(interval); // Cleanup interval on component unmount
-      }, [diskName]);
+      });
 
   if (chartData === null) {
     return <div>No data available to display.</div>;
