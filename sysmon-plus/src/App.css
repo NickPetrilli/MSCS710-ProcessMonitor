@@ -136,7 +136,7 @@ a {
 .home-top-glance-row {
   display: flex;
   /* flex-wrap: wrap; Allow items to wrap to the next line if needed */
-  justify-content: space-between; /* Space items out evenly across the main axis */
+  /* justify-content: space-between; Space items out evenly across the main axis */
 }
 
 .glance-row {
@@ -148,13 +148,14 @@ a {
 .glance-row-disk{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .glance-graph {
   flex: 1;
   /* max-height: 50%; */
   max-width: 50%;
+  padding-left: 3%;
   padding-bottom: 3%;
   position: relative;
 }
@@ -162,7 +163,8 @@ a {
 .glance-graph-disk {
   flex: 1;
   /* max-height: 50%; */
-  max-width: 60%;
+  max-width: 30%;
+  padding-left: 20%;
   padding-bottom: 3%;
   position: relative;
 }
@@ -182,7 +184,23 @@ a {
 }
 
 .section-Disk {
-  width: 50%; /* Each section takes up 50% width with some margin */
+  width: 100%; /* Each section takes up 50% width with some margin */
+}
+
+.section-Disk-TITLE {
+  display: flex;
+  justify-content: center;
+  text-align: left;
+}
+
+.section-Disk-TITLE h1 {
+  font-size: 2.75rem;
+}
+
+.section-Disk-TITLE h4 {
+  font-size: 1.25rem;
+  margin-top: 7rem;
+  margin-left: -5.75rem;
 }
 
 /* @keyframes App-logo-spin {
@@ -199,8 +217,7 @@ a {
   /* text-align: center; Optionally center the text */
   place-items: center;
 
-  /* margin-right: 10%; */
-  /* margin-top: 10%; */
+  margin-right: 5%;
 }
 
 .utilBox-glance {
