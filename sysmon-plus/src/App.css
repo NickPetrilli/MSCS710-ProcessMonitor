@@ -119,14 +119,16 @@ a {
   background-color: black;
   color: white;
   padding: 10px 20px;
-  font-size: 125%;
+  font-size: 215%;
+  text-wrap: nowrap;
   cursor: pointer;
   border-radius: 5px;
   margin-top: 2%;
-  font: inherit;
-  font-weight: bold;
+  font-weight: 600;
 
-  margin-bottom: -20%;
+  position: absolute;
+  top: -14%;
+  left: 58%;
 }
 
 .back-button:active {
@@ -330,13 +332,19 @@ a {
   justify-content: space-evenly;
 }
 
+.detail-row2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+
 .utilandTopProc-sec-detail {
   display: grid; /* Let them grow to occupy available space */
   /* text-align: center; Optionally center the text */
   place-items: center;
 
-  /* margin-right: 10%; */
-  /* margin-top: 10%; */
+  position: relative;
 }
 
 .detail-table {
@@ -373,6 +381,8 @@ a {
 }
 
 .utilBox-detail {
+  margin: 17%;
+
   padding-top: 5%;
   padding-bottom: 5%;
   padding-left: 17%;
@@ -381,7 +391,7 @@ a {
   color: white;
   background-color: black;
   font-weight: bold;
-  font-size: 2.3rem;  
+  font-size: 225%;  
   border: .1rem solid black;
 
   white-space: nowrap;

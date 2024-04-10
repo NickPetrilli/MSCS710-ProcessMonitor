@@ -50,16 +50,11 @@ const CpuDetail = () => {
   const divStyle = {
     display: 'contents'
   };
-
-  const buttonStyle = {
-    textAlign: 'left'
-  };
-
   
 
   return (
     <div className="section-Cpu">
-      <Link to="/"> <button className="back-button" style={buttonStyle}> BACK </button> </Link>
+      
 
       <h1 className='detail-title'> CPU </h1>
       <h4 className='detail-title'>{jsonData.name}</h4>
@@ -67,10 +62,12 @@ const CpuDetail = () => {
       <div>
         {/* Graph side */}
         <div className="detail-row">
-          <CpuLineChartFromAPI view='detail'/>
+          <CpuLineChartFromAPI view="detail"/>
 
           {/* Utilization / Top Processes Side */}
           <div className="utilandTopProc-sec-detail">
+            <Link to="/"> <button className="back-button"> &#10096; BACK </button> </Link>
+
             <div style={divStyle}>
               <div className="utilBox-detail" style={{ backgroundColor }}> {util}% Utilization </div>
             </div>
