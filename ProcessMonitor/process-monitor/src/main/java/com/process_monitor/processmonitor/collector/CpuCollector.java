@@ -24,6 +24,8 @@ public class CpuCollector {
     private static OperatingSystem os = systemInfo.getOperatingSystem();
     private static List<OSProcess> allOSProcesses = os.getProcesses();
 
+    private static final long DELAY = 1000;
+
     /**
      * Gets the CPU name
      * @return CPU name (eg. 12th Gen Intel(R) Core(TM) i7-1255U)
@@ -90,6 +92,36 @@ public class CpuCollector {
     public static int getLogicalProcessorCount() {
         return processor.getLogicalProcessorCount();
     }
+    
+    /**
+     * Retrieves the current CPU utilization of the system.
+     * Calculates the CPU utilization by taking two measurements 
+     * of the system CPU load at different time intervals. It then computes 
+     * the difference between the two measurements to determine the CPU 
+     * utilization during the time interval.
+     * @return the system cpu utilization
+     */
+    public double getCpuUtilization() {
+        // Initial measurement
+        long[] oldTicks = processor.getSystemCpuLoadTicks();
+        //long[][] oldProcTicks = processor.getProcessorCpuLoadTicks();
 
+        try {
+            // Delay before the next measurement
+            Thread.sleep(DELAY);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        // Subsequent measurement
+        double systemCpuLoad = processor.getSystemCpuLoadBetweenTicks(oldTicks) * 100;
+        //System.out.println("System CPU Load: " + (systemCpuLoad * 100) + "%");
+        
+        // double[] procCpuLoad = processor.getProcessorCpuLoadBetweenTicks(oldProcTicks);
+        // for (int i = 0; i < procCpuLoad.length; i++) {
+        //     System.out.println("Processor " + i + " CPU Load: " + (procCpuLoad[i] * 100) + "%");
+        // }
+        
+        return systemCpuLoad;
+    }
 }

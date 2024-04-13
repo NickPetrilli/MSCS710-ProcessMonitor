@@ -156,10 +156,10 @@ public class ProcessCollector {
 
         
         for (double processCpuUsage : cpuUsages) {
-            System.out.println("Previous Usage: " + totalCpuUsagePercentage);
-            //totalCpuUsagePercentage += (processCpuUsage / CpuCollector.getLogicalProcessorCount());
+            //System.out.println("Previous Usage: " + totalCpuUsagePercentage);
+            //totalCpuUsagePercentage += processCpuUsage;
             totalCpuUsagePercentage += processCpuUsage;
-            System.out.println("NEW Usage: " + totalCpuUsagePercentage + " || CHANGE: " + processCpuUsage);
+            //System.out.println("NEW Usage: " + totalCpuUsagePercentage + " || CHANGE: " + processCpuUsage);
         }
 
         //System.out.println("\n\n" + totalCpuUsagePercentage + "\n\n");

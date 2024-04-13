@@ -52,11 +52,10 @@ public class MetricCollector {
             databaseFunctions.insertProcess(process);
         }
         //CPU and Disk utilization are summed in the ProcessCollector
-        double cpuUtilization = processCollector.getTotalCpuPercentage();
+        //double cpuUtilization = processCollector.getTotalCpuPercentage();
         //CPU usage can exceed 100% due to multithreading
         //To handle this, divide by the number of logical processors to match Task Manager
         //int logicalProcessors = CpuCollector.getLogicalProcessorCount();
-
         //cpuUtilization = cpuUtilization / logicalProcessors;
 
         double diskUtilization = processCollector.getTotalDiskPercentage();
@@ -72,8 +71,7 @@ public class MetricCollector {
         int numProcesses = cpuCollector.getProcessCount();
         int numThreads = cpuCollector.getThreadCount();
 
-        //cpuUtilization *= ((logicalProcessors / numCores) * (logicalProcessors - numCores + 1));
-        //System.out.println("CPU TOTAL UTILIZATION: " + cpuUtilization);
+        double cpuUtilization = cpuCollector.getCpuUtilization();
 
         //Timestamp is null because DatabaseFunctions handles it
         Cpu cpu = new Cpu(null, name, speed, maxSpeed, numCores, numProcesses, numThreads, cpuUtilization);
