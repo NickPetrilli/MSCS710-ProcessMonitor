@@ -12,6 +12,7 @@ import com.process_monitor.processmonitor.ProcessMonitorApplication;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 /**
  * Class for testing all API endpoints for Disk Controller
@@ -30,7 +31,9 @@ public class DiskControllerTests {
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON
-               .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+               .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                // Assert that the response body is not empty
+                .andExpect(jsonPath("$").isNotEmpty());
     }
 
     @Test
@@ -40,7 +43,9 @@ public class DiskControllerTests {
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON
-               .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+               .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                // Assert that the response body is not empty
+                .andExpect(jsonPath("$[*]").isNotEmpty());
     }
 
     @Test
@@ -50,7 +55,9 @@ public class DiskControllerTests {
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON
-               .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+               .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                // Assert that the response body is not empty
+                .andExpect(jsonPath("$[*]").isNotEmpty());
     }
 
     @Test
@@ -60,20 +67,20 @@ public class DiskControllerTests {
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON
-               .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+               .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                // Assert that the response body is not empty
+                .andExpect(jsonPath("$[*]").isNotEmpty());
     }
 
-    //TODO: Alter test below with disk name parameter
-    /*
     @Test
     public void testGetDiskChartData() throws Exception {
+        //Define a disk name as a parameter for the chart endpoint
+        String diskName = "NVMe PC SN740 NVMe WD 512GB (Standard disk drives)";
         // Perform a GET request to /api/v1/disk/chart/{name}
-        mockMvc.perform(get("/api/v1/disk/chart/{name}"))
+        mockMvc.perform(get("/api/v1/disk/chart/{name}", diskName))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-               // Expect the content type to be JSON
-               .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+               .andExpect(status().isOk());
     } 
-     */
+     
 
 }

@@ -12,6 +12,7 @@ import com.process_monitor.processmonitor.ProcessMonitorApplication;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 /**
  * Class for testing all API endpoints for Memory Controller
@@ -30,7 +31,9 @@ public class MemoryControllerTests {
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON
-               .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+               .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                // Assert that the response body is not empty
+                .andExpect(jsonPath("$").isNotEmpty());
     }
 
     @Test
@@ -40,7 +43,9 @@ public class MemoryControllerTests {
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON
-               .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+               .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                // Assert that the response body is not empty
+                .andExpect(jsonPath("$[*]").isNotEmpty());
     }
 
     @Test
@@ -50,7 +55,9 @@ public class MemoryControllerTests {
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON
-               .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+               .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                // Assert that the response body is not empty
+                .andExpect(jsonPath("$[*]").isNotEmpty());
     }
 
     @Test
@@ -60,7 +67,9 @@ public class MemoryControllerTests {
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON
-               .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+               .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                // Assert that the response body is not empty
+                .andExpect(jsonPath("$[*]").isNotEmpty());
     }
 
     @Test
@@ -70,6 +79,8 @@ public class MemoryControllerTests {
                // Expect the status code 200 (OK)
                .andExpect(status().isOk())
                // Expect the content type to be JSON
-               .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+               .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                // Assert that the response body is not empty
+                .andExpect(jsonPath("$[*]").isNotEmpty());
     }
 }
