@@ -5,6 +5,10 @@ import { useNavigate } from 'react-router-dom';
 //Process class will be broken up into CpuProcesses, MemoryProcesses, and DiskProcesses
 //Depending on which "Top Processes" the user clicks, processes will be sorted by that metric
 
+const titleStyle = {
+  marginBottom: '3%'
+};
+
 const CpuProcesses = () => {
     
   const [cpuProcessData, setCpuProcessData] = useState({});
@@ -40,35 +44,35 @@ const CpuProcesses = () => {
 
 return (
   <div className="CpuProcesses">
-    <button onClick={goBack}>Back</button>
-      <h1>CPU Processes</h1>
+    <div className='processes-table-HEADER'>
+      <h1 className='detail-title' style={titleStyle}>Processes</h1>
+      <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+    </div>
       
-      <div>
-          <table className="processes-table">
-              <thead>
-                  <tr className='process-table-row'>
-                      <th> Name </th>
-                      <th> <Link to="/cpu-processes-asc"> CPU </Link> </th>
-                      <th> <Link to="/memory-processes"> Memory </Link> </th>
-                      <th> <Link to="/disk-processes"> Disk </Link> </th>
+    <table className="processes-table">
+        <thead>
+            <tr>
+                <th> Name </th>
+                <th className='table-sort-focus table-sort-link'> <Link to="/cpu-processes-asc"> CPU &#9207;</Link> </th>
+                <th className='table-sort-link'> <Link to="/memory-processes"> Memory </Link> </th>
+                <th className='table-sort-link'> <Link to="/disk-processes"> Disk </Link> </th>
+            </tr>
+        </thead>
+        <tbody>
+        {cpuProcessData.length > 0 ? (
+                cpuProcessData.map((process, index) => (
+                  <tr key={process.id}>
+                    <td>{process.name}</td>
+                    <td className='table-sort-focus'>{process.cpuPercentage.toFixed(1)}%</td>
+                    <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
+                    <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
                   </tr>
-              </thead>
-              <tbody>
-              {cpuProcessData.length > 0 ? (
-                      cpuProcessData.map((process, index) => (
-                        <tr key={process.id} className = "processes-row">
-                          <td>{process.name}</td>
-                          <td>{process.cpuPercentage.toFixed(1)}%</td>
-                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)}MB</td>
-                          <td>{(process.diskSpeed / 1000000).toFixed(1)}MB/s</td>
-                        </tr>
-                      ))
-                  ) : (
-                  <p>No data available</p>
-              )}
-              </tbody>
-          </table>
-      </div>
+                ))
+            ) : (
+            <p>No data available</p>
+        )}
+        </tbody>
+    </table>
   </div>
 );
 };
@@ -118,9 +122,9 @@ return (
               <thead>
                   <tr className='process-table-row'>
                       <th> Name </th>
-                      <th> <Link to="/cpu-processes"> CPU </Link> </th>
-                      <th> <Link to="/memory-processes"> Memory </Link> </th>
-                      <th> <Link to="/disk-processes"> Disk </Link> </th>
+                      <th className='table-sort-link table-sort-focus'> <Link to="/cpu-processes"> CPU &#9206; </Link> </th>
+                      <th className='table-sort-link'> <Link to="/memory-processes"> Memory </Link> </th>
+                      <th className='table-sort-link'> <Link to="/disk-processes"> Disk </Link> </th>
                   </tr>
               </thead>
               <tbody>
@@ -128,9 +132,9 @@ return (
                       cpuProcessData.map((process, index) => (
                         <tr key={process.id} className = "processes-row">
                           <td>{process.name}</td>
-                          <td>{process.cpuPercentage.toFixed(1)}%</td>
-                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)}MB</td>
-                          <td>{(process.diskSpeed / 1000000).toFixed(1)}MB/s</td>
+                          <td className='table-sort-focus'>{process.cpuPercentage.toFixed(1)}%</td>
+                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
+                          <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
                         </tr>
                       ))
                   ) : (
@@ -186,9 +190,9 @@ return (
               <thead>
                   <tr className='process-table-row'>
                       <th> Name </th>
-                      <th> <Link to="/cpu-processes"> CPU </Link> </th>
-                      <th> <Link to="/memory-processes-asc"> Memory </Link> </th>
-                      <th> <Link to="/disk-processes"> Disk </Link> </th>
+                      <th className='table-sort-link'> <Link to="/cpu-processes"> CPU </Link> </th>
+                      <th className='table-sort-link table-sort-focus'> <Link to="/memory-processes-asc"> Memory &#9207; </Link> </th>
+                      <th className='table-sort-link'> <Link to="/disk-processes"> Disk </Link> </th>
                   </tr>
               </thead>
               <tbody>
@@ -197,8 +201,8 @@ return (
                         <tr key={process.id} className = "processes-row">
                           <td>{process.name}</td>
                           <td>{process.cpuPercentage.toFixed(1)}%</td>
-                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)}MB</td>
-                          <td>{(process.diskSpeed / 1000000).toFixed(1)}MB/s</td>
+                          <td className='table-sort-focus'>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
+                          <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
                         </tr>
                       ))
                   ) : (
@@ -254,9 +258,9 @@ return (
               <thead>
                   <tr className='process-table-row'>
                       <th> Name </th>
-                      <th> <Link to="/cpu-processes"> CPU </Link> </th>
-                      <th> <Link to="/memory-processes"> Memory </Link> </th>
-                      <th> <Link to="/disk-processes"> Disk </Link> </th>
+                      <th className='table-sort-link'> <Link to="/cpu-processes"> CPU </Link> </th>
+                      <th className='table-sort-link table-sort-focus'> <Link to="/memory-processes"> Memory &#9206; </Link> </th>
+                      <th className='table-sort-link'> <Link to="/disk-processes"> Disk </Link> </th>
                   </tr>
               </thead>
               <tbody>
@@ -265,8 +269,8 @@ return (
                         <tr key={process.id} className = "processes-row">
                           <td>{process.name}</td>
                           <td>{process.cpuPercentage.toFixed(1)}%</td>
-                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)}MB</td>
-                          <td>{(process.diskSpeed / 1000000).toFixed(1)}MB/s</td>
+                          <td className='table-sort-focus'>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
+                          <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
                         </tr>
                       ))
                   ) : (
@@ -322,9 +326,9 @@ return (
               <thead>
                   <tr className='process-table-row'>
                       <th> Name </th>
-                      <th> <Link to="/cpu-processes"> CPU </Link> </th>
-                      <th> <Link to="/memory-processes"> Memory </Link> </th>
-                      <th> <Link to="/disk-processes-asc"> Disk </Link> </th>
+                      <th className='table-sort-link'> <Link to="/cpu-processes"> CPU </Link> </th>
+                      <th className='table-sort-link'> <Link to="/memory-processes"> Memory </Link> </th>
+                      <th className='table-sort-link table-sort-focus'> <Link to="/disk-processes-asc"> Disk &#9207; </Link> </th>
                   </tr>
               </thead>
               <tbody>
@@ -333,8 +337,8 @@ return (
                         <tr key={process.id} className = "processes-row">
                           <td>{process.name}</td>
                           <td>{process.cpuPercentage.toFixed(1)}%</td>
-                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)}MB</td>
-                          <td>{(process.diskSpeed / 1000000).toFixed(1)}MB/s</td>
+                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
+                          <td className='table-sort-focus'>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
                         </tr>
                       ))
                   ) : (
@@ -390,9 +394,9 @@ return (
               <thead>
                   <tr className='process-table-row'>
                       <th> Name </th>
-                      <th> <Link to="/cpu-processes"> CPU </Link> </th>
-                      <th> <Link to="/memory-processes"> Memory </Link> </th>
-                      <th> <Link to="/disk-processes"> Disk </Link> </th>
+                      <th className='table-sort-link'> <Link to="/cpu-processes"> CPU </Link> </th>
+                      <th className='table-sort-link'> <Link to="/memory-processes"> Memory </Link> </th>
+                      <th className='table-sort-link table-sort-focus'> <Link to="/disk-processes"> Disk &#9206; </Link> </th>
                   </tr>
               </thead>
               <tbody>
@@ -401,8 +405,8 @@ return (
                         <tr key={process.id} className = "processes-row">
                           <td>{process.name}</td>
                           <td>{process.cpuPercentage.toFixed(1)}%</td>
-                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)}MB</td>
-                          <td>{(process.diskSpeed / 1000000).toFixed(1)}MB/s</td>
+                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
+                          <td className='table-sort-focus'>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
                         </tr>
                       ))
                   ) : (

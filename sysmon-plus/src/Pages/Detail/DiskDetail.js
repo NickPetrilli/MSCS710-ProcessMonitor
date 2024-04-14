@@ -51,6 +51,7 @@ const DiskDetail = () => {
 
   const divStyle = {
     display: 'contents'
+
   };
 
   const buttonStyle = {
@@ -58,11 +59,9 @@ const DiskDetail = () => {
   };
 
   return (
-    <div className="section-Disk">
-      <Link to="/"> <button className="back-button" style={buttonStyle}> BACK </button> </Link>
-      
+    <div className="section-Disk">      
       <h1 className='detail-title'> Disk </h1>
-      <h4 className='section-title' style={divStyle}>{disks.length > 0 && (
+      <h4 className='detail-title'>{disks.length > 0 && (
         <select className='disk-selection-menu' onChange={handleDiskChange} value={selectedDiskName}>
           {disks.map((diskItem) => (
             <option className='disk-selection-option' key={diskItem.name} value={diskItem.name}>{diskItem.model} - {diskItem.name}</option>
@@ -79,9 +78,11 @@ const DiskDetail = () => {
 
             {/* Utilization / Top Processes Side */}
             <div className="utilandTopProc-sec-detail">
+            <Link to="/"> <button className="back-button"> &#10096; BACK </button> </Link>
+
               <div style={divStyle}>
                 {selectedDisk ? (
-                  <div className="utilBox-glance" style={{backgroundColor: selectedDisk.utilization < 40 ? 'green' : selectedDisk.utilization < 80 ? 'orange' : 'red'}}>
+                  <div className="utilBox-detail" style={{backgroundColor: selectedDisk.utilization < 40 ? 'green' : selectedDisk.utilization < 80 ? 'orange' : 'red'}}>
                     {Math.floor(selectedDisk.utilization)}% Utilization
                   </div>
                 ) : (
@@ -91,7 +92,7 @@ const DiskDetail = () => {
 
               <table className="detail-table">
                 <caption className='detail-table-TITLE'> Disk Info </caption>
-                <tbody>
+                <tbody> 
                   <tr>
                     <td> Read Speed: </td>
                     <td>{(selectedDisk.readSpeed / 1000).toFixed(1)} KB/s</td>

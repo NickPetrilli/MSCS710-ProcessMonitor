@@ -32,7 +32,7 @@ h4.detail-title {
 }
 
 hr {
-  height: 0.5rem;
+  height: 0.35rem;
   background-color: black;
 }
 
@@ -74,7 +74,7 @@ a {
   justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: black;
-  border-bottom: .25rem solid black;
+  border-bottom: .35rem solid black;
 }
 
 .app-bottom-line{
@@ -131,6 +131,22 @@ a {
   left: 58%;
 }
 
+.back-button-PROCESSES {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  font-size: 215%;
+  text-wrap: nowrap;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 2%;
+  font-weight: 600;
+
+  position: absolute;
+  top: 28%;
+  left: 73%;
+}
+
 .back-button:active {
   background-color: #004080;
 }
@@ -139,6 +155,8 @@ a {
   display: flex;
   /* flex-wrap: wrap; Allow items to wrap to the next line if needed */
   /* justify-content: space-between; Space items out evenly across the main axis */
+
+  margin-bottom: -0.5rem;
 }
 
 .glance-row {
@@ -178,9 +196,12 @@ a {
   padding: 5%; /* Add margin between sections */
 }
 
+.section-Cpu {
+  border-right: .35rem solid black;
+}
+
 .section-Cpu, .section-Mem {
   flex: 1;
-  border-right: .25rem solid black;
   max-width: 100%;
   max-height: 100%;
 }
@@ -235,7 +256,7 @@ a {
   padding: '5%';
 }
 
-.top-processes-table-TITLE {
+.top-processes-table caption {
   background-color: white;
   caption-side: top;
 
@@ -245,16 +266,22 @@ a {
   /* position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
 
-  padding-top: 2%; */
+  padding-top: 2%;
 
 }
 
 .top-processes-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
   font-weight: bold;
 
   table-layout: fixed;
+
+  width: 110%;
 
   margin-top: -20%;
   background-color: white;
@@ -274,19 +301,22 @@ a {
   padding-bottom: 2%;
 }
 
-.top-processes-table-row {
+.top-processes-table tbody tr {
   font-weight: normal;
   display: flexbox;
 }
 
-.top-processes-table-proc {
-  flex: 0;
-  /* text-indent: 5%; */
+.top-processes-table tbody td {
+  padding-top: 1%;
+  white-space: nowrap;
 }
 
-.top-processes-table-util {
-  flex: 1;
-  white-space: nowrap;
+.top-processes-table tbody td:first-child {
+  padding-left: 2%;
+}
+
+.top-processes-table tbody td:last-child {
+  padding-right: 2%;
 }
 
 .disk-selection-menu {
@@ -304,21 +334,72 @@ a {
   font-weight: bold;
 }
 
+.processes-table-HEADER {
+  display: flex;
+}
+
 .processes-table {
   background-color: white;
-  /* border-bottom: .1rem solid black;
+  border: .1rem solid black;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 70%;
+
+  table-layout: fixed;
+  border-collapse: collapse;
+
+  position: static;
+
+}
+
+.processes-table thead th, .processes-table tbody td {
   border-left: .1rem solid black;
-  border-right: .1rem solid black; */
+  border-right: .1rem solid black;
 }
 
-.processes-table-row {
-  display: flex;
-  outline: auto;
+.processes-table thead {
+  border-bottom: .1rem solid black;
 }
 
-/* .utilBox, .top-processes-table-TITLE, .top-processes-table, .top-processes-table-row {
-  flex-grow: 1;
-} */
+.processes-table thead th {
+  font-size: 1.4rem;
+  padding-bottom: 1%;
+  padding-top: 1%;
+}
+
+.processes-table thead th:first-child {
+  text-align: left;
+  padding-left: 5%;
+}
+
+.processes-table tbody td {
+  font-size: 1rem;
+  padding-top: 1%;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.processes-table tbody td:first-child {
+  padding-left: 5%;
+  text-align: left;
+}
+
+.table-sort-link:hover {
+  background-color: grey;
+  /* transition: 0.15s; */
+}
+
+.table-sort-focus {
+  background-color: lightgrey;
+}
+
 
 .glance-table {
   margin-top: 10%;
