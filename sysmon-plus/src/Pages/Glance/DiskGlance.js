@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import DiskLineChartFromAPI from '../../Charts/DiskLineChartFromAPI';
 
 const DiskSection = () => {
+
+  const MAX_PROC_LENGTH = 7;
+
   const [disks, setDisks] = useState([]);
   const [selectedDiskName, setSelectedDiskName] = useState('');
   const [topProcesses, setTopProcesses] = useState([]);
@@ -62,6 +65,15 @@ const DiskSection = () => {
   const selectedDisk = useMemo(() => disks.find(disk => disk.name === selectedDiskName), [disks, selectedDiskName]);
   console.log('Selected disk details:', selectedDisk); // Debugging
 
+  
+  function truncateString(str, maxLength) {
+    if (str.length <= maxLength) {
+      return str;
+    } else {
+      return str.substring(0, maxLength + 1) + '...';
+    }
+  }
+  
   return (
     <div className="section-Disk">
       <div className='section-Disk-TITLE'>
@@ -105,7 +117,7 @@ const DiskSection = () => {
               {topProcesses.length > 0 ? (
                 topProcesses.map((item) => (
                   <tr key={item.id} className="top-processes-table-row">
-                    <td>{item.name}</td>
+                    <td>{truncateString(item.name, MAX_PROC_LENGTH)}</td>
                     <td>{(item.diskSpeed / 1000000).toFixed(1)} MB/s</td>
                   </tr>
                 ))
