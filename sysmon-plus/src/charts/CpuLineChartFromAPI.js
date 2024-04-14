@@ -6,7 +6,7 @@ import { Chart, CategoryScale, PointElement, LineElement, Tooltip, Legend, Fille
 Chart.register(CategoryScale, PointElement, LineElement, Tooltip, Legend, Filler);
 
 
-const CpuLineChartFromAPI = (view) => {
+const CpuLineChartFromAPI = ({view}) => {
   const [chartData, setChartData] = useState(null);
 
   const chartOptions = {
