@@ -74,6 +74,7 @@ const MemSection = () => {
   return (
     <div className="section-Mem">
       <Link to="/memory-detail"> <h1 className='section-title'> Memory </h1> </Link> 
+      <h4 className='section-title'></h4>
 
       <div>
         {/* Graph side */}
