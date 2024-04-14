@@ -54,15 +54,13 @@ const CpuDetail = () => {
 
   return (
     <div className="section-Cpu">
-      
-
       <h1 className='detail-title'> CPU </h1>
       <h4 className='detail-title'>{jsonData.name}</h4>
 
       <div>
         {/* Graph side */}
         <div className="detail-row">
-          <CpuLineChartFromAPI view="detail"/>
+          {<CpuLineChartFromAPI view="detail" />}
 
           {/* Utilization / Top Processes Side */}
           <div className="utilandTopProc-sec-detail">

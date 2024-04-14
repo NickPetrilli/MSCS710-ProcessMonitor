@@ -55,17 +55,18 @@ const MemoryDetail = () => {
 
   return (
     <div className="section-Mem">
-      <Link to="/"> <button className="back-button" style={buttonStyle}> BACK </button> </Link>
-      
       <h1 className='detail-title'> Memory </h1>
+      <h4 className='detail-title'></h4>
 
       <div>
         {/* Graph side */}
         <div className="detail-row">
-          <MemoryLineChartFromAPI view='detail'/>
+          {<MemoryLineChartFromAPI view='detail' />}
 
           {/* Utilization / Top Processes Side */}
           <div className="utilandTopProc-sec-detail">
+            <Link to="/"> <button className="back-button"> &#10096; BACK </button> </Link>
+
             <div style={divStyle}>
               <div className="utilBox-detail" style={{ backgroundColor }}> {util}% Utilization </div>
             </div>
