@@ -38,9 +38,6 @@ const CpuProcesses = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const goBack = () => {
-    navigate(-1);
-  };
 
 return (
   <div className="CpuProcesses">
@@ -114,35 +111,37 @@ const CpuProcessesAscending = () => {
 
 return (
   <div className="CpuProcessesAscending">
-    <button onClick={goBack}>Back</button>
-      <h1>CPU Processes</h1>
+    <div className='processes-table-HEADER'>
+      <h1 className='detail-title' style={titleStyle}>Processes</h1>
+      <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+    </div>
       
-      <div>
-          <table className="processes-table">
-              <thead>
-                  <tr className='process-table-row'>
-                      <th> Name </th>
-                      <th className='table-sort-link table-sort-focus'> <Link to="/cpu-processes"> CPU &#9206; </Link> </th>
-                      <th className='table-sort-link'> <Link to="/memory-processes"> Memory </Link> </th>
-                      <th className='table-sort-link'> <Link to="/disk-processes"> Disk </Link> </th>
-                  </tr>
-              </thead>
-              <tbody>
-              {cpuProcessData.length > 0 ? (
-                      cpuProcessData.map((process, index) => (
-                        <tr key={process.id} className = "processes-row">
-                          <td>{process.name}</td>
-                          <td className='table-sort-focus'>{process.cpuPercentage.toFixed(1)}%</td>
-                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
-                          <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
-                        </tr>
-                      ))
-                  ) : (
-                  <p>No data available</p>
-              )}
-              </tbody>
-          </table>
-      </div>
+    <div>
+        <table className="processes-table">
+            <thead>
+                <tr className='process-table-row'>
+                    <th> Name </th>
+                    <th className='table-sort-link table-sort-focus'> <Link to="/cpu-processes"> CPU &#9206; </Link> </th>
+                    <th className='table-sort-link'> <Link to="/memory-processes"> Memory </Link> </th>
+                    <th className='table-sort-link'> <Link to="/disk-processes"> Disk </Link> </th>
+                </tr>
+            </thead>
+            <tbody>
+            {cpuProcessData.length > 0 ? (
+                    cpuProcessData.map((process, index) => (
+                      <tr key={process.id} className = "processes-row">
+                        <td>{process.name}</td>
+                        <td className='table-sort-focus'>{process.cpuPercentage.toFixed(1)}%</td>
+                        <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
+                        <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
+                      </tr>
+                    ))
+                ) : (
+                <p>No data available</p>
+            )}
+            </tbody>
+        </table>
+    </div>
   </div>
 );
 };
@@ -182,35 +181,37 @@ const MemoryProcesses = () => {
 
 return (
   <div className="MemoryProcesses">
-    <button onClick={goBack}>Back</button>
-      <h1>Memory Processes</h1>
+    <div className='processes-table-HEADER'>
+      <h1 className='detail-title' style={titleStyle}>Processes</h1>
+      <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+    </div>
       
-      <div>
-          <table className="processes-table">
-              <thead>
-                  <tr className='process-table-row'>
-                      <th> Name </th>
-                      <th className='table-sort-link'> <Link to="/cpu-processes"> CPU </Link> </th>
-                      <th className='table-sort-link table-sort-focus'> <Link to="/memory-processes-asc"> Memory &#9207; </Link> </th>
-                      <th className='table-sort-link'> <Link to="/disk-processes"> Disk </Link> </th>
-                  </tr>
-              </thead>
-              <tbody>
-              {memProcessData.length > 0 ? (
-                      memProcessData.map((process, index) => (
-                        <tr key={process.id} className = "processes-row">
-                          <td>{process.name}</td>
-                          <td>{process.cpuPercentage.toFixed(1)}%</td>
-                          <td className='table-sort-focus'>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
-                          <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
-                        </tr>
-                      ))
-                  ) : (
-                  <p>No data available</p>
-              )}
-              </tbody>
-          </table>
-      </div>
+    <div>
+        <table className="processes-table">
+            <thead>
+                <tr className='process-table-row'>
+                    <th> Name </th>
+                    <th className='table-sort-link'> <Link to="/cpu-processes"> CPU </Link> </th>
+                    <th className='table-sort-link table-sort-focus'> <Link to="/memory-processes-asc"> Memory &#9207; </Link> </th>
+                    <th className='table-sort-link'> <Link to="/disk-processes"> Disk </Link> </th>
+                </tr>
+            </thead>
+            <tbody>
+            {memProcessData.length > 0 ? (
+                    memProcessData.map((process, index) => (
+                      <tr key={process.id} className = "processes-row">
+                        <td>{process.name}</td>
+                        <td>{process.cpuPercentage.toFixed(1)}%</td>
+                        <td className='table-sort-focus'>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
+                        <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
+                      </tr>
+                    ))
+                ) : (
+                <p>No data available</p>
+            )}
+            </tbody>
+        </table>
+    </div>
   </div>
 );
 };
@@ -250,35 +251,37 @@ const MemoryProcessesAscending = () => {
 
 return (
   <div className="MemoryProcessesAscending">
-    <button onClick={goBack}>Back</button>
-      <h1>Memory Processes</h1>
-      
-      <div>
-          <table className="processes-table">
-              <thead>
-                  <tr className='process-table-row'>
-                      <th> Name </th>
-                      <th className='table-sort-link'> <Link to="/cpu-processes"> CPU </Link> </th>
-                      <th className='table-sort-link table-sort-focus'> <Link to="/memory-processes"> Memory &#9206; </Link> </th>
-                      <th className='table-sort-link'> <Link to="/disk-processes"> Disk </Link> </th>
-                  </tr>
-              </thead>
-              <tbody>
-              {memProcessData.length > 0 ? (
-                      memProcessData.map((process, index) => (
-                        <tr key={process.id} className = "processes-row">
-                          <td>{process.name}</td>
-                          <td>{process.cpuPercentage.toFixed(1)}%</td>
-                          <td className='table-sort-focus'>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
-                          <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
-                        </tr>
-                      ))
-                  ) : (
-                  <p>No data available</p>
-              )}
-              </tbody>
-          </table>
-      </div>
+    <div className='processes-table-HEADER'>
+      <h1 className='detail-title' style={titleStyle}>Processes</h1>
+      <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+    </div>
+
+    <div>
+        <table className="processes-table">
+            <thead>
+                <tr className='process-table-row'>
+                    <th> Name </th>
+                    <th className='table-sort-link'> <Link to="/cpu-processes"> CPU </Link> </th>
+                    <th className='table-sort-link table-sort-focus'> <Link to="/memory-processes"> Memory &#9206; </Link> </th>
+                    <th className='table-sort-link'> <Link to="/disk-processes"> Disk </Link> </th>
+                </tr>
+            </thead>
+            <tbody>
+            {memProcessData.length > 0 ? (
+                    memProcessData.map((process, index) => (
+                      <tr key={process.id} className = "processes-row">
+                        <td>{process.name}</td>
+                        <td>{process.cpuPercentage.toFixed(1)}%</td>
+                        <td className='table-sort-focus'>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
+                        <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
+                      </tr>
+                    ))
+                ) : (
+                <p>No data available</p>
+            )}
+            </tbody>
+        </table>
+    </div>
   </div>
 );
 };
@@ -318,35 +321,37 @@ const DiskProcesses = () => {
 
 return (
   <div className="DiskProcesses">
-    <button onClick={goBack}>Back</button>
-      <h1>Disk Processes</h1>
+    <div className='processes-table-HEADER'>
+      <h1 className='detail-title' style={titleStyle}>Processes</h1>
+      <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+    </div>
       
-      <div>
-          <table className="processes-table">
-              <thead>
-                  <tr className='process-table-row'>
-                      <th> Name </th>
-                      <th className='table-sort-link'> <Link to="/cpu-processes"> CPU </Link> </th>
-                      <th className='table-sort-link'> <Link to="/memory-processes"> Memory </Link> </th>
-                      <th className='table-sort-link table-sort-focus'> <Link to="/disk-processes-asc"> Disk &#9207; </Link> </th>
-                  </tr>
-              </thead>
-              <tbody>
-              {diskProcessData.length > 0 ? (
-                      diskProcessData.map((process, index) => (
-                        <tr key={process.id} className = "processes-row">
-                          <td>{process.name}</td>
-                          <td>{process.cpuPercentage.toFixed(1)}%</td>
-                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
-                          <td className='table-sort-focus'>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
-                        </tr>
-                      ))
-                  ) : (
-                  <p>No data available</p>
-              )}
-              </tbody>
-          </table>
-      </div>
+    <div>
+        <table className="processes-table">
+            <thead>
+                <tr className='process-table-row'>
+                    <th> Name </th>
+                    <th className='table-sort-link'> <Link to="/cpu-processes"> CPU </Link> </th>
+                    <th className='table-sort-link'> <Link to="/memory-processes"> Memory </Link> </th>
+                    <th className='table-sort-link table-sort-focus'> <Link to="/disk-processes-asc"> Disk &#9207; </Link> </th>
+                </tr>
+            </thead>
+            <tbody>
+            {diskProcessData.length > 0 ? (
+                    diskProcessData.map((process, index) => (
+                      <tr key={process.id} className = "processes-row">
+                        <td>{process.name}</td>
+                        <td>{process.cpuPercentage.toFixed(1)}%</td>
+                        <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
+                        <td className='table-sort-focus'>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
+                      </tr>
+                    ))
+                ) : (
+                <p>No data available</p>
+            )}
+            </tbody>
+        </table>
+    </div>
   </div>
 );
 };
@@ -386,35 +391,37 @@ const DiskProcessesAscending = () => {
 
 return (
   <div className="DiskProcessesAscending">
-    <button onClick={goBack}>Back</button>
-      <h1>Disk Processes</h1>
+    <div className='processes-table-HEADER'>
+      <h1 className='detail-title' style={titleStyle}>Processes</h1>
+      <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+    </div>
       
-      <div>
-          <table className="processes-table">
-              <thead>
-                  <tr className='process-table-row'>
-                      <th> Name </th>
-                      <th className='table-sort-link'> <Link to="/cpu-processes"> CPU </Link> </th>
-                      <th className='table-sort-link'> <Link to="/memory-processes"> Memory </Link> </th>
-                      <th className='table-sort-link table-sort-focus'> <Link to="/disk-processes"> Disk &#9206; </Link> </th>
-                  </tr>
-              </thead>
-              <tbody>
-              {diskProcessData.length > 0 ? (
-                      diskProcessData.map((process, index) => (
-                        <tr key={process.id} className = "processes-row">
-                          <td>{process.name}</td>
-                          <td>{process.cpuPercentage.toFixed(1)}%</td>
-                          <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
-                          <td className='table-sort-focus'>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
-                        </tr>
-                      ))
-                  ) : (
-                  <p>No data available</p>
-              )}
-              </tbody>
-          </table>
-      </div>
+    <div>
+        <table className="processes-table">
+            <thead>
+                <tr className='process-table-row'>
+                    <th> Name </th>
+                    <th className='table-sort-link'> <Link to="/cpu-processes"> CPU </Link> </th>
+                    <th className='table-sort-link'> <Link to="/memory-processes"> Memory </Link> </th>
+                    <th className='table-sort-link table-sort-focus'> <Link to="/disk-processes"> Disk &#9206; </Link> </th>
+                </tr>
+            </thead>
+            <tbody>
+            {diskProcessData.length > 0 ? (
+                    diskProcessData.map((process, index) => (
+                      <tr key={process.id} className = "processes-row">
+                        <td>{process.name}</td>
+                        <td>{process.cpuPercentage.toFixed(1)}%</td>
+                        <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
+                        <td className='table-sort-focus'>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
+                      </tr>
+                    ))
+                ) : (
+                <p>No data available</p>
+            )}
+            </tbody>
+        </table>
+    </div>
   </div>
 );
 };
@@ -448,34 +455,37 @@ const Processes = () => {
 
   return (
     <div className="Processes">
-        <h1>Processes</h1>
+      <div className='processes-table-HEADER'>
+        <h1 className='detail-title' style={titleStyle}>Processes</h1>
+        <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+      </div>
         
-        <div>
-            <table className="processes-table">
-                <thead>
-                    <tr className='process-table-row'>
-                        <th> Name </th>
-                        <th> CPU </th>
-                        <th> Memory </th>
-                        <th> Disk </th>
-                    </tr>
-                </thead>
-                <tbody>
-                {jsonData.length > 0 ? (
-                        jsonData.map((jsonData, index) => (
-                          <tr key={jsonData.id} className = "processes-row">
-                            <td>{jsonData.name}</td>
-                            <td>{jsonData.cpuPercentage.toFixed(1)}%</td>
-                            <td>{(jsonData.memoryUsageBytes / 1000000).toFixed(1)}MB</td>
-                            <td>{(jsonData.diskSpeed / 1000000).toFixed(1)}MB/s</td>
-                          </tr>
-                        ))
-                    ) : (
-                    <p>No data available</p>
-                )}
-                </tbody>
-            </table>
-        </div>
+      <div>
+          <table className="processes-table">
+              <thead>
+                  <tr className='process-table-row'>
+                      <th> Name </th>
+                      <th> CPU </th>
+                      <th> Memory </th>
+                      <th> Disk </th>
+                  </tr>
+              </thead>
+              <tbody>
+              {jsonData.length > 0 ? (
+                      jsonData.map((jsonData, index) => (
+                        <tr key={jsonData.id} className = "processes-row">
+                          <td>{jsonData.name}</td>
+                          <td>{jsonData.cpuPercentage.toFixed(1)}%</td>
+                          <td>{(jsonData.memoryUsageBytes / 1000000).toFixed(1)}MB</td>
+                          <td>{(jsonData.diskSpeed / 1000000).toFixed(1)}MB/s</td>
+                        </tr>
+                      ))
+                  ) : (
+                  <p>No data available</p>
+              )}
+              </tbody>
+          </table>
+      </div>
     </div>
   );
 };

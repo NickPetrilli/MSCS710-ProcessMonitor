@@ -64,7 +64,7 @@ public class CpuCollector {
      * Gets the amount of physical processors on this CPU
      * @return the amount of cores
      */
-    public int getCoreCount() {
+    public static int getCoreCount() {
         return processor.getPhysicalProcessorCount();
     }
 
@@ -101,7 +101,7 @@ public class CpuCollector {
      * utilization during the time interval.
      * @return the system cpu utilization
      */
-    public double getCpuUtilization() {
+    public static double getCpuUtilization() {
         // Initial measurement
         long[] oldTicks = processor.getSystemCpuLoadTicks();
         //long[][] oldProcTicks = processor.getProcessorCpuLoadTicks();

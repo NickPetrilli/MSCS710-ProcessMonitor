@@ -29,6 +29,9 @@ public class ProcessCollector {
     private final SystemInfo systemInfo = new SystemInfo();
     private final OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
     private final List<OSProcess> allOSProcesses = operatingSystem.getProcesses();
+    // private double cpUsage = CpuCollector.getCpuUtilization();
+    // private int cpuCores = CpuCollector.getCoreCount();
+    // private int cpuLogical = CpuCollector.getLogicalProcessorCount();
     private double totalDiskUsagePercentage = 0.0;
     private double totalCpuUsagePercentage = 0.0;
 
@@ -66,6 +69,9 @@ public class ProcessCollector {
         for (OSProcess process : allOSProcesses) {
             initReads.add(process.getBytesRead());
             initWrites.add(process.getBytesWritten());
+
+            // double procCpUsage = 0.0d;
+            cpuUsages.add(process.getProcessCpuLoadBetweenTicks(process) * 100);
         }
 
         try {
@@ -83,6 +89,7 @@ public class ProcessCollector {
             OSProcess proc = procIterator.next();
 
             try {
+
                 if (!proc.updateAttributes()) {System.out.println("Process info update FAIL: " + proc.getName());}
             }
 
@@ -103,7 +110,7 @@ public class ProcessCollector {
             if (process.getName().equals("Idle")) {
                 continue;
             }
-            cpuUsages.add(process.getProcessCpuLoadCumulative() * 100);
+            // cpuUsages.add(process.getProcessCpuLoadCumulative() * 100);
 
             MemoryCollector memoryCollector = new MemoryCollector();
             long memUsage = process.getResidentSetSize();
