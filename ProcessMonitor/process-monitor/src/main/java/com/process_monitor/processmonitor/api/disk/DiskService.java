@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.process_monitor.processmonitor.api.process.model.Process;
 import com.process_monitor.processmonitor.api.util.ChartData;
+import com.process_monitor.processmonitor.api.util.DiskAverages;
 import com.process_monitor.processmonitor.api.util.DiskChartData;
 
 import org.slf4j.Logger;
@@ -258,4 +259,181 @@ public class DiskService {
 
         return diskChartList.isEmpty() ? null : diskChartList;
     }
+
+    /**
+     * Retrieves average disk read/write speeds in the past 15 minutes
+     * @return DiskAverages object containing average read and write speed
+     */
+    public DiskAverages getAverageSpeeds15Min() {
+         DiskAverages averageReadWriteSpeeds = new DiskAverages();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+                String sql = """
+                    SELECT AVG(readSpeed) as average_readSpeed, AVG(writeSpeed) as average_writeSpeed
+                    FROM disk
+                    WHERE timestamp >= datetime('now', '-15 minute');
+                    """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageReadWriteSpeeds.setAverageReadSpeed(resultSet.getLong("average_readSpeed"));
+                averageReadWriteSpeeds.setAverageWriteSpeed(resultSet.getLong("average_writeSpeed"));
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting disk average speeds in past 15 minutes");
+        }
+
+        return averageReadWriteSpeeds == null ? null : averageReadWriteSpeeds;
+    }
+
+    /**
+     * Retrieves average disk read/write speeds in the past 1 hour
+     * @return DiskAverages object containing average read and write speed
+     */
+    public DiskAverages getAverageSpeeds1Hour() {
+        DiskAverages averageReadWriteSpeeds = new DiskAverages();
+
+       try (Connection connection = DriverManager.getConnection(URL);
+            Statement statement = connection.createStatement()) {
+
+               String sql = """
+                   SELECT AVG(readSpeed) as average_readSpeed, AVG(writeSpeed) as average_writeSpeed
+                   FROM disk
+                   WHERE timestamp >= datetime('now', '-1 hour');
+                   """;
+
+           resultSet = statement.executeQuery(sql);
+
+           while (resultSet.next()) {
+               averageReadWriteSpeeds.setAverageReadSpeed(resultSet.getLong("average_readSpeed"));
+               averageReadWriteSpeeds.setAverageWriteSpeed(resultSet.getLong("average_writeSpeed"));
+           }
+
+       } catch (SQLException e) {
+           logger.error("Error while getting disk average speeds in past 1 hour");
+       }
+
+       return averageReadWriteSpeeds == null ? null : averageReadWriteSpeeds;
+   }
+
+    /**
+     * Retrieves average disk read/write speeds in the past 24 hours
+     * @return DiskAverages object containing average read and write speed
+     */
+    public DiskAverages getAverageSpeeds24Hours() {
+        DiskAverages averageReadWriteSpeeds = new DiskAverages();
+
+       try (Connection connection = DriverManager.getConnection(URL);
+            Statement statement = connection.createStatement()) {
+
+               String sql = """
+                   SELECT AVG(readSpeed) as average_readSpeed, AVG(writeSpeed) as average_writeSpeed
+                   FROM disk
+                   WHERE timestamp >= datetime('now', '-24 hour');
+                   """;
+
+           resultSet = statement.executeQuery(sql);
+
+           while (resultSet.next()) {
+               averageReadWriteSpeeds.setAverageReadSpeed(resultSet.getLong("average_readSpeed"));
+               averageReadWriteSpeeds.setAverageWriteSpeed(resultSet.getLong("average_writeSpeed"));
+           }
+
+       } catch (SQLException e) {
+           logger.error("Error while getting disk average speeds in past 24 hours");
+       }
+
+       return averageReadWriteSpeeds == null ? null : averageReadWriteSpeeds;
+   }
+
+    /**
+     * Retrieves average disk utilization in the past 15 minutes
+     * @return average disk utilization
+     */
+    public Double getAverageUtilization15Min() {
+        Double averageUtilization = 0.0;
+
+       try (Connection connection = DriverManager.getConnection(URL);
+            Statement statement = connection.createStatement()) {
+
+               String sql = """
+                   SELECT AVG(utilization) as average_utilization
+                   FROM disk
+                   WHERE timestamp >= datetime('now', '-15 minute');
+                   """;
+
+           resultSet = statement.executeQuery(sql);
+
+           while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+           }
+
+       } catch (SQLException e) {
+           logger.error("Error while getting disk average utilization in past 15 minutes");
+       }
+
+       return averageUtilization == 0.0 ? null : averageUtilization;
+   }
+
+    /**
+     * Retrieves average disk utilization in the past 1 hour
+     * @return average disk utilization
+     */
+    public Double getAverageUtilization1Hour() {
+        Double averageUtilization = 0.0;
+
+       try (Connection connection = DriverManager.getConnection(URL);
+            Statement statement = connection.createStatement()) {
+
+               String sql = """
+                   SELECT AVG(utilization) as average_utilization
+                   FROM disk
+                   WHERE timestamp >= datetime('now', '-1 hour');
+                   """;
+
+           resultSet = statement.executeQuery(sql);
+
+           while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+           }
+
+       } catch (SQLException e) {
+           logger.error("Error while getting disk average utiliation in past 1 hour");
+       }
+
+       return averageUtilization == 0.0 ? null : averageUtilization;
+   }
+
+    /**
+     * Retrieves average disk utilization in the past 24 hours
+     * @return average disk utilization
+     */
+    public Double getAverageUtilization24Hours() {
+        Double averageUtilization = 0.0;
+
+       try (Connection connection = DriverManager.getConnection(URL);
+            Statement statement = connection.createStatement()) {
+
+               String sql = """
+                   SELECT AVG(utilization) as average_utilization
+                   FROM disk
+                   WHERE timestamp >= datetime('now', '-24 hour');
+                   """;
+
+           resultSet = statement.executeQuery(sql);
+
+           while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+           }
+
+       } catch (SQLException e) {
+           logger.error("Error while getting disk average utilization in past 24 hours");
+       }
+
+       return averageUtilization == 0.0 ? null : averageUtilization;
+   }
 }

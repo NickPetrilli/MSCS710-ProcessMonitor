@@ -3,6 +3,7 @@ package com.process_monitor.processmonitor.api.disk;
 import java.util.List;
 
 import com.process_monitor.processmonitor.api.util.ChartData;
+import com.process_monitor.processmonitor.api.util.DiskAverages;
 import com.process_monitor.processmonitor.api.util.DiskChartData;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,17 +66,6 @@ public class DiskController {
         return diskService.getProcessesByDiskUsageAsc();
     }
 
-
-    /**
-     * GET Request endpoint to handle getting disk chart metrics.
-     * @param name Disk name
-     * @return List of utilization metrics
-     */
-    // @GetMapping(path = "chart/{name}")
-    // public List<ChartData> getChartUtilizationMetrics(@PathVariable("name") String name) {
-    //     return diskService.getUtilizationMetrics(name);
-    // }
-
     /**
      * GET Request endpoint to handle getting disk chart metrics.
      * @param name Disk name
@@ -84,5 +74,59 @@ public class DiskController {
     @GetMapping(path = "chart/{name}")
     public List<DiskChartData> getChartMetrics(@PathVariable("name") String name) {
         return diskService.getChartMetrics(name);
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average speeds in past 15 minutes
+     * @return DiskAverages object containing average read and write speed
+     */
+    @GetMapping(path = "avg-speeds-15min")
+    public DiskAverages getAverageSpeeds15Min() {
+        return diskService.getAverageSpeeds15Min();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average speeds in past 1 hour
+     * @return DiskAverages object containing average read and write speed
+     */
+    @GetMapping(path = "avg-speeds-1hour")
+    public DiskAverages getAverageSpeeds1Hour() {
+        return diskService.getAverageSpeeds1Hour();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average speeds in past 24 hours
+     * @return DiskAverages object containing average read and write speed
+     */
+    @GetMapping(path = "avg-speeds-24hour")
+    public DiskAverages getAverageSpeeds24Hours() {
+        return diskService.getAverageSpeeds24Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average utilization in past 15 minutes
+     * @return disk average utilization
+     */
+    @GetMapping(path = "avg-util-15min")
+    public Double getAverageUtilization15Min() {
+        return diskService.getAverageUtilization15Min();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average utilization in past 1 hour
+     * @return disk average utilization
+     */
+    @GetMapping(path = "avg-util-1hour")
+    public Double getAverageUtilization1Hour() {
+        return diskService.getAverageUtilization1Hour();
+    }
+    
+    /**
+     * GET Request endpoint to handle getting disk average utilization in past 24 hours
+     * @return disk average utilization
+     */
+    @GetMapping(path = "avg-util-24hour")
+    public Double getAverageUtilization24Hours() {
+        return diskService.getAverageUtilization24Hours();
     }
 }
