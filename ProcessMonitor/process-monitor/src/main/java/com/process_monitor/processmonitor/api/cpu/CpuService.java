@@ -242,4 +242,97 @@ public class CpuService {
 
         return chartList.isEmpty() ? null : chartList;
     }
+
+    /**
+     * Retrieves average CPU utilization for the past 15 minutes.
+     * @return average cpu utilization
+     */
+    public Double getAverageUtilization15Min() {
+        Double averageUtilization = 0.0;
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                        SELECT 
+                            AVG(utilization) as average_utilization
+                        FROM 
+                            cpu
+                        WHERE timestamp >= datetime('now', '-15 minute');
+                             """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting cpu average utilization in past 15 minutes.");
+        }
+
+        return averageUtilization == 0.0 ? null : averageUtilization;
+    }
+
+    /**
+     * Retrieves average CPU utilization for the past 1 hour.
+     * @return average cpu utilization
+     */
+    public Double getAverageUtilization1Hour() {
+        Double averageUtilization = 0.0;
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                        SELECT 
+                            AVG(utilization) as average_utilization
+                        FROM 
+                            cpu
+                        WHERE timestamp >= datetime('now', '-1 hour');
+                             """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting cpu average utilization in past hour.");
+        }
+
+        return averageUtilization == 0.0 ? null : averageUtilization;
+    }
+
+    /**
+     * Retrieves average CPU utilization for the past 24 hours.
+     * @return average cpu utilization
+     */
+    public Double getAverageUtilization24Hours() {
+        Double averageUtilization = 0.0;
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                        SELECT 
+                            AVG(utilization) as average_utilization
+                        FROM 
+                            cpu
+                        WHERE timestamp >= datetime('now', '-24 hour');
+                             """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting cpu average utilization in past 24 hours.");
+        }
+
+        return averageUtilization == 0.0 ? null : averageUtilization;
+    }
 }

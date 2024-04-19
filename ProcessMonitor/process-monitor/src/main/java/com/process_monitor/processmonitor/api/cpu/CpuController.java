@@ -68,4 +68,30 @@ public class CpuController {
         return cpuService.getUtilizationMetrics();
     }
 
+    /**
+     * GET Request endpoint to handle getting CPU average utilization in the past 15 min
+     * @return average cpu utilization
+     */
+    @GetMapping(path = "avg-util-15min")
+    public Double getAverageUtilization15Min() {
+        return cpuService.getAverageUtilization15Min();
+    }
+
+    /**
+     * GET Request endpoint to handle getting CPU average utilization in the past hour
+     * @return average cpu utilization
+     */
+    @GetMapping(path = "avg-util-1hour")
+    public Double getAverageUtilization1Hour() {
+        return cpuService.getAverageUtilization1Hour();
+    }
+
+    /**
+     * GET Request endpoint to handle getting CPU average utilization in the past 24 hours
+     * @return average cpu utilization
+     */
+    @GetMapping(path = "avg-util-24hour")
+    public Double getAverageUtilization24Hours() {
+        return cpuService.getAverageUtilization24Hours();
+    }
 }
