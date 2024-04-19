@@ -58,7 +58,6 @@ public class MemoryController {
         return memoryService.getProcessesByMemoryUsageAsc();
     }
 
-
     /**
      * GET Request endpoint to handle getting Memory chart metrics
      * @return List of utilization metrics
@@ -66,6 +65,33 @@ public class MemoryController {
     @GetMapping(path = "chart")
     public List<ChartData> getChartUtilizationMetrics() {
         return memoryService.getUtilizationMetrics();
+    }
+
+    /**
+     * GET Request endpoint to handle getting Memory average utilization in past 15 min
+     * @return average memory utilization
+     */
+    @GetMapping(path = "avg-util-15min")
+    public Double getAverageUtilization15Min() {
+        return memoryService.getAverageUtilization15Min();
+    }
+
+    /**
+     * GET Request endpoint to handle getting Memory average utilization in past 1 hour
+     * @return average memory utilization
+     */
+    @GetMapping(path = "avg-util-1hour")
+    public Double getAverageUtilization1Hour() {
+        return memoryService.getAverageUtilization1Hour();
+    }
+
+    /**
+     * GET Request endpoint to handle getting Memory average utilization in past 24 hours
+     * @return average memory utilization
+     */
+    @GetMapping(path = "avg-util-24hour")
+    public Double getAverageUtilization24Hours() {
+        return memoryService.getAverageUtilization24Hours();
     }
 
 }

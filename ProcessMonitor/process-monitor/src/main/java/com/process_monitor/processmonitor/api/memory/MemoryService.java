@@ -264,4 +264,91 @@ public class MemoryService {
 
         return chartList.isEmpty() ? null : chartList;
     }
+
+    /**
+     * Retrieves Memory average utilization in the past 15 minutes.
+     * @return average memory utilization
+     */
+    public Double getAverageUtilization15Min() {
+        Double averageUtilization = 0.0;
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                    SELECT AVG(utilization) as average_utilization
+                    FROM memory
+                    Where timestamp >= datetime('now', '-15 minute');
+                             """;
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting memory average utilization in the past 15 minutes.");
+        }
+
+        return averageUtilization == 0.0 ? null : averageUtilization;
+    }
+
+    /**
+     * Retrieves Memory average utilization in the past 1 hour.
+     * @return average memory utilization
+     */
+    public Double getAverageUtilization1Hour() {
+        Double averageUtilization = 0.0;
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                    SELECT AVG(utilization) as average_utilization
+                    FROM memory
+                    Where timestamp >= datetime('now', '-1 hour');
+                             """;
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting memory average utilization in the past 1 hour.");
+        }
+
+        return averageUtilization == 0.0 ? null : averageUtilization;
+    }
+
+    /**
+     * Retrieves Memory average utilization in the past 24 hours.
+     * @return average memory utilization
+     */
+    public Double getAverageUtilization24Hours() {
+        Double averageUtilization = 0.0;
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                    SELECT AVG(utilization) as average_utilization
+                    FROM memory
+                    Where timestamp >= datetime('now', '-24 hour');
+                             """;
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting memory average utilization in the past 24 hours.");
+        }
+
+        return averageUtilization == 0.0 ? null : averageUtilization;
+    }
 }
