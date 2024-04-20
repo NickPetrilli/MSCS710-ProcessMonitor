@@ -278,7 +278,8 @@ public class MemoryService {
             String sql = """
                     SELECT AVG(utilization) as average_utilization
                     FROM memory
-                    Where timestamp >= datetime('now', '-15 minute');
+                    WHERE timestamp
+                    BETWEEN datetime('now', 'localtime', '-15 minute') AND datetime('now', 'localtime');
                              """;
 
             ResultSet resultSet = statement.executeQuery(sql);
@@ -307,7 +308,8 @@ public class MemoryService {
             String sql = """
                     SELECT AVG(utilization) as average_utilization
                     FROM memory
-                    Where timestamp >= datetime('now', '-1 hour');
+                    WHERE timestamp
+                    BETWEEN datetime('now', 'localtime', '-1 hour') AND datetime('now', 'localtime');
                              """;
 
             ResultSet resultSet = statement.executeQuery(sql);
@@ -336,7 +338,8 @@ public class MemoryService {
             String sql = """
                     SELECT AVG(utilization) as average_utilization
                     FROM memory
-                    Where timestamp >= datetime('now', '-24 hour');
+                    WHERE timestamp
+                    BETWEEN datetime('now', 'localtime', '-24 hour') AND datetime('now', 'localtime');
                              """;
 
             ResultSet resultSet = statement.executeQuery(sql);

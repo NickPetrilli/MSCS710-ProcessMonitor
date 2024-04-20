@@ -273,7 +273,8 @@ public class DiskService {
                 String sql = """
                     SELECT AVG(readSpeed) as average_readSpeed, AVG(writeSpeed) as average_writeSpeed
                     FROM disk
-                    WHERE timestamp >= datetime('now', '-15 minute');
+                    WHERE timestamp
+                    BETWEEN datetime('now', 'localtime', '-15 minute') AND datetime('now', 'localtime');
                     """;
 
             resultSet = statement.executeQuery(sql);
@@ -303,7 +304,8 @@ public class DiskService {
                String sql = """
                    SELECT AVG(readSpeed) as average_readSpeed, AVG(writeSpeed) as average_writeSpeed
                    FROM disk
-                   WHERE timestamp >= datetime('now', '-1 hour');
+                   WHERE timestamp
+                   BETWEEN datetime('now', 'localtime', '-1 hour') AND datetime('now', 'localtime');
                    """;
 
            resultSet = statement.executeQuery(sql);
@@ -333,7 +335,8 @@ public class DiskService {
                String sql = """
                    SELECT AVG(readSpeed) as average_readSpeed, AVG(writeSpeed) as average_writeSpeed
                    FROM disk
-                   WHERE timestamp >= datetime('now', '-24 hour');
+                   WHERE timestamp
+                   BETWEEN datetime('now', 'localtime', '-24 hour') AND datetime('now', 'localtime');
                    """;
 
            resultSet = statement.executeQuery(sql);
@@ -363,7 +366,8 @@ public class DiskService {
                String sql = """
                    SELECT AVG(utilization) as average_utilization
                    FROM disk
-                   WHERE timestamp >= datetime('now', '-15 minute');
+                   WHERE timestamp
+                   BETWEEN datetime('now', 'localtime', '-15 minute') AND datetime('now', 'localtime');
                    """;
 
            resultSet = statement.executeQuery(sql);
@@ -392,7 +396,8 @@ public class DiskService {
                String sql = """
                    SELECT AVG(utilization) as average_utilization
                    FROM disk
-                   WHERE timestamp >= datetime('now', '-1 hour');
+                   WHERE timestamp
+                   BETWEEN datetime('now', 'localtime', '-1 hour') AND datetime('now', 'localtime');
                    """;
 
            resultSet = statement.executeQuery(sql);
@@ -421,7 +426,8 @@ public class DiskService {
                String sql = """
                    SELECT AVG(utilization) as average_utilization
                    FROM disk
-                   WHERE timestamp >= datetime('now', '-24 hour');
+                   WHERE timestamp
+                   BETWEEN datetime('now', 'localtime', '-24 hour') AND datetime('now', 'localtime');
                    """;
 
            resultSet = statement.executeQuery(sql);
