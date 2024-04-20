@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.process_monitor.processmonitor.api.util.ChartData;
 import org.slf4j.Logger;
@@ -247,8 +249,10 @@ public class CpuService {
      * Retrieves average CPU utilization for the past 15 minutes.
      * @return average cpu utilization
      */
-    public Double getAverageUtilization15Min() {
+    public Map<String, Double> getAverageUtilization15Min() {
         Double averageUtilization = 0.0;
+
+        Map<String, Double> map = new HashMap<>();
 
         try (Connection connection = DriverManager.getConnection(URL);
              Statement statement = connection.createStatement()) {
@@ -272,15 +276,21 @@ public class CpuService {
             logger.error("Error while getting cpu average utilization in past 15 minutes.");
         }
 
-        return averageUtilization == 0.0 ? null : averageUtilization;
+        if (averageUtilization == 0)
+            return null;
+
+        map.put("utilization", averageUtilization);
+        return map;
     }
 
     /**
      * Retrieves average CPU utilization for the past 1 hour.
      * @return average cpu utilization
      */
-    public Double getAverageUtilization1Hour() {
+    public Map<String, Double> getAverageUtilization1Hour() {
         Double averageUtilization = 0.0;
+
+        Map<String, Double> map = new HashMap<>();
 
         try (Connection connection = DriverManager.getConnection(URL);
              Statement statement = connection.createStatement()) {
@@ -304,15 +314,21 @@ public class CpuService {
             logger.error("Error while getting cpu average utilization in past hour.");
         }
 
-        return averageUtilization == 0.0 ? null : averageUtilization;
+        if (averageUtilization == 0)
+            return null;
+
+        map.put("utilization", averageUtilization);
+        return map;
     }
 
     /**
      * Retrieves average CPU utilization for the past 24 hours.
      * @return average cpu utilization
      */
-    public Double getAverageUtilization24Hours() {
+    public Map<String, Double> getAverageUtilization24Hours() {
         Double averageUtilization = 0.0;
+
+        Map<String, Double> map = new HashMap<>();
 
         try (Connection connection = DriverManager.getConnection(URL);
              Statement statement = connection.createStatement()) {
@@ -336,6 +352,10 @@ public class CpuService {
             logger.error("Error while getting cpu average utilization in past 24 hours.");
         }
 
-        return averageUtilization == 0.0 ? null : averageUtilization;
+        if (averageUtilization == 0)
+            return null;
+
+        map.put("utilization", averageUtilization);
+        return map;
     }
 }

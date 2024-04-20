@@ -2,6 +2,7 @@ package com.process_monitor.processmonitor.api.memory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.process_monitor.processmonitor.api.util.ChartData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +73,7 @@ public class MemoryController {
      * @return average memory utilization
      */
     @GetMapping(path = "avg-util-15min")
-    public Double getAverageUtilization15Min() {
+    public Map<String, Double> getAverageUtilization15Min() {
         return memoryService.getAverageUtilization15Min();
     }
 
@@ -81,7 +82,7 @@ public class MemoryController {
      * @return average memory utilization
      */
     @GetMapping(path = "avg-util-1hour")
-    public Double getAverageUtilization1Hour() {
+    public Map<String, Double> getAverageUtilization1Hour() {
         return memoryService.getAverageUtilization1Hour();
     }
 
@@ -90,7 +91,7 @@ public class MemoryController {
      * @return average memory utilization
      */
     @GetMapping(path = "avg-util-24hour")
-    public Double getAverageUtilization24Hours() {
+    public Map<String, Double> getAverageUtilization24Hours() {
         return memoryService.getAverageUtilization24Hours();
     }
 

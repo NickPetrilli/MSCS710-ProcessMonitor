@@ -1,6 +1,7 @@
 package com.process_monitor.processmonitor.api.cpu;
 
 import java.util.List;
+import java.util.Map;
 
 import com.process_monitor.processmonitor.api.util.ChartData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +74,7 @@ public class CpuController {
      * @return average cpu utilization
      */
     @GetMapping(path = "avg-util-15min")
-    public Double getAverageUtilization15Min() {
+    public Map<String, Double> getAverageUtilization15Min() {
         return cpuService.getAverageUtilization15Min();
     }
 
@@ -82,7 +83,7 @@ public class CpuController {
      * @return average cpu utilization
      */
     @GetMapping(path = "avg-util-1hour")
-    public Double getAverageUtilization1Hour() {
+    public Map<String, Double> getAverageUtilization1Hour() {
         return cpuService.getAverageUtilization1Hour();
     }
 
@@ -91,7 +92,7 @@ public class CpuController {
      * @return average cpu utilization
      */
     @GetMapping(path = "avg-util-24hour")
-    public Double getAverageUtilization24Hours() {
+    public Map<String, Double> getAverageUtilization24Hours() {
         return cpuService.getAverageUtilization24Hours();
     }
 }

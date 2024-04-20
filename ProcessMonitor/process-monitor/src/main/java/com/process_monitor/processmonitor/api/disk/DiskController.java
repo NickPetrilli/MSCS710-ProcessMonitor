@@ -1,6 +1,7 @@
 package com.process_monitor.processmonitor.api.disk;
 
 import java.util.List;
+import java.util.Map;
 
 import com.process_monitor.processmonitor.api.util.ChartData;
 import com.process_monitor.processmonitor.api.util.DiskAverages;
@@ -108,7 +109,7 @@ public class DiskController {
      * @return disk average utilization
      */
     @GetMapping(path = "avg-util-15min")
-    public Double getAverageUtilization15Min() {
+    public Map<String, Double> getAverageUtilization15Min() {
         return diskService.getAverageUtilization15Min();
     }
 
@@ -117,7 +118,7 @@ public class DiskController {
      * @return disk average utilization
      */
     @GetMapping(path = "avg-util-1hour")
-    public Double getAverageUtilization1Hour() {
+    public Map<String, Double> getAverageUtilization1Hour() {
         return diskService.getAverageUtilization1Hour();
     }
     
@@ -126,7 +127,7 @@ public class DiskController {
      * @return disk average utilization
      */
     @GetMapping(path = "avg-util-24hour")
-    public Double getAverageUtilization24Hours() {
+    public Map<String, Double> getAverageUtilization24Hours() {
         return diskService.getAverageUtilization24Hours();
     }
 }
