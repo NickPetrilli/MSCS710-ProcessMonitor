@@ -15,6 +15,7 @@ import { MemoryProcesses } from './Pages/Processes';
 import { MemoryProcessesAscending } from './Pages/Processes';
 import { DiskProcesses } from './Pages/Processes';
 import { DiskProcessesAscending } from './Pages/Processes';
+import Reports from './Pages/Reports';
 
 import Header from './Pages/Header';
 import Footer from './Pages/Footer';
@@ -38,6 +39,7 @@ const App = () => {
           <Route path = "/memory-processes-asc" element={<MemoryProcessesAscending />} />
           <Route path = "/disk-processes" element={<DiskProcesses />} />
           <Route path = "/disk-processes-asc" element={<DiskProcessesAscending />} />
+          <Route path = "/reports" element={<Reports />} />
         </Routes>
 
         <Footer />

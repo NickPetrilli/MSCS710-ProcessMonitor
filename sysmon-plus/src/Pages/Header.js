@@ -5,6 +5,7 @@ const Header = () => {
     return (
         <header className="App-header">
         <Link to="/"> <img src={logo} alt="" className="App-logo-header" /> </Link>
+        <Link to="/reports"> Click for Reports </Link>
         </header>
     )
 };
