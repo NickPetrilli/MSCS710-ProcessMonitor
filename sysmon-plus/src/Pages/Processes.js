@@ -9,6 +9,14 @@ const titleStyle = {
   marginBottom: '3%'
 };
 
+function truncateString(str, maxLength) {
+  if (str.length <= maxLength) {
+    return str;
+  } else {
+    return str.substring(0, maxLength + 1) + '...';
+  }
+}
+
 const CpuProcesses = () => {
     
   const [cpuProcessData, setCpuProcessData] = useState({});
@@ -59,10 +67,10 @@ return (
         {cpuProcessData.length > 0 ? (
                 cpuProcessData.map((process, index) => (
                   <tr key={process.id}>
-                    <td>{process.name}</td>
+                    <td>{truncateString(process.name, 16)}</td>
                     <td className='table-sort-focus'>{process.cpuPercentage.toFixed(1)}%</td>
                     <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
-                    <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
+                    <td>{Math.max((process.diskSpeed / 1000000).toFixed(1), 0)} MB/s</td>
                   </tr>
                 ))
             ) : (
@@ -130,10 +138,10 @@ return (
             {cpuProcessData.length > 0 ? (
                     cpuProcessData.map((process, index) => (
                       <tr key={process.id} className = "processes-row">
-                        <td>{process.name}</td>
+                        <td>{truncateString(process.name, 16)}</td>
                         <td className='table-sort-focus'>{process.cpuPercentage.toFixed(1)}%</td>
                         <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
-                        <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
+                        <td>{Math.max((process.diskSpeed / 1000000).toFixed(1), 0)} MB/s</td>
                       </tr>
                     ))
                 ) : (
@@ -200,10 +208,10 @@ return (
             {memProcessData.length > 0 ? (
                     memProcessData.map((process, index) => (
                       <tr key={process.id} className = "processes-row">
-                        <td>{process.name}</td>
+                        <td>{truncateString(process.name, 16)}</td>
                         <td>{process.cpuPercentage.toFixed(1)}%</td>
                         <td className='table-sort-focus'>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
-                        <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
+                        <td>{Math.max((process.diskSpeed / 1000000).toFixed(1), 0)} MB/s</td>
                       </tr>
                     ))
                 ) : (
@@ -270,10 +278,10 @@ return (
             {memProcessData.length > 0 ? (
                     memProcessData.map((process, index) => (
                       <tr key={process.id} className = "processes-row">
-                        <td>{process.name}</td>
+                        <td>{truncateString(process.name, 16)}</td>
                         <td>{process.cpuPercentage.toFixed(1)}%</td>
                         <td className='table-sort-focus'>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
-                        <td>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
+                        <td>{Math.max((process.diskSpeed / 1000000).toFixed(1), 0)} MB/s</td>
                       </tr>
                     ))
                 ) : (
@@ -340,10 +348,10 @@ return (
             {diskProcessData.length > 0 ? (
                     diskProcessData.map((process, index) => (
                       <tr key={process.id} className = "processes-row">
-                        <td>{process.name}</td>
+                        <td>{truncateString(process.name, 16)}</td>
                         <td>{process.cpuPercentage.toFixed(1)}%</td>
                         <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
-                        <td className='table-sort-focus'>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
+                        <td className='table-sort-focus'>{Math.max((process.diskSpeed / 1000000).toFixed(1), 0)} MB/s</td>
                       </tr>
                     ))
                 ) : (
@@ -410,10 +418,10 @@ return (
             {diskProcessData.length > 0 ? (
                     diskProcessData.map((process, index) => (
                       <tr key={process.id} className = "processes-row">
-                        <td>{process.name}</td>
+                        <td>{truncateString(process.name, 16)}</td>
                         <td>{process.cpuPercentage.toFixed(1)}%</td>
                         <td>{(process.memoryUsageBytes / 1000000).toFixed(1)} MB</td>
-                        <td className='table-sort-focus'>{(process.diskSpeed / 1000000).toFixed(1)} MB/s</td>
+                        <td className='table-sort-focus'>{Math.max((process.diskSpeed / 1000000).toFixed(1), 0)} MB/s</td>
                       </tr>
                     ))
                 ) : (

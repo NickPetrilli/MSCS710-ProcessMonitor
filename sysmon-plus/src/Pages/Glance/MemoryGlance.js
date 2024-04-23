@@ -6,7 +6,7 @@ import MemoryLineChartFromAPI from '../../Charts/MemoryLineChartFromAPI';
 const MemSection = () => {
 
   const rowStyle = {
-    paddingTop: '7.25%'
+    paddingTop: '5.25%'
   };
   const MAX_PROC_LENGTH = 7;  
 

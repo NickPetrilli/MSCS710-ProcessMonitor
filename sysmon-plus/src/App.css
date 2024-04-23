@@ -143,8 +143,8 @@ a {
   font-weight: 600;
 
   position: absolute;
-  top: 28%;
-  left: 73%;
+  top: 15%;
+  left: 78%;
 }
 
 .back-button:active {
@@ -433,7 +433,7 @@ a {
   font-weight: bold;
   border-spacing: 1.25em;
   background-color: white;
-  border: .1rem solid black;
+  /* border: .1rem solid black; */
   padding-left: 5%;
   padding-right: 5%;
   margin-bottom: 20%;
