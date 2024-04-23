@@ -50,8 +50,12 @@ const CpuProcesses = () => {
 return (
   <div className="CpuProcesses">
     <div className='processes-table-HEADER'>
-      <h1 className='detail-title' style={titleStyle}>Processes</h1>
-      <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+          <div className='detail-title-wrapper'>
+                <h1 className='detail-title' style={titleStyle}>Processes</h1>
+          </div>
+          <div className='detail-button-wrapper'>
+               <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+          </div>
     </div>
       
     <table className="processes-table">
@@ -120,9 +124,13 @@ const CpuProcessesAscending = () => {
 return (
   <div className="CpuProcessesAscending">
     <div className='processes-table-HEADER'>
-      <h1 className='detail-title' style={titleStyle}>Processes</h1>
-      <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
-    </div>
+                                 <div className='detail-title-wrapper'>
+                                   <h1 className='detail-title' style={titleStyle}>Processes</h1>
+                                 </div>
+                                 <div className='detail-button-wrapper'>
+                                   <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+                                 </div>
+                               </div>
       
     <div>
         <table className="processes-table">
@@ -190,9 +198,13 @@ const MemoryProcesses = () => {
 return (
   <div className="MemoryProcesses">
     <div className='processes-table-HEADER'>
-      <h1 className='detail-title' style={titleStyle}>Processes</h1>
-      <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
-    </div>
+                                 <div className='detail-title-wrapper'>
+                                   <h1 className='detail-title' style={titleStyle}>Processes</h1>
+                                 </div>
+                                 <div className='detail-button-wrapper'>
+                                   <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+                                 </div>
+                               </div>
       
     <div>
         <table className="processes-table">
@@ -260,9 +272,13 @@ const MemoryProcessesAscending = () => {
 return (
   <div className="MemoryProcessesAscending">
     <div className='processes-table-HEADER'>
-      <h1 className='detail-title' style={titleStyle}>Processes</h1>
-      <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
-    </div>
+                                 <div className='detail-title-wrapper'>
+                                   <h1 className='detail-title' style={titleStyle}>Processes</h1>
+                                 </div>
+                                 <div className='detail-button-wrapper'>
+                                   <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+                                 </div>
+                               </div>
 
     <div>
         <table className="processes-table">
@@ -330,8 +346,12 @@ const DiskProcesses = () => {
 return (
   <div className="DiskProcesses">
     <div className='processes-table-HEADER'>
-      <h1 className='detail-title' style={titleStyle}>Processes</h1>
-      <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+          <div className='detail-title-wrapper'>
+               <h1 className='detail-title' style={titleStyle}>Processes</h1>
+          </div>
+          <div className='detail-button-wrapper'>
+               <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+          </div>
     </div>
       
     <div>
@@ -400,9 +420,13 @@ const DiskProcessesAscending = () => {
 return (
   <div className="DiskProcessesAscending">
     <div className='processes-table-HEADER'>
-      <h1 className='detail-title' style={titleStyle}>Processes</h1>
-      <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
-    </div>
+                                 <div className='detail-title-wrapper'>
+                                   <h1 className='detail-title' style={titleStyle}>Processes</h1>
+                                 </div>
+                                 <div className='detail-button-wrapper'>
+                                   <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+                                 </div>
+                               </div>
       
     <div>
         <table className="processes-table">
@@ -464,9 +488,13 @@ const Processes = () => {
   return (
     <div className="Processes">
       <div className='processes-table-HEADER'>
-        <h1 className='detail-title' style={titleStyle}>Processes</h1>
-        <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
-      </div>
+                                   <div className='detail-title-wrapper'>
+                                     <h1 className='detail-title' style={titleStyle}>Processes</h1>
+                                   </div>
+                                   <div className='detail-button-wrapper'>
+                                     <Link to="/"> <button className="back-button-PROCESSES"> &#10096; BACK </button> </Link>
+                                   </div>
+                                 </div>
         
       <div>
           <table className="processes-table">

@@ -9,7 +9,7 @@ h1.section-title, h4.section-title {
 
 h1.detail-title, h4.detail-title {
   text-align: left;
-  margin-left: 50px;
+  margin-left: 5%;
 }
 
 h1.section-title {
@@ -141,8 +141,15 @@ a {
   border-radius: 5px;
   margin-top: 2%;
   font-weight: 600;
+}
 
-  margin-right: 50px;
+.detail-title-wrapper {
+    padding-left: 10%;
+    margin-bottom: 1%;
+}
+
+.detail-button-wrapper {
+    padding-right: 12%;
 }
 
 .back-button:active {
