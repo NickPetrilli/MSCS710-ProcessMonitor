@@ -1,7 +1,5 @@
 package com.process_monitor.db;
 
-import org.junit.jupiter.api.Test;
-
 public interface DatabaseTest {
     void setUp() throws Exception;
     void tearDown() throws Exception;

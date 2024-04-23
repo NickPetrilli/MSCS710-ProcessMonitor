@@ -34,11 +34,9 @@ public class CpuCollector {
         return processor.getProcessorIdentifier().getName();
     }
 
-    // TODO: May need to be scrapped, all cores are reported @ max frequency, even though this does not match the performance graphs
-    // given by Windows (Task Manager, Resource Monitor)
     /**
      * Gets the current frequency of all logical processors on this CPU
-     * @return an average of all the locigcal processor's frequencies (in Hz)
+     * @return an average of all the logical processor's frequencies (in Hz)
      */
     public long getCurrentFreq() {
         long[] currFreqs = processor.getCurrentFreq();
@@ -64,7 +62,7 @@ public class CpuCollector {
      * Gets the amount of physical processors on this CPU
      * @return the amount of cores
      */
-    public static int getCoreCount() {
+    public int getCoreCount() {
         return processor.getPhysicalProcessorCount();
     }
 
@@ -89,7 +87,7 @@ public class CpuCollector {
      * Static method allows to call without creating another object in MetricCollector
      * @return the number of logical processors
      */
-    public static int getLogicalProcessorCount() {
+    public int getLogicalProcessorCount() {
         return processor.getLogicalProcessorCount();
     }
     
@@ -101,7 +99,7 @@ public class CpuCollector {
      * utilization during the time interval.
      * @return the system cpu utilization
      */
-    public static double getCpuUtilization() {
+    public double getCpuUtilization() {
         // Initial measurement
         long[] oldTicks = processor.getSystemCpuLoadTicks();
         //long[][] oldProcTicks = processor.getProcessorCpuLoadTicks();

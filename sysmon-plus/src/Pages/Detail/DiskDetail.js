@@ -109,8 +109,13 @@ const DiskDetail = () => {
                   </tr>
 
                   <tr>
-                    <td> Swap Available: </td>
-                    <td> {(selectedDisk.swapAvailable / 1000000).toFixed(1)} MB</td>
+                    <td> Swap Total: </td>
+                    <td> {(selectedDisk.swapTotal / 1000000).toFixed(1)} MB</td>
+                  </tr>
+
+                  <tr>
+                    <td> Swap Utilization: </td>
+                    <td> {(selectedDisk.swapUtilization * 100).toFixed(1)} %</td>
                   </tr>
                 </tbody>
               </table>

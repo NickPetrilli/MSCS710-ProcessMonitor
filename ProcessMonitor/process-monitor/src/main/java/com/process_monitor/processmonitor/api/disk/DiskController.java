@@ -3,11 +3,9 @@ package com.process_monitor.processmonitor.api.disk;
 import java.util.List;
 import java.util.Map;
 
-import com.process_monitor.processmonitor.api.util.ChartData;
 import com.process_monitor.processmonitor.api.util.DiskAverages;
 import com.process_monitor.processmonitor.api.util.DiskChartData;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.process_monitor.processmonitor.api.disk.model.Disk;
@@ -23,7 +21,6 @@ public class DiskController {
     
     private DiskService diskService = null;
 
-    @Autowired
     public DiskController(DiskService diskService) {
         this.diskService = diskService;
     }

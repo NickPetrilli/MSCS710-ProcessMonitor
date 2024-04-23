@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.process_monitor.processmonitor.api.util.ChartData;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +21,6 @@ public class MemoryController {
 
     private MemoryService memoryService = null;
 
-    @Autowired
     public MemoryController(MemoryService memoryService) {
         this.memoryService = memoryService;
     }
