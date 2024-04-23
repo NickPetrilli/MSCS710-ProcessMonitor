@@ -4,12 +4,12 @@ h1.title {
 
 h1.section-title, h4.section-title {
   text-align: left;
-  margin-left: 5%;
+  margin-left: 50px;
 }
 
 h1.detail-title, h4.detail-title {
   text-align: left;
-  margin-left: 5%;
+  margin-left: 50px;
 }
 
 h1.section-title {
@@ -142,9 +142,7 @@ a {
   margin-top: 2%;
   font-weight: 600;
 
-  position: absolute;
-  top: 15%;
-  left: 78%;
+  margin-right: 50px;
 }
 
 .back-button:active {
@@ -252,7 +250,7 @@ a {
 }
 
 .graph {
-  width: '75%'; 
+  width: '75%';
   padding: '5%';
 }
 
@@ -336,6 +334,9 @@ a {
 
 .processes-table-HEADER {
   display: flex;
+  justify-content: space-between;  /* This will align the h1 to the left and Link to the right */
+  align-items: center;             /* This ensures that the items are aligned vertically in the center */
+  width: 100%;
 }
 
 .processes-table {
