@@ -68,6 +68,24 @@ public class CpuController {
     }
 
     /**
+     * GET Request endpoint to handle getting CPU average utilization in the past 5 min
+     * @return average cpu utilization
+     */
+    @GetMapping(path = "avg-util-5min")
+    public Map<String, Double> getAverageUtilization5Min() {
+        return cpuService.getAverageUtilization5Min();
+    }
+
+    /**
+     * GET Request endpoint to handle getting CPU average utilization in the past 10 min
+     * @return average cpu utilization
+     */
+    @GetMapping(path = "avg-util-10min")
+    public Map<String, Double> getAverageUtilization10Min() {
+        return cpuService.getAverageUtilization10Min();
+    }
+
+    /**
      * GET Request endpoint to handle getting CPU average utilization in the past 15 min
      * @return average cpu utilization
      */
@@ -77,12 +95,57 @@ public class CpuController {
     }
 
     /**
+     * GET Request endpoint to handle getting CPU average utilization in the past 30 min
+     * @return average cpu utilization
+     */
+    @GetMapping(path = "avg-util-30min")
+    public Map<String, Double> getAverageUtilization30Min() {
+        return cpuService.getAverageUtilization30Min();
+    }
+
+    /**
      * GET Request endpoint to handle getting CPU average utilization in the past hour
      * @return average cpu utilization
      */
     @GetMapping(path = "avg-util-1hour")
     public Map<String, Double> getAverageUtilization1Hour() {
         return cpuService.getAverageUtilization1Hour();
+    }
+
+    /**
+     * GET Request endpoint to handle getting CPU average utilization in the past 2 hours
+     * @return average cpu utilization
+     */
+    @GetMapping(path = "avg-util-2hour")
+    public Map<String, Double> getAverageUtilization2Hours() {
+        return cpuService.getAverageUtilization2Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting CPU average utilization in the past 4 hours
+     * @return average cpu utilization
+     */
+    @GetMapping(path = "avg-util-4hour")
+    public Map<String, Double> getAverageUtilization4Hours() {
+        return cpuService.getAverageUtilization4Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting CPU average utilization in the past 6 hours
+     * @return average cpu utilization
+     */
+    @GetMapping(path = "avg-util-6hour")
+    public Map<String, Double> getAverageUtilization6Hours() {
+        return cpuService.getAverageUtilization6Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting CPU average utilization in the past 12 hours
+     * @return average cpu utilization
+     */
+    @GetMapping(path = "avg-util-12hour")
+    public Map<String, Double> getAverageUtilization12Hours() {
+        return cpuService.getAverageUtilization12Hours();
     }
 
     /**

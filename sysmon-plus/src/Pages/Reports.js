@@ -3,8 +3,14 @@ import React, { useState, useEffect } from 'react';
 
 const Reports = () => {
 
+    const [cpuAvg5Min, setCpuAvg5Min] = useState({});
+    const [cpuAvg10Min, setCpuAvg10Min] = useState({});
     const [cpuAvg15Min, setCpuAvg15Min] = useState({});
     const [cpuAvg1Hour, setCpuAvg1Hour] = useState({});
+    const [cpuAvg2Hours, setCpuAvg2Hours] = useState({});
+    const [cpuAvg4Hours, setCpuAvg4Hours] = useState({});
+    const [cpuAvg6Hours, setCpuAvg6Hours] = useState({});
+    const [cpuAvg12Hours, setCpuAvg12Hours] = useState({});
     const [cpuAvg24Hours, setCpuAvg24Hours] = useState({});
 
     const [memoryAvg15Min, setMemoryAvg15Min] = useState({});
@@ -22,7 +28,28 @@ const Reports = () => {
     useEffect(() => {
         // Fetch data from an API endpoint
         const fetchData = () => {
-          fetch('http://localhost:8080/api/v1/cpu/avg-util-15min')
+
+          fetch('http://localhost:8080/api/v1/cpu/avg-util-5min')
+          .then(response => response.json())
+          .then(data => {
+            // Update the JSON object with fetched data
+            setCpuAvg5Min(data);
+          })
+          .catch(error => {
+            console.error('Error fetching avg cpu util 5 min:', error);
+          });
+
+          fetch('http://localhost:8080/api/v1/cpu/avg-util-10min')
+          .then(response => response.json())
+          .then(data => {
+            // Update the JSON object with fetched data
+            setCpuAvg10Min(data);
+          })
+          .catch(error => {
+            console.error('Error fetching avg cpu util 10 min:', error);
+          });
+
+        fetch('http://localhost:8080/api/v1/cpu/avg-util-15min')
             .then(response => response.json())
             .then(data => {
               // Update the JSON object with fetched data
@@ -32,7 +59,7 @@ const Reports = () => {
               console.error('Error fetching avg cpu util 15 min:', error);
             });
     
-          fetch('http://localhost:8080/api/v1/cpu/avg-util-1hour')
+        fetch('http://localhost:8080/api/v1/cpu/avg-util-1hour')
             .then(response => response.json())
             .then(data => {
               // Update the JSON object with fetched data
@@ -40,6 +67,46 @@ const Reports = () => {
             })
             .catch(error => {
               console.error('Error fetching avg cpu util 1 hour:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/cpu/avg-util-2hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setCpuAvg2Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg cpu util 2 hour:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/cpu/avg-util-4hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setCpuAvg4Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg cpu util 4 hour:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/cpu/avg-util-6hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setCpuAvg6Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg cpu util 6 hour:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/cpu/avg-util-12hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setCpuAvg12Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg cpu util 12 hour:', error);
             });
 
         fetch('http://localhost:8080/api/v1/cpu/avg-util-24hour')
@@ -151,6 +218,22 @@ const Reports = () => {
     return (
     <>
         <div>
+            {cpuAvg5Min !== null ? (
+        <div> CPU Average 5 Min: {cpuAvg5Min.utilization}</div>
+        ) : (
+        <div>No data available for 5 Min Report</div>
+        )}
+        </div>
+
+        <div>
+            {cpuAvg10Min !== null ? (
+        <div> CPU Average 10 Min: {cpuAvg10Min.utilization}</div>
+        ) : (
+        <div>No data available for 10 Min Report</div>
+        )}
+        </div>
+
+        <div>
             {cpuAvg15Min !== null ? (
         <div> CPU Average 15 Min: {cpuAvg15Min.utilization}</div>
         ) : (
@@ -163,6 +246,38 @@ const Reports = () => {
         <div>CPU Average 1 Hour: {cpuAvg1Hour.utilization}</div>
         ) : (
         <div>No data available for 1 Hour Report</div>
+        )}
+        </div>
+
+        <div>
+            {cpuAvg2Hours !== null ? (
+        <div>CPU Average 2 Hours: {cpuAvg2Hours.utilization}</div>
+        ) : (
+        <div>No data available for 2 Hours Report</div>
+        )}
+        </div>
+
+        <div>
+            {cpuAvg4Hours !== null ? (
+        <div>CPU Average 4 Hours: {cpuAvg4Hours.utilization}</div>
+        ) : (
+        <div>No data available for 4 Hours Report</div>
+        )}
+        </div>
+
+        <div>
+            {cpuAvg6Hours !== null ? (
+        <div>CPU Average 6 Hours: {cpuAvg6Hours.utilization}</div>
+        ) : (
+        <div>No data available for 6 Hours Report</div>
+        )}
+        </div>
+
+        <div>
+            {cpuAvg12Hours !== null ? (
+        <div>CPU Average 12 Hours: {cpuAvg12Hours.utilization}</div>
+        ) : (
+        <div>No data available for 12 Hours Report</div>
         )}
         </div>
 

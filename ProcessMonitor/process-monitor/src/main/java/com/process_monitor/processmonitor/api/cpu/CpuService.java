@@ -246,6 +246,82 @@ public class CpuService {
     }
 
     /**
+     * Retrieves average CPU utilization for the past 5 minutes.
+     * @return average cpu utilization
+     */
+    public Map<String, Double> getAverageUtilization5Min() {
+        Double averageUtilization = 0.0;
+
+        Map<String, Double> map = new HashMap<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                        SELECT 
+                            AVG(utilization) as average_utilization
+                        FROM 
+                            cpu
+                        WHERE timestamp 
+                        BETWEEN datetime('now', 'localtime', '-5 minute') AND datetime('now', 'localtime');
+                             """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting cpu average utilization in past 5 minutes.");
+        }
+
+        if (averageUtilization == 0)
+            return null;
+
+        map.put("utilization", averageUtilization);
+        return map;
+    }
+
+    /**
+     * Retrieves average CPU utilization for the past 10 minutes.
+     * @return average cpu utilization
+     */
+    public Map<String, Double> getAverageUtilization10Min() {
+        Double averageUtilization = 0.0;
+
+        Map<String, Double> map = new HashMap<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                        SELECT 
+                            AVG(utilization) as average_utilization
+                        FROM 
+                            cpu
+                        WHERE timestamp 
+                        BETWEEN datetime('now', 'localtime', '-10 minute') AND datetime('now', 'localtime');
+                             """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting cpu average utilization in past 10 minutes.");
+        }
+
+        if (averageUtilization == 0)
+            return null;
+
+        map.put("utilization", averageUtilization);
+        return map;
+    }
+
+    /**
      * Retrieves average CPU utilization for the past 15 minutes.
      * @return average cpu utilization
      */
@@ -274,6 +350,44 @@ public class CpuService {
 
         } catch (SQLException e) {
             logger.error("Error while getting cpu average utilization in past 15 minutes.");
+        }
+
+        if (averageUtilization == 0)
+            return null;
+
+        map.put("utilization", averageUtilization);
+        return map;
+    }
+
+        /**
+     * Retrieves average CPU utilization for the past 30 minutes.
+     * @return average cpu utilization
+     */
+    public Map<String, Double> getAverageUtilization30Min() {
+        Double averageUtilization = 0.0;
+
+        Map<String, Double> map = new HashMap<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                        SELECT 
+                            AVG(utilization) as average_utilization
+                        FROM 
+                            cpu
+                        WHERE timestamp 
+                        BETWEEN datetime('now', 'localtime', '-30 minute') AND datetime('now', 'localtime');
+                             """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting cpu average utilization in past 30 minutes.");
         }
 
         if (averageUtilization == 0)
@@ -312,6 +426,158 @@ public class CpuService {
 
         } catch (SQLException e) {
             logger.error("Error while getting cpu average utilization in past hour.");
+        }
+
+        if (averageUtilization == 0)
+            return null;
+
+        map.put("utilization", averageUtilization);
+        return map;
+    }
+
+    /**
+     * Retrieves average CPU utilization for the past 2 hours.
+     * @return average cpu utilization
+     */
+    public Map<String, Double> getAverageUtilization2Hours() {
+        Double averageUtilization = 0.0;
+
+        Map<String, Double> map = new HashMap<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                        SELECT 
+                            AVG(utilization) as average_utilization
+                        FROM 
+                            cpu
+                        WHERE timestamp 
+                        BETWEEN datetime('now', 'localtime', '-2 hour') AND datetime('now', 'localtime');
+                             """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting cpu average utilization in past 2 hours.");
+        }
+
+        if (averageUtilization == 0)
+            return null;
+
+        map.put("utilization", averageUtilization);
+        return map;
+    }
+
+    /**
+     * Retrieves average CPU utilization for the past 4 hours.
+     * @return average cpu utilization
+     */
+    public Map<String, Double> getAverageUtilization4Hours() {
+        Double averageUtilization = 0.0;
+
+        Map<String, Double> map = new HashMap<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                        SELECT 
+                            AVG(utilization) as average_utilization
+                        FROM 
+                            cpu
+                        WHERE timestamp 
+                        BETWEEN datetime('now', 'localtime', '-4 hour') AND datetime('now', 'localtime');
+                             """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting cpu average utilization in past 4 hours.");
+        }
+
+        if (averageUtilization == 0)
+            return null;
+
+        map.put("utilization", averageUtilization);
+        return map;
+    }
+
+    /**
+     * Retrieves average CPU utilization for the past 6 hours.
+     * @return average cpu utilization
+     */
+    public Map<String, Double> getAverageUtilization6Hours() {
+        Double averageUtilization = 0.0;
+
+        Map<String, Double> map = new HashMap<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                        SELECT 
+                            AVG(utilization) as average_utilization
+                        FROM 
+                            cpu
+                        WHERE timestamp 
+                        BETWEEN datetime('now', 'localtime', '-6 hour') AND datetime('now', 'localtime');
+                             """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting cpu average utilization in past 6 hours.");
+        }
+
+        if (averageUtilization == 0)
+            return null;
+
+        map.put("utilization", averageUtilization);
+        return map;
+    }
+
+    /**
+     * Retrieves average CPU utilization for the past 12 hours.
+     * @return average cpu utilization
+     */
+    public Map<String, Double> getAverageUtilization12Hours() {
+        Double averageUtilization = 0.0;
+
+        Map<String, Double> map = new HashMap<>();
+
+        try (Connection connection = DriverManager.getConnection(URL);
+             Statement statement = connection.createStatement()) {
+
+            String sql = """
+                        SELECT 
+                            AVG(utilization) as average_utilization
+                        FROM 
+                            cpu
+                        WHERE timestamp 
+                        BETWEEN datetime('now', 'localtime', '-12 hour') AND datetime('now', 'localtime');
+                             """;
+
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                averageUtilization = resultSet.getDouble("average_utilization");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Error while getting cpu average utilization in past 12 hours.");
         }
 
         if (averageUtilization == 0)
