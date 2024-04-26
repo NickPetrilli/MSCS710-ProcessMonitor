@@ -6,6 +6,7 @@ const Reports = () => {
     const [cpuAvg5Min, setCpuAvg5Min] = useState({});
     const [cpuAvg10Min, setCpuAvg10Min] = useState({});
     const [cpuAvg15Min, setCpuAvg15Min] = useState({});
+    const [cpuAvg30Min, setCpuAvg30Min] = useState({});
     const [cpuAvg1Hour, setCpuAvg1Hour] = useState({});
     const [cpuAvg2Hours, setCpuAvg2Hours] = useState({});
     const [cpuAvg4Hours, setCpuAvg4Hours] = useState({});
@@ -13,8 +14,15 @@ const Reports = () => {
     const [cpuAvg12Hours, setCpuAvg12Hours] = useState({});
     const [cpuAvg24Hours, setCpuAvg24Hours] = useState({});
 
+    const [memoryAvg5Min, setMemoryAvg5Min] = useState({});
+    const [memoryAvg10Min, setMemoryAvg10Min] = useState({});
     const [memoryAvg15Min, setMemoryAvg15Min] = useState({});
+    const [memoryAvg30Min, setMemoryAvg30Min] = useState({});
     const [memoryAvg1Hour, setMemoryAvg1Hour] = useState({});
+    const [memoryAvg2Hours, setMemoryAvg2Hours] = useState({});
+    const [memoryAvg4Hours, setMemoryAvg4Hours] = useState({});
+    const [memoryAvg6Hours, setMemoryAvg6Hours] = useState({});
+    const [memoryAvg12Hours, setMemoryAvg12Hours] = useState({});
     const [memoryAvg24Hours, setMemoryAvg24Hours] = useState({});
 
     const [diskAvg15Min, setDiskAvg15Min] = useState({});
@@ -57,6 +65,16 @@ const Reports = () => {
             })
             .catch(error => {
               console.error('Error fetching avg cpu util 15 min:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/cpu/avg-util-30min')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setCpuAvg30Min(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg cpu util 30 min:', error);
             });
     
         fetch('http://localhost:8080/api/v1/cpu/avg-util-1hour')
@@ -119,6 +137,26 @@ const Reports = () => {
               console.error('Error fetching avg cpu util 24 hours:', error);
             });
 
+        fetch('http://localhost:8080/api/v1/memory/avg-util-5min')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setMemoryAvg5Min(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg memory util 5 min:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/memory/avg-util-10min')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setMemoryAvg10Min(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg memory util 10 min:', error);
+            });
+
         fetch('http://localhost:8080/api/v1/memory/avg-util-15min')
             .then(response => response.json())
             .then(data => {
@@ -127,6 +165,16 @@ const Reports = () => {
             })
             .catch(error => {
               console.error('Error fetching avg memory util 15 min:', error);
+            });
+          
+        fetch('http://localhost:8080/api/v1/memory/avg-util-30min')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setMemoryAvg30Min(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg memory util 30 min:', error);
             });
 
         fetch('http://localhost:8080/api/v1/memory/avg-util-1hour')
@@ -137,6 +185,46 @@ const Reports = () => {
             })
             .catch(error => {
               console.error('Error fetching avg memory util 1 hour:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/memory/avg-util-2hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setMemoryAvg2Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg memory util 2 hours:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/memory/avg-util-4hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setMemoryAvg4Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg memory util 4 hours:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/memory/avg-util-6hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setMemoryAvg6Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg memory util 6 hours:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/memory/avg-util-12hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setMemoryAvg12Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg memory util 12 hours:', error);
             });
 
         fetch('http://localhost:8080/api/v1/memory/avg-util-24hour')
@@ -240,6 +328,14 @@ const Reports = () => {
         <div>No data available for 15 Min Report</div>
         )}
         </div>
+
+        <div>
+            {cpuAvg30Min !== null ? (
+        <div> CPU Average 30 Min: {cpuAvg30Min.utilization}</div>
+        ) : (
+        <div>No data available for 30 Min Report</div>
+        )}
+        </div>
     
         <div>
             {cpuAvg1Hour !== null ? (
@@ -290,10 +386,34 @@ const Reports = () => {
         </div>
 
         <div>
+            {memoryAvg5Min !== null ? (
+        <div>Memory Average 5 Min: {memoryAvg5Min.utilization}</div>
+        ) : (
+        <div>No data available for 5 Min Report</div>
+        )}
+        </div>
+
+        <div>
+            {memoryAvg10Min !== null ? (
+        <div>Memory Average 10 Min: {memoryAvg10Min.utilization}</div>
+        ) : (
+        <div>No data available for 10 Min Report</div>
+        )}
+        </div>
+
+        <div>
             {memoryAvg15Min !== null ? (
         <div>Memory Average 15 Min: {memoryAvg15Min.utilization}</div>
         ) : (
         <div>No data available for 15 Min Report</div>
+        )}
+        </div>
+
+        <div>
+            {memoryAvg30Min !== null ? (
+        <div>Memory Average 30 Min: {memoryAvg30Min.utilization}</div>
+        ) : (
+        <div>No data available for 30 Min Report</div>
         )}
         </div>
     
@@ -302,6 +422,38 @@ const Reports = () => {
         <div>Memory Average 1 Hour: {memoryAvg1Hour.utilization}</div>
         ) : (
         <div>No data available for 1 Hour Report</div>
+        )}
+        </div>
+
+        <div>
+            {memoryAvg2Hours !== null ? (
+        <div>Memory Average 2 Hours: {memoryAvg2Hours.utilization}</div>
+        ) : (
+        <div>No data available for 2 Hours Report</div>
+        )}
+        </div>
+
+        <div>
+            {memoryAvg4Hours !== null ? (
+        <div>Memory Average 4 Hours: {memoryAvg4Hours.utilization}</div>
+        ) : (
+        <div>No data available for 4 Hours Report</div>
+        )}
+        </div>
+
+        <div>
+            {memoryAvg6Hours !== null ? (
+        <div>Memory Average 6 Hours: {memoryAvg6Hours.utilization}</div>
+        ) : (
+        <div>No data available for 6 Hours Report</div>
+        )}
+        </div>
+
+        <div>
+            {memoryAvg12Hours !== null ? (
+        <div>Memory Average 12 Hours: {memoryAvg12Hours.utilization}</div>
+        ) : (
+        <div>No data available for 12 Hours Report</div>
         )}
         </div>
 

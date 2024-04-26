@@ -67,6 +67,24 @@ public class MemoryController {
     }
 
     /**
+     * GET Request endpoint to handle getting Memory average utilization in past 5 min
+     * @return average memory utilization
+     */
+    @GetMapping(path = "avg-util-5min")
+    public Map<String, Double> getAverageUtilization5Min() {
+        return memoryService.getAverageUtilization5Min();
+    }
+
+    /**
+     * GET Request endpoint to handle getting Memory average utilization in past 10 min
+     * @return average memory utilization
+     */
+    @GetMapping(path = "avg-util-10min")
+    public Map<String, Double> getAverageUtilization10Min() {
+        return memoryService.getAverageUtilization10Min();
+    }
+
+    /**
      * GET Request endpoint to handle getting Memory average utilization in past 15 min
      * @return average memory utilization
      */
@@ -76,12 +94,57 @@ public class MemoryController {
     }
 
     /**
+     * GET Request endpoint to handle getting Memory average utilization in past 30 min
+     * @return average memory utilization
+     */
+    @GetMapping(path = "avg-util-30min")
+    public Map<String, Double> getAverageUtilization30Min() {
+        return memoryService.getAverageUtilization30Min();
+    }
+
+    /**
      * GET Request endpoint to handle getting Memory average utilization in past 1 hour
      * @return average memory utilization
      */
     @GetMapping(path = "avg-util-1hour")
     public Map<String, Double> getAverageUtilization1Hour() {
         return memoryService.getAverageUtilization1Hour();
+    }
+
+    /**
+     * GET Request endpoint to handle getting Memory average utilization in past 2 hours
+     * @return average memory utilization
+     */
+    @GetMapping(path = "avg-util-2hour")
+    public Map<String, Double> getAverageUtilization2Hours() {
+        return memoryService.getAverageUtilization2Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting Memory average utilization in past 4 hours
+     * @return average memory utilization
+     */
+    @GetMapping(path = "avg-util-4hour")
+    public Map<String, Double> getAverageUtilization4Hours() {
+        return memoryService.getAverageUtilization4Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting Memory average utilization in past 6 hours
+     * @return average memory utilization
+     */
+    @GetMapping(path = "avg-util-6hour")
+    public Map<String, Double> getAverageUtilization6Hours() {
+        return memoryService.getAverageUtilization6Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting Memory average utilization in past 12 hours
+     * @return average memory utilization
+     */
+    @GetMapping(path = "avg-util-12hour")
+    public Map<String, Double> getAverageUtilization12Hours() {
+        return memoryService.getAverageUtilization12Hours();
     }
 
     /**
