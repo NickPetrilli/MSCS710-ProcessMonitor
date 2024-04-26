@@ -33,7 +33,7 @@ const Reports = () => {
     const [diskAvg2Hours, setDiskAvg2Hours] = useState({});
     const [diskAvg4Hours, setDiskAvg4Hours] = useState({});
     const [diskAvg6Hours, setDiskAvg6Hours] = useState({});
-    const [diskAvg12Hour, setDiskAvg12Hour] = useState({});
+    const [diskAvg12Hours, setDiskAvg12Hours] = useState({});
     const [diskAvg24Hours, setDiskAvg24Hours] = useState({});
 
     const [diskSpeedAvg5Min, setDiskSpeedAvg5Min] = useState({});
@@ -306,6 +306,7 @@ const Reports = () => {
             .then(data => {
               // Update the JSON object with fetched data
               setDiskAvg2Hours(data);
+              console.log("Average Disk Util 2 Hours: " + diskAvg2Hours.utilization);
             })
             .catch(error => {
               console.error('Error fetching avg disk util 2 hours:', error);
@@ -381,6 +382,16 @@ const Reports = () => {
               console.error('Error fetching avg disk speeds 15 min:', error);
             });
 
+        fetch('http://localhost:8080/api/v1/disk/avg-speeds-30min')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskSpeedAvg30Min(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk speeds 30 min:', error);
+            });
+
         fetch('http://localhost:8080/api/v1/disk/avg-speeds-1hour')
             .then(response => response.json())
             .then(data => {
@@ -444,9 +455,12 @@ const Reports = () => {
     
         // Run the function immediately when the component mounts
         fetchData();
-    
-      }, []); // Empty dependency array means this effect runs once after the first render
-
+        // Set up interval to run the function every 10 seconds
+        const intervalId = setInterval(fetchData, 10000);
+      
+        return () => clearInterval(intervalId);
+      }, []);
+      
     return (
     <>
         <div>
@@ -650,18 +664,10 @@ const Reports = () => {
         </div>
 
         <div>
-            {diskAvg2Hour !== null ? (
-        <div>Disk Average 2 Hour: {diskAvg2Hour.utilization}</div>
+            {diskAvg2Hours !== null ? (
+        <div>Disk Average 2 Hour: {diskAvg2Hours.utilization}</div>
         ) : (
         <div>No data available for 1 Hour Report</div>
-        )}
-        </div>
-
-        <div>
-            {diskAvg4Hour !== null ? (
-        <div>Disk Average 4 Hours: {diskAvg4Hours.utilization}</div>
-        ) : (
-        <div>No data available for 4 Hours Report</div>
         )}
         </div>
 
@@ -674,7 +680,7 @@ const Reports = () => {
         </div>
 
         <div>
-            {diskAvg6Hour !== null ? (
+            {diskAvg6Hours !== null ? (
         <div>Disk Average 6 Hours: {diskAvg6Hours.utilization}</div>
         ) : (
         <div>No data available for 6 Hours Report</div>
@@ -682,8 +688,8 @@ const Reports = () => {
         </div>
 
         <div>
-            {diskAvg12Hour !== null ? (
-        <div>Disk Average 12 Hour: {diskAvg12Hour.utilization}</div>
+            {diskAvg12Hours !== null ? (
+        <div>Disk Average 12 Hour: {diskAvg12Hours.utilization}</div>
         ) : (
         <div>No data available for 12 Hours Report</div>
         )}
@@ -775,7 +781,7 @@ const Reports = () => {
         </div>
 
         <div>
-            {diskSpeedAvg6Hour !== null ? (
+            {diskSpeedAvg6Hours !== null ? (
         <>
         <div>Disk Read Speed Average 6 Hours: {diskSpeedAvg6Hours.averageReadSpeed} </div>
         <div>Disk Write Speed Average 6 Hours: {diskSpeedAvg6Hours.averageWriteSpeed}</div>
@@ -786,7 +792,7 @@ const Reports = () => {
         </div>
 
         <div>
-            {diskSpeedAvg12Hour !== null ? (
+            {diskSpeedAvg12Hours !== null ? (
         <>
         <div>Disk Read Speed Average 12 Hours: {diskSpeedAvg12Hours.averageReadSpeed} </div>
         <div>Disk Write Speed Average 12 Hours: {diskSpeedAvg12Hours.averageWriteSpeed}</div>
