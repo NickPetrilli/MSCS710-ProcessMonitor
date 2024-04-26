@@ -75,12 +75,39 @@ public class DiskController {
     }
 
     /**
+     * GET Request endpoint to handle getting disk average speeds in past 5 minutes
+     * @return DiskAverages object containing average read and write speed
+     */
+    @GetMapping(path = "avg-speeds-5min")
+    public DiskAverages getAverageSpeeds5Min() {
+        return diskService.getAverageSpeeds5Min();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average speeds in past 10 minutes
+     * @return DiskAverages object containing average read and write speed
+     */
+    @GetMapping(path = "avg-speeds-10min")
+    public DiskAverages getAverageSpeeds10Min() {
+        return diskService.getAverageSpeeds10Min();
+    }
+
+    /**
      * GET Request endpoint to handle getting disk average speeds in past 15 minutes
      * @return DiskAverages object containing average read and write speed
      */
     @GetMapping(path = "avg-speeds-15min")
     public DiskAverages getAverageSpeeds15Min() {
         return diskService.getAverageSpeeds15Min();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average speeds in past 30 minutes
+     * @return DiskAverages object containing average read and write speed
+     */
+    @GetMapping(path = "avg-speeds-30min")
+    public DiskAverages getAverageSpeeds30Min() {
+        return diskService.getAverageSpeeds30Min();
     }
 
     /**
@@ -93,12 +120,66 @@ public class DiskController {
     }
 
     /**
+     * GET Request endpoint to handle getting disk average speeds in past 2 hours
+     * @return DiskAverages object containing average read and write speed
+     */
+    @GetMapping(path = "avg-speeds-2hour")
+    public DiskAverages getAverageSpeeds2Hours() {
+        return diskService.getAverageSpeeds2Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average speeds in past 4 hours
+     * @return DiskAverages object containing average read and write speed
+     */
+    @GetMapping(path = "avg-speeds-4hour")
+    public DiskAverages getAverageSpeeds4Hours() {
+        return diskService.getAverageSpeeds4Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average speeds in past 6 hours
+     * @return DiskAverages object containing average read and write speed
+     */
+    @GetMapping(path = "avg-speeds-6hour")
+    public DiskAverages getAverageSpeeds6Hours() {
+        return diskService.getAverageSpeeds6Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average speeds in past 12 hours
+     * @return DiskAverages object containing average read and write speed
+     */
+    @GetMapping(path = "avg-speeds-12hour")
+    public DiskAverages getAverageSpeeds12Hours() {
+        return diskService.getAverageSpeeds12Hours();
+    }
+
+    /**
      * GET Request endpoint to handle getting disk average speeds in past 24 hours
      * @return DiskAverages object containing average read and write speed
      */
     @GetMapping(path = "avg-speeds-24hour")
     public DiskAverages getAverageSpeeds24Hours() {
         return diskService.getAverageSpeeds24Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average utilization in past 5 minutes
+     * @return disk average utilization
+     */
+    @GetMapping(path = "avg-util-5min")
+    public Map<String, Double> getAverageUtilization5Min() {
+        return diskService.getAverageUtilization5Min();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average utilization in past 10 minutes
+     * @return disk average utilization
+     */
+    @GetMapping(path = "avg-util-10min")
+    public Map<String, Double> getAverageUtilization10Min() {
+        return diskService.getAverageUtilization10Min();
     }
 
     /**
@@ -111,12 +192,57 @@ public class DiskController {
     }
 
     /**
+     * GET Request endpoint to handle getting disk average utilization in past 30 minutes
+     * @return disk average utilization
+     */
+    @GetMapping(path = "avg-util-30min")
+    public Map<String, Double> getAverageUtilization30Min() {
+        return diskService.getAverageUtilization30Min();
+    }
+
+    /**
      * GET Request endpoint to handle getting disk average utilization in past 1 hour
      * @return disk average utilization
      */
     @GetMapping(path = "avg-util-1hour")
     public Map<String, Double> getAverageUtilization1Hour() {
         return diskService.getAverageUtilization1Hour();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average utilization in past 2 hours
+     * @return disk average utilization
+     */
+    @GetMapping(path = "avg-util-2hour")
+    public Map<String, Double> getAverageUtilization2Hours() {
+        return diskService.getAverageUtilization2Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average utilization in past 4 hours
+     * @return disk average utilization
+     */
+    @GetMapping(path = "avg-util-4hour")
+    public Map<String, Double> getAverageUtilization4Hours() {
+        return diskService.getAverageUtilization4Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average utilization in past 6 hours
+     * @return disk average utilization
+     */
+    @GetMapping(path = "avg-util-6hour")
+    public Map<String, Double> getAverageUtilization6Hours() {
+        return diskService.getAverageUtilization6Hours();
+    }
+
+    /**
+     * GET Request endpoint to handle getting disk average utilization in past 12 hours
+     * @return disk average utilization
+     */
+    @GetMapping(path = "avg-util-12hour")
+    public Map<String, Double> getAverageUtilization12Hours() {
+        return diskService.getAverageUtilization12Hours();
     }
     
     /**

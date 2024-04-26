@@ -25,12 +25,26 @@ const Reports = () => {
     const [memoryAvg12Hours, setMemoryAvg12Hours] = useState({});
     const [memoryAvg24Hours, setMemoryAvg24Hours] = useState({});
 
+    const [diskAvg5Min, setDiskAvg5Min] = useState({});
+    const [diskAvg10Min, setDiskAvg10Min] = useState({});
     const [diskAvg15Min, setDiskAvg15Min] = useState({});
+    const [diskAvg30Min, setDiskAvg30Min] = useState({});
     const [diskAvg1Hour, setDiskAvg1Hour] = useState({});
+    const [diskAvg2Hours, setDiskAvg2Hours] = useState({});
+    const [diskAvg4Hours, setDiskAvg4Hours] = useState({});
+    const [diskAvg6Hours, setDiskAvg6Hours] = useState({});
+    const [diskAvg12Hour, setDiskAvg12Hour] = useState({});
     const [diskAvg24Hours, setDiskAvg24Hours] = useState({});
 
+    const [diskSpeedAvg5Min, setDiskSpeedAvg5Min] = useState({});
+    const [diskSpeedAvg10Min, setDiskSpeedAvg10Min] = useState({});
     const [diskSpeedAvg15Min, setDiskSpeedAvg15Min] = useState({});
+    const [diskSpeedAvg30Min, setDiskSpeedAvg30Min] = useState({});
     const [diskSpeedAvg1Hour, setDiskSpeedAvg1Hour] = useState({});
+    const [diskSpeedAvg2Hours, setDiskSpeedAvg2Hours] = useState({});
+    const [diskSpeedAvg4Hours, setDiskSpeedAvg4Hours] = useState({});
+    const [diskSpeedAvg6Hours, setDiskSpeedAvg6Hours] = useState({});
+    const [diskSpeedAvg12Hours, setDiskSpeedAvg12Hours] = useState({});
     const [diskSpeedAvg24Hours, setDiskSpeedAvg24Hours] = useState({});
 
     useEffect(() => {
@@ -237,7 +251,27 @@ const Reports = () => {
               console.error('Error fetching avg memory util 24 hours:', error);
             });
 
-          fetch('http://localhost:8080/api/v1/disk/avg-util-15min')
+        fetch('http://localhost:8080/api/v1/disk/avg-util-5min')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskAvg5Min(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk util 5 min:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/disk/avg-util-10min')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskAvg10Min(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk util 10 min:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/disk/avg-util-15min')
             .then(response => response.json())
             .then(data => {
               // Update the JSON object with fetched data
@@ -245,6 +279,16 @@ const Reports = () => {
             })
             .catch(error => {
               console.error('Error fetching avg disk util 15 min:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/disk/avg-util-30min')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskAvg30Min(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk util 30 min:', error);
             });
 
         fetch('http://localhost:8080/api/v1/disk/avg-util-1hour')
@@ -257,6 +301,46 @@ const Reports = () => {
               console.error('Error fetching avg disk util 1 hour:', error);
             });
 
+        fetch('http://localhost:8080/api/v1/disk/avg-util-2hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskAvg2Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk util 2 hours:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/disk/avg-util-4hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskAvg4Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk util 4 hours:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/disk/avg-util-6hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskAvg6Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk util 6 hours:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/disk/avg-util-12hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskAvg12Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk util 12 hours:', error);
+            });
+
         fetch('http://localhost:8080/api/v1/disk/avg-util-24hour')
             .then(response => response.json())
             .then(data => {
@@ -265,6 +349,26 @@ const Reports = () => {
             })
             .catch(error => {
               console.error('Error fetching avg disk util 24 hours:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/disk/avg-speeds-5min')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskSpeedAvg5Min(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk speeds 5 min:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/disk/avg-speeds-10min')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskSpeedAvg10Min(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk speeds 10 min:', error);
             });
 
           fetch('http://localhost:8080/api/v1/disk/avg-speeds-15min')
@@ -285,6 +389,46 @@ const Reports = () => {
             })
             .catch(error => {
               console.error('Error fetching avg disk speeds 1 hour:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/disk/avg-speeds-2hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskSpeedAvg2Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk speeds 2 hours:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/disk/avg-speeds-4hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskSpeedAvg4Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk speeds 4 hours:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/disk/avg-speeds-6hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskSpeedAvg6Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk speeds 6 hours:', error);
+            });
+
+        fetch('http://localhost:8080/api/v1/disk/avg-speeds-12hour')
+            .then(response => response.json())
+            .then(data => {
+              // Update the JSON object with fetched data
+              setDiskSpeedAvg12Hours(data);
+            })
+            .catch(error => {
+              console.error('Error fetching avg disk speeds 12 hours:', error);
             });
 
         fetch('http://localhost:8080/api/v1/disk/avg-speeds-24hour')
@@ -466,10 +610,34 @@ const Reports = () => {
         </div>
 
         <div>
+            {diskAvg5Min !== null ? (
+        <div>Disk Average 5 Min: {diskAvg5Min.utilization}</div>
+        ) : (
+        <div>No data available for 5 Min Report</div>
+        )}
+        </div>
+
+        <div>
+            {diskAvg10Min !== null ? (
+        <div>Disk Average 10 Min: {diskAvg10Min.utilization}</div>
+        ) : (
+        <div>No data available for 10 Min Report</div>
+        )}
+        </div>
+
+        <div>
             {diskAvg15Min !== null ? (
         <div>Disk Average 15 Min: {diskAvg15Min.utilization}</div>
         ) : (
         <div>No data available for 15 Min Report</div>
+        )}
+        </div>
+
+        <div>
+            {diskAvg30Min !== null ? (
+        <div>Disk Average 30 Min: {diskAvg30Min.utilization}</div>
+        ) : (
+        <div>No data available for 30 Min Report</div>
         )}
         </div>
     
@@ -482,6 +650,46 @@ const Reports = () => {
         </div>
 
         <div>
+            {diskAvg2Hour !== null ? (
+        <div>Disk Average 2 Hour: {diskAvg2Hour.utilization}</div>
+        ) : (
+        <div>No data available for 1 Hour Report</div>
+        )}
+        </div>
+
+        <div>
+            {diskAvg4Hour !== null ? (
+        <div>Disk Average 4 Hours: {diskAvg4Hours.utilization}</div>
+        ) : (
+        <div>No data available for 4 Hours Report</div>
+        )}
+        </div>
+
+        <div>
+            {diskAvg4Hours !== null ? (
+        <div>Disk Average 4 Hours: {diskAvg4Hours.utilization}</div>
+        ) : (
+        <div>No data available for 4 Hours Report</div>
+        )}
+        </div>
+
+        <div>
+            {diskAvg6Hour !== null ? (
+        <div>Disk Average 6 Hours: {diskAvg6Hours.utilization}</div>
+        ) : (
+        <div>No data available for 6 Hours Report</div>
+        )}
+        </div>
+
+        <div>
+            {diskAvg12Hour !== null ? (
+        <div>Disk Average 12 Hour: {diskAvg12Hour.utilization}</div>
+        ) : (
+        <div>No data available for 12 Hours Report</div>
+        )}
+        </div>
+
+        <div>
             {diskAvg24Hours !== null ? (
         <div>Disk Average 24 Hours: {diskAvg24Hours.utilization}</div>
         ) : (
@@ -490,10 +698,43 @@ const Reports = () => {
         </div>
 
         <div>
+            {diskSpeedAvg5Min !== null ? (
+        <>
+        <div>Disk Read Speed Average 5 Min: {diskSpeedAvg5Min.averageReadSpeed} </div>
+        <div>Disk Write Speed Average 5 Min: {diskSpeedAvg5Min.averageWriteSpeed}</div>
+        </>
+        ) : (
+        <div>No data available for 5 Min Report</div>
+        )}
+        </div>
+
+        <div>
+            {diskSpeedAvg10Min !== null ? (
+        <>
+        <div>Disk Read Speed Average 10 Min: {diskSpeedAvg10Min.averageReadSpeed} </div>
+        <div>Disk Write Speed Average 10 Min: {diskSpeedAvg10Min.averageWriteSpeed}</div>
+        </>
+        ) : (
+        <div>No data available for 10 Min Report</div>
+        )}
+        </div>
+
+        <div>
             {diskSpeedAvg15Min !== null ? (
         <>
         <div>Disk Read Speed Average 15 Min: {diskSpeedAvg15Min.averageReadSpeed} </div>
         <div>Disk Write Speed Average 15 Min: {diskSpeedAvg15Min.averageWriteSpeed}</div>
+        </>
+        ) : (
+        <div>No data available for 15 Min Report</div>
+        )}
+        </div>
+
+        <div>
+            {diskSpeedAvg30Min !== null ? (
+        <>
+        <div>Disk Read Speed Average 30 Min: {diskSpeedAvg30Min.averageReadSpeed} </div>
+        <div>Disk Write Speed Average 30 Min: {diskSpeedAvg30Min.averageWriteSpeed}</div>
         </>
         ) : (
         <div>No data available for 15 Min Report</div>
@@ -508,6 +749,50 @@ const Reports = () => {
         </>
         ) : (
         <div>No data available for 1 Hour Report</div>
+        )}
+        </div>
+
+        <div>
+            {diskSpeedAvg2Hours !== null ? (
+        <>
+        <div>Disk Read Speed Average 2 Hours: {diskSpeedAvg2Hours.averageReadSpeed} </div>
+        <div>Disk Write Speed Average 2 Hours: {diskSpeedAvg2Hours.averageWriteSpeed}</div>
+        </>
+        ) : (
+        <div>No data available for 2 Hours Report</div>
+        )}
+        </div>
+
+        <div>
+            {diskSpeedAvg4Hours !== null ? (
+        <>
+        <div>Disk Read Speed Average 4 Hours: {diskSpeedAvg4Hours.averageReadSpeed} </div>
+        <div>Disk Write Speed Average 4 Hours: {diskSpeedAvg4Hours.averageWriteSpeed}</div>
+        </>
+        ) : (
+        <div>No data available for 4 Hours Report</div>
+        )}
+        </div>
+
+        <div>
+            {diskSpeedAvg6Hour !== null ? (
+        <>
+        <div>Disk Read Speed Average 6 Hours: {diskSpeedAvg6Hours.averageReadSpeed} </div>
+        <div>Disk Write Speed Average 6 Hours: {diskSpeedAvg6Hours.averageWriteSpeed}</div>
+        </>
+        ) : (
+        <div>No data available for 6 Hours Report</div>
+        )}
+        </div>
+
+        <div>
+            {diskSpeedAvg12Hour !== null ? (
+        <>
+        <div>Disk Read Speed Average 12 Hours: {diskSpeedAvg12Hours.averageReadSpeed} </div>
+        <div>Disk Write Speed Average 12 Hours: {diskSpeedAvg12Hours.averageWriteSpeed}</div>
+        </>
+        ) : (
+        <div>No data available for 12 Hours Report</div>
         )}
         </div>
 
