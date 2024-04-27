@@ -4,7 +4,6 @@ import com.process_monitor.processmonitor.api.memory.model.Memory;
 import com.process_monitor.processmonitor.api.cpu.model.Cpu;
 import com.process_monitor.processmonitor.api.disk.model.Disk;
 import com.process_monitor.processmonitor.api.process.model.Process;
-import com.process_monitor.processmonitor.collector.MetricCollector;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,7 +18,7 @@ import org.slf4j.LoggerFactory;
  */
 public class DatabaseFunctions {
     
-    private static final Logger logger = LoggerFactory.getLogger(MetricCollector.class);
+    private static final Logger logger = LoggerFactory.getLogger(DatabaseFunctions.class);
 
     // Database URL
     private final String URL = "jdbc:sqlite:ProcessMonitor.db";

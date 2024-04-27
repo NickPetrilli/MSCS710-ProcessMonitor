@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Class to prune database
- * Scheduled to prune every 12 hours deleting records that are 1 week old
+ * Scheduled to prune every 5 minutes deleting records that are 1 week old
  */
 @Component
 public class DatabasePruning {
@@ -25,8 +25,8 @@ public class DatabasePruning {
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     
-    //180000 milliseconds = 3 minutes
-    @Scheduled(fixedRate = 180000)
+    //300000 milliseconds = 5 minutes
+    @Scheduled(fixedRate = 300000)
     public void pruneDatabase() {
         
         try {
@@ -85,12 +85,6 @@ public class DatabasePruning {
                 }
             }
         }
-    }
-
-    //Used to test the above function, can be deleted once function is properly scheduled
-    public static void main(String[] args) {
-        DatabasePruning dbPrune = new DatabasePruning();
-        dbPrune.pruneDatabase();
     }
 }
     
