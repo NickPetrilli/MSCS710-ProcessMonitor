@@ -26,8 +26,9 @@ public class MetricCollector {
 
     private static final Logger logger = LoggerFactory.getLogger(MetricCollector.class);
 
-    // Collects metrics every 10 seconds.
-    // fixedRate = 10000
+    /**
+     * Collects metrics every 10 seconds (fixedRate = 10000).
+     */
     @Scheduled(fixedRate = 10000)
     public void collectMetrics() {
         LocalDateTime currentTimestamp = LocalDateTime.now();
@@ -36,7 +37,9 @@ public class MetricCollector {
         // Object to handle database functions
         DatabaseFunctions databaseFunctions = new DatabaseFunctions(currentTimestamp.toString().replace('T', ' '));
 
-        // Object to handle collecting running process metrics
+        //============================================================================================================
+        // Process Collection
+
         ProcessCollector processCollector = new ProcessCollector();
 
         List<Process> processList = processCollector.getProcessMetrics();
@@ -48,21 +51,16 @@ public class MetricCollector {
             if (process.getName().equals("Idle")) {
                 continue;
             }
-            //System.out.println("Process Name: " + process.getName());
             databaseFunctions.insertProcess(process);
         }
-        //CPU and Disk utilization are summed in the ProcessCollector
-        //double cpuUtilization = processCollector.getTotalCpuPercentage();
-        //CPU usage can exceed 100% due to multithreading
-        //To handle this, divide by the number of logical processors to match Task Manager
-        //int logicalProcessors = CpuCollector.getLogicalProcessorCount();
-        //cpuUtilization = cpuUtilization / logicalProcessors;
 
         double diskUtilization = processCollector.getTotalDiskPercentage();
 
         logger.info("Finished insert of process list at {}", LocalDateTime.now());
 
-        // Object to handle collecting CPU metrics
+        //============================================================================================================
+        // CPU Collection
+
         CpuCollector cpuCollector = new CpuCollector();
         String name = cpuCollector.getName();
         long speed = cpuCollector.getCurrentFreq();
@@ -80,8 +78,9 @@ public class MetricCollector {
         databaseFunctions.insertCpu(cpu);
         logger.info("Finished insert of cpu metrics at {}", LocalDateTime.now());
 
+        //============================================================================================================
+        // Memory Collection
 
-        //Object to handle collecting memory metrics
         MemoryCollector memoryCollector = new MemoryCollector();
 
         long totalMemory = memoryCollector.getTotalMemory();
@@ -96,7 +95,9 @@ public class MetricCollector {
         databaseFunctions.insertMemory(memory);
         logger.info("Finished insert of memory metrics at {}", LocalDateTime.now());
 
-        //Object to handle collecting disk metrics
+        //============================================================================================================
+        // Disk Collection
+
         DiskCollector diskCollector = new DiskCollector();
 
         List<Disk> diskStores = diskCollector.getDiskMetrics();

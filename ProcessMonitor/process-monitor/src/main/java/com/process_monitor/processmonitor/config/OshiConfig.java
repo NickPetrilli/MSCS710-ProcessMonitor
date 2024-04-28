@@ -5,6 +5,10 @@ import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 import oshi.util.GlobalConfig;
 
+/**
+ * Configuration class for enabling the OSHI library to return output results like Windows Task Manager,
+ * specifically CPU metrics.
+ */
 @Component
 public class OshiConfig {
     

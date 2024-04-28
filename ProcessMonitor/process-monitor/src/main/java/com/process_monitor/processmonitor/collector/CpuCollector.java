@@ -102,7 +102,6 @@ public class CpuCollector {
     public double getCpuUtilization() {
         // Initial measurement
         long[] oldTicks = processor.getSystemCpuLoadTicks();
-        //long[][] oldProcTicks = processor.getProcessorCpuLoadTicks();
 
         try {
             // Delay before the next measurement
@@ -113,12 +112,6 @@ public class CpuCollector {
 
         // Subsequent measurement
         double systemCpuLoad = processor.getSystemCpuLoadBetweenTicks(oldTicks) * 100;
-        //System.out.println("System CPU Load: " + (systemCpuLoad * 100) + "%");
-        
-        // double[] procCpuLoad = processor.getProcessorCpuLoadBetweenTicks(oldProcTicks);
-        // for (int i = 0; i < procCpuLoad.length; i++) {
-        //     System.out.println("Processor " + i + " CPU Load: " + (procCpuLoad[i] * 100) + "%");
-        // }
         
         return systemCpuLoad;
     }

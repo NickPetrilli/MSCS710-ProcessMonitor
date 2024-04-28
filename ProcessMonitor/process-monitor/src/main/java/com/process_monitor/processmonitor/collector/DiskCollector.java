@@ -30,7 +30,7 @@ public class DiskCollector {
     private static VirtualMemory virtualMemory = systemInfo.getHardware().getMemory().getVirtualMemory();
 
     private static String unsafeCharactersRegex = "[\\s#%&{}\\\\<>*?/|\":.^~\\[\\]`]+";
-    
+
 
     public List<Disk> getDiskMetrics() {
 
@@ -65,12 +65,6 @@ public class DiskCollector {
         }
 
         return disks;
-    }
-
-    public void updateDiskData() {
-        for (HWDiskStore disk : diskStores) {
-            disk.updateAttributes();
-        }
     }
 
     public long getDiskReadSpeed(int index) {

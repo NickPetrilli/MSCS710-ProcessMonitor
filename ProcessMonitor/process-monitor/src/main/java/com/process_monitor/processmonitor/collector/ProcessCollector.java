@@ -29,9 +29,6 @@ public class ProcessCollector {
     private final SystemInfo systemInfo = new SystemInfo();
     private final OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
     private final List<OSProcess> allOSProcesses = operatingSystem.getProcesses();
-    // private double cpUsage = CpuCollector.getCpuUtilization();
-    // private int cpuCores = CpuCollector.getCoreCount();
-    // private int cpuLogical = CpuCollector.getLogicalProcessorCount();
     private double totalDiskUsagePercentage = 0.0;
     private double totalCpuUsagePercentage = 0.0;
 
@@ -110,11 +107,15 @@ public class ProcessCollector {
             if (process.getName().equals("Idle")) {
                 continue;
             }
-            // cpuUsages.add(process.getProcessCpuLoadCumulative() * 100);
+
 
             MemoryCollector memoryCollector = new MemoryCollector();
             long memUsage = process.getResidentSetSize();
+
+            // Stores memory usage of each process in bytes
             memUsagesBytes.add(memUsage);
+
+            // Stores memory usage of each process as a percentage
             memUsagesPer.add(memUsage / (memoryCollector.getTotalMemory() * 1.0) * 100);
 
             long secRead = process.getBytesRead();
@@ -163,15 +164,8 @@ public class ProcessCollector {
 
         
         for (double processCpuUsage : cpuUsages) {
-            //System.out.println("Previous Usage: " + totalCpuUsagePercentage);
-            //totalCpuUsagePercentage += processCpuUsage;
             totalCpuUsagePercentage += processCpuUsage;
-            //System.out.println("NEW Usage: " + totalCpuUsagePercentage + " || CHANGE: " + processCpuUsage);
         }
-
-        //System.out.println("\n\n" + totalCpuUsagePercentage + "\n\n");
-
-        //System.out.println("\n\n" + totalDiskUsagePercentage + "\n\n");
 
         return processList;
     }
