@@ -14,6 +14,10 @@ import com.process_monitor.processmonitor.api.memory.model.Memory;
 import com.process_monitor.processmonitor.api.process.model.Process;
 
 
+/**
+ * RESTful Controller for Memory.
+ * Handles all API requests passed to URL 'http://localhost:8080/api/v1/memory'.
+ */
 @RestController
 @RequestMapping(path = "api/v1/memory")
 @CrossOrigin
@@ -25,6 +29,10 @@ public class MemoryController {
         this.memoryService = memoryService;
     }
 
+    /**
+     * GET Request endpoint to handle getting and returning current memory information.
+     * @return Most recent memory data.
+     */
     @GetMapping
     public Memory getMemoryData() {
         Memory memory = memoryService.getMemoryData();
@@ -32,6 +40,10 @@ public class MemoryController {
         return memory;
     }
 
+    /**
+     * GET Request endpoint to handles getting and returning the top-3 processes based on memory usage.
+     * @return List of processes with most memory usage.
+     */
     @GetMapping("/top-processes")
     public ArrayList<Process> getMemoryTopProcesses() {
         ArrayList<Process> processList = memoryService.getMemoryTopProcesses();

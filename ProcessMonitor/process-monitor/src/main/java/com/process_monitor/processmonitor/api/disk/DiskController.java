@@ -12,7 +12,8 @@ import com.process_monitor.processmonitor.api.disk.model.Disk;
 import com.process_monitor.processmonitor.api.process.model.Process;
 
 /**
- * RESTful API for Disk information.
+ * RESTful Controller for Disk.
+ * Handles all API requests passed to URL 'http://localhost:8080/api/v1/disk'.
  */
 @RestController
 @RequestMapping(path = "api/v1/disk")
@@ -27,8 +28,8 @@ public class DiskController {
 
 
     /**
-     * GET Request endpoint to handle getting and returning disk information.
-     * @return
+     * GET Request endpoint to handle getting and returning current disk information.
+     * @return Most recent disk data.
      */
     @GetMapping
     public List<Disk> getDiskData() {

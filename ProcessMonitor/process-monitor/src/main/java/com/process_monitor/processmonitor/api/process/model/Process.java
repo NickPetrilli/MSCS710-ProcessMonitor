@@ -1,6 +1,8 @@
 package com.process_monitor.processmonitor.api.process.model;
 
-
+/**
+ * Model class for Process data.
+ */
 public class Process {
     private int id;
     private String timestamp;

@@ -18,6 +18,10 @@ import org.springframework.stereotype.Service;
 import com.process_monitor.processmonitor.api.memory.model.Memory;
 import com.process_monitor.processmonitor.api.process.model.Process;
 
+/**
+ * Service class for responding to Memory API requests.
+ * Handles each request logic and database functionality for Memory.
+ */
 @Service
 public class MemoryService {
 

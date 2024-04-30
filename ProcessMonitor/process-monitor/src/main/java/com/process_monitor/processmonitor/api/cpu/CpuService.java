@@ -18,6 +18,10 @@ import org.springframework.stereotype.Service;
 import com.process_monitor.processmonitor.api.cpu.model.Cpu;
 import com.process_monitor.processmonitor.api.process.model.Process;
 
+/**
+ * Service class for responding to Cpu API requests.
+ * Handles each request logic and database functionality for Cpu.
+ */
 @Service
 public class CpuService {
 
@@ -30,6 +34,10 @@ public class CpuService {
     private Statement statement = null;
     private ResultSet resultSet = null;
 
+    /**
+     * Retrieves the most recent Cpu data entry from database.
+     * @return Most recent Cpu object.
+     */
     public Cpu getCpuData() {
         Cpu cpu = null;
         try {

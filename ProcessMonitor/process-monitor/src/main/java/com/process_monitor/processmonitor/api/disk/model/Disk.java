@@ -1,5 +1,8 @@
 package com.process_monitor.processmonitor.api.disk.model;
 
+/**
+ * Model class for Disk data.
+ */
 public class Disk {
 
     private String timestamp;

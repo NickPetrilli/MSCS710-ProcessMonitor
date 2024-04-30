@@ -32,6 +32,10 @@ public class DiskCollector {
     private static String unsafeCharactersRegex = "[\\s#%&{}\\\\<>*?/|\":.^~\\[\\]`]+";
 
 
+    /**
+     * Gets the Disk Metrics using the OSHI library functions.
+     * @return List of Disks that are on the user's computer.
+     */
     public List<Disk> getDiskMetrics() {
 
         List<Disk> disks = new ArrayList<>();
@@ -67,6 +71,11 @@ public class DiskCollector {
         return disks;
     }
 
+    /**
+     * Gets the read speed of a specified disk.
+     * @param index Index value of disk
+     * @return Read speed of the disk.
+     */
     public long getDiskReadSpeed(int index) {
         long initReadBytes = diskStores.get(index).getReadBytes();
 
@@ -84,6 +93,11 @@ public class DiskCollector {
         return (retestReadBytes - initReadBytes);
     }
 
+    /**
+     * Gets the write speed of a specified disk.
+     * @param index Index value of disk.
+     * @return Write speed of the disk.
+     */
     public long getDiskWriteSpeed(int index) {
         long initWriteBytes = diskStores.get(index).getWriteBytes();
 

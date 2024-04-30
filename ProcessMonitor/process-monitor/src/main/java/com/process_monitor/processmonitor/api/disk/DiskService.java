@@ -23,6 +23,7 @@ import com.process_monitor.processmonitor.api.disk.model.Disk;
 
 /**
  * Service class for responding to Disk API requests.
+ * Handles each request logic and database functionality for Disk.
  */
 @Service
 public class DiskService {

@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.process_monitor.processmonitor.api.cpu.model.Cpu;
 import com.process_monitor.processmonitor.api.process.model.Process;
 
+/**
+ * RESTful Controller for Cpu.
+ * Handles all API requests passed to URL 'http://localhost:8080/api/v1/cpu'.
+ */
 @RestController
 @RequestMapping(path = "api/v1/cpu")
 @CrossOrigin
@@ -23,6 +27,10 @@ public class CpuController {
         this.cpuService = cpuService;
     }
 
+    /**
+     * GET Request endpoint to handle getting most recent Cpu data stored in database.
+     * @return Most recent Cpu data.
+     */
     @GetMapping
     public Cpu getCpuData() {
         Cpu cpu = cpuService.getCpuData();

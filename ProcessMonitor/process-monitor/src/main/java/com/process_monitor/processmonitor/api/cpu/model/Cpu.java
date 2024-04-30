@@ -1,5 +1,8 @@
 package com.process_monitor.processmonitor.api.cpu.model;
 
+/**
+ * Model class for Cpu data.
+ */
 public class Cpu {
 
     private String timestamp;

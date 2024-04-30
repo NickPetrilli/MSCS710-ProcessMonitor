@@ -1,5 +1,8 @@
 package com.process_monitor.processmonitor.api.memory.model;
 
+/**
+ * Model class for Memory data.
+ */
 public class Memory {
 
     String timestamp;

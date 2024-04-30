@@ -1,5 +1,10 @@
 package com.process_monitor.processmonitor.api.util;
 
+/**
+ * Class to store the average read and write speed of disks.
+ * This class is necessary to package the average read and write speeds of disks
+ * together into a single object.
+ */
 public class DiskAverages {
 
     private long average_readSpeed;
