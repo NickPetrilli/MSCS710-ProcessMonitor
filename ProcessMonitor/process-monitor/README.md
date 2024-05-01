@@ -14,7 +14,7 @@ The page will reload when you make changes.
 # ./mvnw test
 Launches the test runner in the interactive watch mode.
 
-See the section about running tests for more information.
+See the section about [running tests](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-testing-spring-boot-applications-testing) for more information: 
 
 # ./mvnw package
 Builds the app for production to the target folder.
@@ -26,21 +26,21 @@ The build is optimized and ready to be deployed!
 # ./mvnw clean install
 Cleans the project and installs dependencies.
 
-See the section about dependency management for more information.
+See the section about [dependency management](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-dependency-management) for more information.
 
 # Learn More
-You can learn more about Java Spring Boot in the Spring Boot Documentation.
+You can learn more about Java Spring Boot in the [Spring Boot Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/).
 
-To learn Java Spring, check out the Spring Framework Documentation.
+To learn Java Spring, check out the [Spring Framework Documentation](https://docs.spring.io/spring-framework/reference/).
 
 # Advanced Configuration
-This section has moved here: Spring Boot Advanced Configuration
+This section has moved here: [Spring Boot Advanced Configuration](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#features.external-config)
 
 # Deployment
-This section has moved here: Spring Boot Deployment
+This section has moved here: [Spring Boot Deployment](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-deployment)
 
 # Troubleshooting
-This section has moved here: Spring Boot Troubleshooting
+This section has moved here: [Spring Boot Troubleshooting](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-troubleshooting)
 
 # License
 This project is licensed under the MIT License - see the LICENSE file for details.
