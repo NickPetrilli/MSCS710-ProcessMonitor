@@ -145,16 +145,24 @@ const CpuReports = () => {
 
   return (
     <div>
-      <h1 className='detail-title'>
-        <select className='disk-selection-menu' onChange={handleSelectionChange} value="/cpu-reports">
-            <option className='disk-selection-option' key={"CPU"} value={"/cpu-reports"}>CPU Reports</option>
-            <option className='disk-selection-option' key={"Memory"} value={"/memory-reports"}>Memory Reports</option>
-            <option className='disk-selection-option' key={"Disk"} value={"/disk-reports"}>Disk Reports</option>
+      <h1 className='report-title'> Reports </h1>
+      <div className='reports-menu-wrapper'>
+        <select className='report-selection-menu' onChange={handleSelectionChange} value="/cpu-reports">
+          <option className='report-selection-option' key={"CPU"} value={"/cpu-reports"}>CPU Reports</option>
+          <option className='report-selection-option' key={"Memory"} value={"/memory-reports"}>Memory Reports</option>
+          <option className='report-selection-option' key={"Disk"} value={"/disk-reports"}>Disk Reports</option>
         </select>
-        {/* <Link to={selectedOption} style={{ display: 'none' }}></Link> */}
-      </h1>
+      </div>
+      
+        
+      <table className="reports-table">
+        <thead>
+          <tr>
+            <th> Time Interval </th>
+            <th> Utilization </th>
+          </tr>
+        </thead>
 
-      <table className="detail-table">
         <tbody>
           <tr>
             <td> 5 Minutes: </td>
@@ -354,16 +362,21 @@ const MemReports = () => {
 
   return (
     <div>
-      <h1 className='detail-title'>
-        <select className='disk-selection-menu' onChange={handleSelectionChange} value="/memory-reports">
-            <option className='disk-selection-option' key={"CPU"} value={"/cpu-reports"}>CPU Reports</option>
-            <option className='disk-selection-option' key={"Memory"} value={"/memory-reports"}>Memory Reports</option>
-            <option className='disk-selection-option' key={"Disk"} value={"/disk-reports"}>Disk Reports</option>
-        </select>
-        {/* <Link to={selectedOption} style={{ display: 'none' }}></Link> */}
-      </h1>
+      <h1 className='report-title'> Reports </h1>
+      <select className='report-selection-menu' onChange={handleSelectionChange} value="/memory-reports">
+          <option className='report-selection-option' key={"CPU"} value={"/cpu-reports"}>CPU Reports</option>
+          <option className='report-selection-option' key={"Memory"} value={"/memory-reports"}>Memory Reports</option>
+          <option className='report-selection-option' key={"Disk"} value={"/disk-reports"}>Disk Reports</option>
+      </select>
 
-      <table className="detail-table">
+      <table className="reports-table">
+        <thead>
+          <tr>
+            <th> Time Interval </th>
+            <th> Utilization </th>
+          </tr>
+        </thead>
+
         <tbody>
           <tr>
             <td> 5 Minutes: </td>
@@ -674,23 +687,22 @@ const DiskReports = () => {
 
   return (
     <div>
-      <h1 className='detail-title'>
-        <select className='disk-selection-menu' onChange={handleSelectionChange} value="/disk-reports">
-            <option className='disk-selection-option' key={"CPU"} value={"/cpu-reports"}>CPU Reports</option>
-            <option className='disk-selection-option' key={"Memory"} value={"/memory-reports"}>Memory Reports</option>
-            <option className='disk-selection-option' key={"Disk"} value={"/disk-reports"}>Disk Reports</option>
-        </select>
-        {/* <Link to={selectedOption} style={{ display: 'none' }}></Link> */}
-      </h1>
+      <h1 className='report-title'> Reports </h1>
+      <select className='report-selection-menu' onChange={handleSelectionChange} value="/disk-reports">
+          <option className='report-selection-option' key={"CPU"} value={"/cpu-reports"}>CPU Reports</option>
+          <option className='report-selection-option' key={"Memory"} value={"/memory-reports"}>Memory Reports</option>
+          <option className='report-selection-option' key={"Disk"} value={"/disk-reports"}>Disk Reports</option>
+      </select>
 
-      <table className="detail-table">
+
+      <table className="reports-table">
         <thead>
-          <th>
-            <td>Interval</td>
-            <td>Utilization</td>
-            <td>Read Speed (MB/s)</td>
-            <td>Write Speed (MB/s)</td>
-          </th>
+          <tr>
+            <th>Interval</th>
+            <th>Utilization</th>
+            <th>Read Speed (MB/s)</th>
+            <th>Write Speed (MB/s)</th>
+          </tr>
         </thead>
 
         <tbody>
