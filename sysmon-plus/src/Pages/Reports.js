@@ -146,13 +146,12 @@ const CpuReports = () => {
   return (
     <div>
       <h1 className='report-title'> Reports </h1>
-      <div className='reports-menu-wrapper'>
-        <select className='report-selection-menu' onChange={handleSelectionChange} value="/cpu-reports">
-          <option className='report-selection-option' key={"CPU"} value={"/cpu-reports"}>CPU Reports</option>
-          <option className='report-selection-option' key={"Memory"} value={"/memory-reports"}>Memory Reports</option>
-          <option className='report-selection-option' key={"Disk"} value={"/disk-reports"}>Disk Reports</option>
-        </select>
-      </div>
+      <select className='report-selection-menu' onChange={handleSelectionChange} value="/cpu-reports">
+        <option className='report-selection-option' key={"CPU"} value={"/cpu-reports"}>CPU Reports</option>
+        <option className='report-selection-option' key={"Memory"} value={"/memory-reports"}>Memory Reports</option>
+        <option className='report-selection-option' key={"Disk"} value={"/disk-reports"}>Disk Reports</option>
+      </select>
+
       
         
       <table className="reports-table">
