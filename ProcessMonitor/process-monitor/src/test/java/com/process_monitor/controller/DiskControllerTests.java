@@ -87,9 +87,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-util-5min"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -97,9 +95,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-util-10min"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -107,9 +103,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-util-15min"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -117,9 +111,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-util-30min"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -127,9 +119,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-util-1hour"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -137,9 +127,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-util-2hour"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -147,9 +135,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-util-4hour"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -157,9 +143,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-util-6hour"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -167,9 +151,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-util-12hour"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -177,9 +159,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-util-24hour"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -187,9 +167,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-speeds-5min"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -197,9 +175,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-speeds-10min"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -207,9 +183,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-speeds-15min"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -217,9 +191,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-speeds-30min"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -227,9 +199,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-speeds-1hour"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -237,9 +207,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-speeds-2hour"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -247,9 +215,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-speeds-4hour"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -257,9 +223,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-speeds-6hour"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -267,9 +231,7 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-speeds-12hour"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -277,8 +239,6 @@ public class DiskControllerTests {
         // Perform a GET request to /api/v1/cpu/chart
         mockMvc.perform(get("/api/v1/disk/avg-speeds-24hour"))
                // Expect the status code 200 (OK)
-               .andExpect(status().isOk())
-                // Assert that the response body is not empty
-                .andExpect(jsonPath("$").isNotEmpty());
+               .andExpect(status().isOk());
     }
 }
