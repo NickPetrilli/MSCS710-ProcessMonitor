@@ -19,11 +19,12 @@ const CpuLineChartFromAPI = ({view}) => {
       },
 
       y: {
-        min: 0, // Set custom minimum value for y-axis
-        max: 100, // Set custom maximum value for y-axis
-        ticks: {
-          stepSize: 10
-        }
+         beginAtZero: true,
+         ticks: {
+            stepSize: 10.0,
+            min: 0,
+            max: 100,
+         }
       }
     }
   };
@@ -61,22 +62,7 @@ const CpuLineChartFromAPI = ({view}) => {
             backgroundColor: 'rgb(51, 204, 255, 0.75)',
             tension: 0.1
           }
-        ],
-
-        options : {
-          responsive: true,
-          // keepAspectRatio: true,
-
-          scales: {
-            y: {
-              min: 0,
-              max: 100,
-              ticks: {
-                stepSize: 10.0
-              }
-            }
-          }
-        }
+        ]
       });   
     } catch (error) {
       console.error("Error fetching data:", error);

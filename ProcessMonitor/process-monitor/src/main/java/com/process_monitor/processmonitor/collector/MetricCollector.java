@@ -69,7 +69,7 @@ public class MetricCollector {
         int numProcesses = cpuCollector.getProcessCount();
         int numThreads = cpuCollector.getThreadCount();
 
-        double cpuUtilization = cpuCollector.getCpuUtilization();
+        double cpuUtilization = cpuCollector.getCpuUtilization() > 100 ? 100 : cpuCollector.getCpuUtilization();
 
         //Timestamp is null because DatabaseFunctions handles it
         Cpu cpu = new Cpu(null, name, speed, maxSpeed, numCores, numProcesses, numThreads, cpuUtilization);

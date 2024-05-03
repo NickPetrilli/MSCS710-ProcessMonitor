@@ -19,11 +19,12 @@ const MemoryLineChartFromAPI = ({view}) => {
       },
 
       y: {
-        min: 0, // Set custom minimum value for y-axis
-        max: 100, // Set custom maximum value for y-axis
-        ticks: {
-          stepSize: 10
-        }
+         beginAtZero: true,
+         ticks: {
+            stepSize: 20.0,
+            min: 0,
+            max: 100
+         }
       }
     }
   };
