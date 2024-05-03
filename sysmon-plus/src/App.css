@@ -551,7 +551,7 @@ a {
   margin-right: auto;
   margin-bottom: 3%;
 
-  width: 40%;
+  width: 55%;
 
   table-layout: fixed;
   border-collapse: collapse;
@@ -571,8 +571,8 @@ a {
 
 .reports-table thead th {
   font-size: 1.8rem;
-  padding-bottom: 1%;
-  padding-top: 1%;
+  padding: 1%;
+  /* white-space: nowrap; */
 }
 
 /* .reports-table thead th:first-child {
