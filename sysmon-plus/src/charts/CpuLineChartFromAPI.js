@@ -22,7 +22,7 @@ const CpuLineChartFromAPI = ({view}) => {
          min: 0,
          max: 100,
          ticks: {
-            stepSize: 10.0
+            stepSize: 20.0
          }
       }
     }
