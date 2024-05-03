@@ -19,11 +19,10 @@ const MemoryLineChartFromAPI = ({view}) => {
       },
 
       y: {
-         beginAtZero: true,
+         min: 0,
+         max: 100,
          ticks: {
-            stepSize: 20.0,
-            min: 0,
-            max: 100
+            stepSize: 20.0
          }
       }
     }
